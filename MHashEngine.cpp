@@ -9,6 +9,9 @@ MHashEngine::MHashEngine() {
 }
 
 MHashEngine::~MHashEngine() {
+	if(_out != NULL) {
+		free(_out);
+	}
 	_out = NULL;
 	mhash_deinit(_thread, NULL);
 }
@@ -21,6 +24,7 @@ std::string MHashEngine::getHash(std::string in) {
 	for(int i = 0; i < _outsize; i++) {
 		hexoutss << std::hex << static_cast<unsigned int>(_out[i]);
 	}
+	free(_out);
 	_out = NULL;
 	_thread = mhash_init(MHASH_MD5);
 	return hexoutss.str();
