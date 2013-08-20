@@ -1,0 +1,20 @@
+RemoteControlFramework - A client-server remote control environment
+
+This is a project, which will provide a configurable network command server and a variety of clients to access it and control the server remotely.
+
+TODO:
+Server:
+- network communication
+- implementation of RCF protocol
+- user authentication
+- user groups
+- command groups
+- configuration
+Clients:
+- implementation of RCF protocol
+- network communication
+- user authentication
+- configuration
+- proper representation: CLI, GUI, multiple-server GUI, mobile (Android)
+
+
