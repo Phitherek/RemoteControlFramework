@@ -7,7 +7,7 @@
 /// \file Command.h
 /// \brief A class that represents a command
 /// \author Phitherek_
-/// \date 2013
+/// \date 2014
 /// \version 0.1
 
 /// \namespace RCF

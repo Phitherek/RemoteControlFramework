@@ -1,11 +1,11 @@
 #include <iostream>
 #include <cstdlib>
 #include <string>
-#include "MHashEngine.h"
+#include <librcfcommon/librcfcommon.h>
 using namespace std;
 
 int main() {
-RCF::MHashEngine mhe;
+RCF::Common::MHashEngine mhe;
 char act;
 do {
 cout << "(c)alculate hash, (e)nd: ";
