@@ -1,7 +1,7 @@
 project('librcfcommon', 'cpp')
 comp = meson.get_compiler('cpp')
 inc = include_directories('include')
-dep = find_library('mhash')
+dep = find_library('mhash', required : false)
 subdir('include')
 subdir('src')
 pkgconfig_gen(libraries : librcfc, version : '0.1', name : 'librcfcommon', filebase : 'librcfcommon', description : 'A library of common classes for RemoteControlFramework', include_directories: inc)
