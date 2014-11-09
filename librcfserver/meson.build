@@ -2,7 +2,7 @@ project('librcfserver', 'cpp')
 comp = meson.get_compiler('cpp')
 inc = include_directories('include')
 if build.name() == 'windows'
-    dep = dependency('librcfcommon', required : false)
+    dep = find_library('libsrcfcommon', required : false)
 else
     dep = dependency('librcfcommon')
 endif
