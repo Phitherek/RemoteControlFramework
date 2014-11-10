@@ -3,8 +3,10 @@ comp = meson.get_compiler('cpp')
 inc = include_directories('include')
 if build.name() == 'windows'
     dep = find_library('libsrcfcommon', required : false)
+    dep = dependency('boost', modules: ['filesystem', 'system'], required: false)
 else
     dep = dependency('librcfcommon')
+    dep = dependency('boost', modules: ['filesystem', 'system'])
 endif
 subdir('include')
 subdir('src')

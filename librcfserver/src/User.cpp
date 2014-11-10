@@ -1,6 +1,7 @@
 #include "User.h"
 #include <librcfcommon/librcfcommon.h>
 #include <ctime>
+#include <fstream>
 #include <sstream>
 #include <boost/filesystem.hpp>
 using namespace RCF::Server;
@@ -36,7 +37,29 @@ void User::load(std::string name) {
 }
 
 void User::save() {
-    
+    RCF::Common::HelperFunctions hf;
+    boost::filesystem::path confdir = hf.getHomeDirectory();
+    confdir += "/.rcfserver";
+    boost::filesystem::path permdir = confdir;
+    permdir += "/perms";
+    boost::filesystem::path filepath = permdir;
+    filepath += "/";
+    filepath += _name;
+    filepath += ".rcfuser";
+    if(!boost::filesystem::exists(permdir)) {
+        if(!boost::filesystem::create_directories(permdir)) {
+            // Could not create permission config directory
+        }
+    }
+    if(!boost::filesystem::is_directory(permdir)) {
+        // Permission config directory is not a directory...
+    }
+    if(boost::filesystem::exists(filepath)) {
+        // User already exists
+    }
+    std::ofstream out(filepath.c_str());
+    out << "[name]" << std::endl << _name << std::endl << "[salt]" << std::endl << _salt << std::endl << "[hashed_password]" << std::endl << _hashed_password << std::endl;
+    out.close();
 }
 
 std::string User::getPermissionType() {

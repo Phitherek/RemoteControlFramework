@@ -17,6 +17,8 @@ int main() {
         cout << "CheckPassword() failed!" << endl;
         return EXIT_FAILURE;
     }
+    u.save();
+    cout << "User data has been saved!" << endl;
     cout << "Success!" << endl;
     return EXIT_SUCCESS;
 }
