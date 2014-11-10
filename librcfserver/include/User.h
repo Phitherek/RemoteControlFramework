@@ -30,6 +30,9 @@ namespace RCF {
             void save(); ///< Save user to configuration.
             std::string getPermissionType(); ///< \brief A function that returns permission type.
             ///< \return Permission type.
+            bool checkPassword(std::string password);  ///< \brief A function that returns if given password for user is correct.
+            ///< \param password Password to check.
+            ///< \return True if password matches, false otherwise.
         };
     }
 }
