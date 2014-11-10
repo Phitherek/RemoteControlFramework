@@ -57,7 +57,8 @@ void User::save() {
     if(boost::filesystem::exists(filepath)) {
         // User already exists
     }
-    std::ofstream out(filepath.c_str());
+    std::string filepathstr = filepath.string();
+    std::ofstream out(filepathstr.c_str());
     out << "[name]" << std::endl << _name << std::endl << "[salt]" << std::endl << _salt << std::endl << "[hashed_password]" << std::endl << _hashed_password << std::endl;
     out.close();
 }
