@@ -19,6 +19,20 @@ int main() {
     }
     u.save();
     cout << "User data has been saved!" << endl;
+    RCF::Server::User u2;
+    u2.load("Test");
+    if(u2.getPermissionType() != "user") {
+        cout << "load() failed!" << endl;
+        return EXIT_FAILURE;
+    }
+    if(!u2.checkPassword("testtest")) {
+        cout << "load() failed!" << endl;
+        return EXIT_FAILURE;
+    }
+    if(u2.checkPassword("ureuhe")) {
+        cout << "load() failed!" << endl;
+        return EXIT_FAILURE;
+    }
     cout << "Success!" << endl;
     return EXIT_SUCCESS;
 }
