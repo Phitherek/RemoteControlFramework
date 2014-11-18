@@ -2,6 +2,7 @@
 #define _GROUP_H
 #include "Permission.h"
 #include "User.h"
+#include <string>
 /// \file Group.h
 /// \brief An implementation of a user permission.
 /// \author Phitherek_
@@ -19,16 +20,34 @@ namespace RCF {
         class Group: public Permission {
         private:
             User* _users; ///< Users inside group.
+            int _usersSize; ///< Size of users.
+            int _usersIterator; ///< Iterator for users.
+            bool _usersEnd; ///< If users table is at end.
             bool valid(); ///< If group is valid to save.
+            void setUsersEnd();
         public:
             Group(); ///< A plain constructor.
             Group(std::string name); ///< \brief A constructor from name.
             ///< \param name Group name.
+            Group(Group& cpy); ///< \brief A copy constructor.
+            ///< \param cpy Object to copy.
             void load(std::string name); ///< \brief Load group of given name from configuration.
             ///< \param name Name of group to load.
             void save(); ///< Save group to configuration.
             std::string getPermissionType(); ///< \brief A function that returns permission type.
             ///< \return Permission type.
+            void addUser(User u);  ///< \brief Adds a user to group.
+            ///< \param u User to add.
+            void removeUser(std::string name); ///< \brief Removes user from group.
+            ///< \param name Name of the user.
+            bool hasUser(std::string name); ///< \brief Checks if user of given name belongs to group.
+            ///< \param name Name of the user.
+            ///< \return If user belongs to group.
+            User getNextUser(); ///< \brief Gets next user from the group based on internal iterator.
+            ///< \return Next user from the group.
+            bool usersAtEnd(); ///< \brief Checks if users iterator is at the end.
+            ///< \return If users iterator is at the end.
+            void resetUsersIterator(); ///< Resets users internal iterator.
         };
     }
 }

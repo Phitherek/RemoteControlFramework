@@ -47,3 +47,43 @@ const char* ParserException::what() const throw() {
     ret += _error;
     return ret.c_str();
 }
+
+NotFoundException::NotFoundException(std::string query, std::string error) {
+    _query = query;
+    _error = error;
+}
+
+NotFoundException::~NotFoundException() throw() {}
+
+const char* NotFoundException::what() const throw() {
+    std::string ret = "";
+    ret += _query;
+    ret += ": ";
+    ret += _error;
+    return ret.c_str();
+}
+
+AlreadyExistsException::AlreadyExistsException(std::string name, std::string error) {
+    _name = name;
+    _error = error;
+}
+
+AlreadyExistsException::~AlreadyExistsException() throw() {}
+
+const char* AlreadyExistsException::what() const throw() {
+    std::string ret = "";
+    ret += _name;
+    ret += ": ";
+    ret += _error;
+    return ret.c_str();
+}
+
+AtEndException::AtEndException(std::string error) {
+    _error = error;
+}
+
+AtEndException::~AtEndException() throw() {}
+
+const char* AtEndException::what() const throw() {
+    return _error.c_str();
+}

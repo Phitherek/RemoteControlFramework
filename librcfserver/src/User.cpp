@@ -74,6 +74,7 @@ void User::load(std::string name) {
             }
         }
     }
+    in.close();
 }
 
 void User::save() {

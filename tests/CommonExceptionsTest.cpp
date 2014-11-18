@@ -40,6 +40,39 @@ int main() {
         cout << "ParserException is wrong!"  << endl;
         return EXIT_FAILURE;
     }
+    try {
+        throw RCF::Common::NotFoundException("sth", "Object not found!");
+    } catch(RCF::Common::NotFoundException& e) {
+        if(strcmp(e.what(), "sth: Object not found!") != 0) {
+            fail = true;
+        }
+    }
+    if(fail) {
+        cout << "NotFoundException is wrong!" << endl;
+        return EXIT_FAILURE;
+    }
+    try {
+        throw RCF::Common::AlreadyExistsException("sth", "Object already exists!");
+    } catch(RCF::Common::AlreadyExistsException& e) {
+        if(strcmp(e.what(), "sth: Object already exists!") != 0) {
+            fail = true;
+        }
+    }
+    if(fail) {
+        cout << "AlreadyExistsException is wrong!" << endl;
+        return EXIT_FAILURE;
+    }
+    try {
+        throw RCF::Common::AtEndException("Collection at end");
+    } catch(RCF::Common::AtEndException& e) {
+        if(strcmp(e.what(), "Collection at end") != 0) {
+            fail = true;
+        }
+    }
+    if(fail) {
+        cout << "AtEndException is wrong!" << endl;
+        return EXIT_FAILURE;
+    }
     cout << "Success!" << endl;
     return EXIT_SUCCESS;
 }

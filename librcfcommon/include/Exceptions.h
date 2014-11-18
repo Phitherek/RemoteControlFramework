@@ -57,6 +57,46 @@ namespace RCF {
             const char* what() const throw(); ///< \brief A function describing the error.
             ///< \return What has happened.
         };
+        /// \class NotFoundException
+        /// \brief An exception related to not finding object by given string.
+        class NotFoundException: public std::exception {
+        private:
+            std::string _query;
+            std::string _error;
+        public:
+            NotFoundException(std::string query, std::string error); ///< \brief A constructor from query and error.
+            ///< \param query Query string that was not found.
+            ///< \param error Additional information.
+            ~NotFoundException() throw(); ///< A destructor required by std::exception.
+            const char* what() const throw(); ///< \brief A function describing the error.
+            ///< \return What has happened.
+        };
+        /// \class AlreadyExistsException
+        /// \brief An exception related to object already existing in given collection.
+        class AlreadyExistsException: public std::exception {
+        private:
+            std::string _name;
+            std::string _error;
+        public:
+            AlreadyExistsException(std::string name, std::string error); ///< \brief A constructor from query and error.
+            ///< \param query Name of an object that already exists.
+            ///< \param error Additional information.
+            ~AlreadyExistsException() throw(); ///< A destructor required by std::exception.
+            const char* what() const throw(); ///< \brief A function describing the error.
+            ///< \return What has happened.
+        };
+        /// \class AtEndException
+        /// \brief An exception related to iterator being at the end of the collection.
+        class AtEndException: public std::exception {
+        private:
+            std::string _error;
+        public:
+            AtEndException(std::string error); ///< \brief A constructor from error.
+            ///< \param error What has happened.
+            ~AtEndException() throw(); ///< A destructor required by std::exception.
+            const char* what() const throw(); ///< \brief A function describing the error.
+            ///< \return What has happened.
+        };
     }
 }
 #endif
