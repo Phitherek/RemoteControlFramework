@@ -43,7 +43,7 @@ bool Group::valid() {
     return false;
 }
 
-void setUsersEnd() {
+void Group::setUsersEnd() {
     if(_usersSize == 0 || _usersIterator >= _usersSize-1) {
         _usersEnd = true;
     } else {
@@ -51,7 +51,7 @@ void setUsersEnd() {
     }
 }
 
-void Group::load() {
+void Group::load(std::string name) {
     RCF::Common::HelperFunctions hf;
     boost::filesystem::path confdir = hf.getHomeDirectory();
     confdir += "/.rcfserver";

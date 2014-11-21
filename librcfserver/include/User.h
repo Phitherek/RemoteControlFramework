@@ -19,7 +19,6 @@ namespace RCF {
         private:
             std::string _salt;
             std::string _hashed_password;
-            bool valid(); ///< If user is valid to save.
         public:
             User(); ///< A plain constructor.
             User(std::string name, std::string password); ///< \brief A constructor from name and password.
@@ -33,6 +32,8 @@ namespace RCF {
             bool checkPassword(std::string password);  ///< \brief A function that returns if given password for user is correct.
             ///< \param password Password to check.
             ///< \return True if password matches, false otherwise.
+            bool valid(); ///< \brief If user is valid to save or process.
+            ///< \return Boolean.
         };
     }
 }

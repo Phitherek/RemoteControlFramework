@@ -23,7 +23,6 @@ namespace RCF {
             int _usersSize; ///< Size of users.
             int _usersIterator; ///< Iterator for users.
             bool _usersEnd; ///< If users table is at end.
-            bool valid(); ///< If group is valid to save.
             void setUsersEnd();
         public:
             Group(); ///< A plain constructor.
@@ -48,6 +47,8 @@ namespace RCF {
             bool usersAtEnd(); ///< \brief Checks if users iterator is at the end.
             ///< \return If users iterator is at the end.
             void resetUsersIterator(); ///< Resets users internal iterator.
+            bool valid(); ///< \brief If group is valid to save or process.
+            ///< \return Boolean.
         };
     }
 }
