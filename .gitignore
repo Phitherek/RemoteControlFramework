@@ -4,3 +4,5 @@ build
 SSLTestClient
 SSLTestServer
 *Test
+*.exe
+testcmd

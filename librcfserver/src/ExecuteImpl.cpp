@@ -124,28 +124,68 @@ int ExecuteImpl::execute(std::string exec, std::string* stdout_target, std::stri
     // Partially used the following sources:
     // http://msdn.microsoft.com/en-us/library/windows/desktop/ms682499%28v=vs.85%29.aspx
     // http://msdn.microsoft.com/en-us/library/windows/desktop/ms683189%28v=vs.85%29.aspx
+    // Other MSDN sources
+    // Don' t even ask how this code works. It works. WinAPI is strange.
     int ExecuteImpl::windows_execute(std::string exec, std::string* stdout_target, std::string* stderr_target) {
         HANDLE outRead = NULL;
         HANDLE outWrite = NULL;
         HANDLE errRead = NULL;
         HANDLE errWrite = NULL;
         SECURITY_ATTRIBUTES sa;
+        DWORD errorCode;
+        LPVOID errorBuffer;
         sa.nLength = sizeof(SECURITY_ATTRIBUTES);
         sa.bInheritHandle = true;
         sa.lpSecurityDescriptor = NULL;
         if(!CreatePipe(&outRead, &outWrite, &sa, 0)) {
-            throw RCF::Common::RuntimeException("Cannot create stdout pipe!");
+            errorCode = GetLastError();
+            FormatMessage(FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS, NULL, errorCode, MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), (LPTSTR)&errorBuffer, 0, NULL);
+            std::string err = "Cannot create stdout pipe: ";
+            int strsize = lstrlen((LPTSTR)errorBuffer)*sizeof(TCHAR);
+            for(int i = 0; i < strsize; i++) {
+                err += ((LPTSTR)errorBuffer)[i];
+            }
+            LocalFree(errorBuffer);
+            throw RCF::Common::RuntimeException(err);
         }
-        if(!SetHandleInformation(&outRead, HANDLE_FLAG_INHERIT, 0)) {
-            throw RCF::Common::RuntimeException("Cannot set stdout pipe handle information!");
+        if(!SetHandleInformation(outRead, HANDLE_FLAG_INHERIT, 0)) {
+            errorCode = GetLastError();
+            FormatMessage(FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS, NULL, errorCode, MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), (LPTSTR)&errorBuffer, 0, NULL);
+            std::string err = "Cannot set stdout pipe information: ";
+            int strsize = lstrlen((LPTSTR)errorBuffer)*sizeof(TCHAR);
+            for(int i = 0; i < strsize; i++) {
+                err += ((LPTSTR)errorBuffer)[i];
+            }
+            LocalFree(errorBuffer);
+            throw RCF::Common::RuntimeException(err);
         }
-         if(!CreatePipe(&errRead, &errWrite, &sa, 0)) {
-            throw RCF::Common::RuntimeException("Cannot create stderr pipe!");
+        if(!CreatePipe(&errRead, &errWrite, &sa, 0)) {
+            errorCode = GetLastError();
+            FormatMessage(FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS, NULL, errorCode, MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), (LPTSTR)&errorBuffer, 0, NULL);
+            std::string err = "Cannot create stderr pipe: ";
+            int strsize = lstrlen((LPTSTR)errorBuffer)*sizeof(TCHAR);
+            for(int i = 0; i < strsize; i++) {
+                err += ((LPTSTR)errorBuffer)[i];
+            }
+            LocalFree(errorBuffer);
+            throw RCF::Common::RuntimeException(err);
         }
-        if(!SetHandleInformation(&errRead, HANDLE_FLAG_INHERIT, 0)) {
-            throw RCF::Common::RuntimeException("Cannot set stderr pipe handle information!");
+        if(!SetHandleInformation(errRead, HANDLE_FLAG_INHERIT, 0)) {
+            errorCode = GetLastError();
+            FormatMessage(FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS, NULL, errorCode, MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), (LPTSTR)&errorBuffer, 0, NULL);
+            std::string err = "Cannot set stderr pipe information: ";
+            int strsize = lstrlen((LPTSTR)errorBuffer)*sizeof(TCHAR);
+            for(int i = 0; i < strsize; i++) {
+                err += ((LPTSTR)errorBuffer)[i];
+            }
+            LocalFree(errorBuffer);
+            throw RCF::Common::RuntimeException(err);
         }
-        TCHAR cmd[] = TEXT(exec.c_str());
+        TCHAR* cmd = new TCHAR[exec.length()];
+        int execLength = exec.length();
+        for(int i = 0; i < execLength; i++) {
+            cmd[i] = exec[i];
+        }
         PROCESS_INFORMATION pi;
         STARTUPINFO si;
         BOOL success = false;
@@ -156,33 +196,53 @@ int ExecuteImpl::execute(std::string exec, std::string* stdout_target, std::stri
         si.hStdOutput = outWrite;
         si.dwFlags |= STARTF_USESTDHANDLES;
 
-        success = CreateProcess(cmd, NULL, NULL, true, 0, NULL, NULL, &si, &pi);
+        success = CreateProcess(NULL, cmd, NULL, NULL, true, 0, NULL, NULL, &si, &pi);
 
         if(!success) {
-            throw RCF::Common::RuntimeException("Cannot create child process!");
+            errorCode = GetLastError();
+            FormatMessage(FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS, NULL, errorCode, MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), (LPTSTR)&errorBuffer, 0, NULL);
+            std::string err = "Cannot create child process: ";
+            int strsize = lstrlen((LPTSTR)errorBuffer)*sizeof(TCHAR);
+            for(int i = 0; i < strsize; i++) {
+                err += ((LPTSTR)errorBuffer)[i];
+            }
+            LocalFree(errorBuffer);
+            throw RCF::Common::RuntimeException(err);
         }
-        DWORD bytesRead, bytesWritten;
+        WaitForSingleObject(pi.hProcess, INFINITE);
+        DWORD ec;
+        if(!GetExitCodeProcess(pi.hProcess, &ec)) {
+            errorCode = GetLastError();
+            FormatMessage(FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS, NULL, errorCode, MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), (LPTSTR)&errorBuffer, 0, NULL);
+            std::string err = "Cannot get exit code of a child process: ";
+            int strsize = lstrlen((LPTSTR)errorBuffer)*sizeof(TCHAR);
+            for(int i = 0; i < strsize; i++) {
+                err += ((LPTSTR)errorBuffer)[i];
+            }
+            LocalFree(errorBuffer);
+            throw RCF::Common::RuntimeException(err);
+        }
+        delete[] cmd;
+        CloseHandle(pi.hProcess);
+        CloseHandle(pi.hThread);
+        CloseHandle(outWrite);
+        CloseHandle(errWrite);
+        DWORD bytesRead;
         CHAR buffer[4096];
         success = false;
         for(;;) {
             success = ReadFile(outRead, buffer, 4096, &bytesRead, NULL);
             if(!success || bytesRead == 0) break;
-            *stdout_target << buffer;
+            *stdout_target += buffer;
         }
         success = false;
         for(;;) {
             success = ReadFile(errRead, buffer, 4096, &bytesRead, NULL);
             if(!success || bytesRead == 0) break;
-            *stderr_target << buffer;
+            *stderr_target += buffer;
         }
-        DWORD ec;
-        if(!GetExitCodeProcess(pi.hProcess, &ec)) {
-            throw RCF::Common::RuntimeException("Cannot get exit code of a child process!");
-        }
-        CloseHandle(pi.hProcess);
-        CloseHandle(pi.hThread);
-        CloseHandle(outWrite);
-        CloseHandle(errWrite);
+        CloseHandle(outRead);
+        CloseHandle(errRead);
         return ec;
     }
 #endif
