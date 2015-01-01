@@ -73,6 +73,28 @@ int main() {
         cout << "AtEndException is wrong!" << endl;
         return EXIT_FAILURE;
     }
+    try {
+        throw RCF::Common::ParametersNeededException("Insufficient parameters for test command!", 3, 1);
+    } catch(RCF::Common::ParametersNeededException& e) {
+        if(strcmp(e.what(), "Insufficient parameters for test command! (3 parameters required, 1 given)") != 0) {
+            fail = true;
+        }
+    }
+    if(fail) {
+        cout << "ParametersNeededException is wrong!" << endl;
+        return EXIT_FAILURE;
+    }
+    try {
+        throw RCF::Common::RuntimeException("Something went wrong");
+    } catch(RCF::Common::RuntimeException& e) {
+        if(strcmp(e.what(), "Something went wrong") != 0) {
+            fail = true;
+        }
+    }
+    if(fail) {
+        cout << "RuntimeException is wrong!"  << endl;
+        return EXIT_FAILURE;
+    }
     cout << "Success!" << endl;
     return EXIT_SUCCESS;
 }

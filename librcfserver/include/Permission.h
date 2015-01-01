@@ -29,6 +29,8 @@ namespace RCF {
             virtual void load(std::string name); ///< \brief A function that loads permission from file.
             ///< \param name Permission name.
             virtual void save(); ///< A function that saves permission from file.
+            virtual bool valid(); ///< \brief If permission is valid to save or process.
+            ///< \return Boolean.
         };
     }
 }

@@ -47,7 +47,7 @@ namespace RCF {
             bool usersAtEnd(); ///< \brief Checks if users iterator is at the end.
             ///< \return If users iterator is at the end.
             void resetUsersIterator(); ///< Resets users internal iterator.
-            bool valid(); ///< \brief If group is valid to save or process.
+            bool valid(); ///< \brief If permission is valid to save or process.
             ///< \return Boolean.
         };
     }

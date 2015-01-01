@@ -97,6 +97,34 @@ namespace RCF {
             const char* what() const throw(); ///< \brief A function describing the error.
             ///< \return What has happened.
         };
+        /// \class ParametersNeededException
+        /// \brief An exception related to command needing more parameters.
+        class ParametersNeededException: public std::exception {
+        private:
+            int _paramsRequired;
+            int _paramsGiven;
+            std::string _error;
+        public:
+            ParametersNeededException(std::string error, int paramsRequired, int paramsGiven); ///< \brief A constructor from params required, params given and error.
+            ///< \param paramsRequired A number of parameters that command requires.
+            ///< \param paramsGiven A number of parameters that were given to command.
+            ///< \param  error Additional error information.
+            ~ParametersNeededException() throw(); ///< A destructor required by std::exception.
+            const char* what() const throw(); ///< \brief A function describing the error.
+            ///< \return What has happened.
+        };
+        /// \class RuntimeException
+        /// \brief An exception related to error during program execution.
+        class RuntimeException: public std::exception {
+        private:
+            std::string _error;
+        public:
+            RuntimeException(std::string error); ///< \brief A constructor from error.
+            ///< \param error What has happened.
+            ~RuntimeException() throw(); ///< A destructor required by std::exception.
+            const char* what() const throw(); ///< \brief A function describing the error.
+            ///< \return What has happened.
+        };
     }
 }
 #endif

@@ -163,6 +163,7 @@ void Group::addUser(User u) {
         newUsers[newSize-1] = u;
         _users = newUsers;
         _usersSize = newSize;
+        setUsersEnd();
     } else {
         throw RCF::Common::InvalidObjectException("User is invalid and cannot be added to group!");
     }

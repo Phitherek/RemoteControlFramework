@@ -87,3 +87,29 @@ AtEndException::~AtEndException() throw() {}
 const char* AtEndException::what() const throw() {
     return _error.c_str();
 }
+
+ParametersNeededException::ParametersNeededException(std::string error, int paramsRequired, int paramsGiven) {
+    _paramsRequired = paramsRequired;
+    _paramsGiven = paramsGiven;
+    _error = error;
+}
+
+ParametersNeededException::~ParametersNeededException() throw() {}
+
+const char* ParametersNeededException::what() const throw() {
+    std::stringstream retss;
+    retss.str("");
+    retss << _error << " (" << _paramsRequired << " parameters required, " << _paramsGiven << " given)";
+    return retss.str().c_str();
+}
+
+RuntimeException::RuntimeException(std::string error) {
+    _error = error;
+}
+
+RuntimeException::~RuntimeException() throw() {}
+
+const char* RuntimeException::what() const throw() {
+    return _error.c_str();
+}
+

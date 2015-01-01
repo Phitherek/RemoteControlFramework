@@ -20,3 +20,7 @@ std::string Permission::getPermissionType() {
 void Permission::load(std::string name) {}
 
 void Permission::save() {}
+
+bool Permission::valid() {
+    return false;
+}
