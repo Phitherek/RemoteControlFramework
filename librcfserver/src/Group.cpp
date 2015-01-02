@@ -36,6 +36,14 @@ Group::Group(Group& cpy) {
     setUsersEnd();
 }
 
+Group::~Group() {
+    if(_users != NULL && _usersSize > 0) {
+        delete[] _users;
+        _usersSize = 0;
+        _users = NULL;
+    }
+}
+
 bool Group::valid() {
     if(_name != "") {
         return true;

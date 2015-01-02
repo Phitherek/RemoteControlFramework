@@ -26,6 +26,7 @@ namespace RCF {
             void setUsersEnd();
         public:
             Group(); ///< A plain constructor.
+            ~Group(); ///< A destructor.
             Group(std::string name); ///< \brief A constructor from name.
             ///< \param name Group name.
             Group(Group& cpy); ///< \brief A copy constructor.

@@ -38,6 +38,9 @@ namespace RCF {
             ///< \param name Command name.
             ///< \param exec Command on server.
             ///< \param numParams Number of command parameters.
+            Command(Command& cpy); ///< \brief A copy constructor.
+            ///< \param cpy Object to copy.
+            ~Command(); ///< A destructor.
             std::string getName(); ///< \brief A function that returns command name
             ///< \return Command name
             std::string getExec(); ///< \brief A function that returns command to execute on the server

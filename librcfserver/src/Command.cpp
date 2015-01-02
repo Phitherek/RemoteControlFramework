@@ -27,6 +27,31 @@ Command::Command(std::string name, std::string exec, int numParams) {
     _numParams = numParams;
 }
 
+Command::Command(Command& cpy) {
+    _name = cpy._name;
+    _exec = cpy._exec;
+    if(cpy._perms != NULL && cpy._permsSize > 0) {
+        _perms = new Permission*[cpy._permsSize];
+        for(int i = 0; i < cpy._permsSize; i++) {
+            _perms[i] = cpy._perms[i];
+        }
+    } else {
+        _perms = NULL;
+    }
+    _permsSize = cpy._permsSize;
+    _permsIterator = -1;
+    _numParams = cpy._numParams;
+    setPermsEnd();
+}
+
+Command::~Command() {
+    if(_perms != NULL && _permsSize > 0) {
+        delete[] _perms;
+        _perms = NULL;
+        _permsSize = 0;
+    }
+}
+
 void Command::setPermsEnd() {
     if(_permsSize == 0 || _permsIterator >= _permsSize-1) {
         _permsEnd = true;
