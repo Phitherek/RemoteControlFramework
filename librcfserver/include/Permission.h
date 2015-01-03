@@ -18,19 +18,21 @@ namespace RCF {
         class Permission {
         protected:
             std::string _name; ///< Name of permitted user/group.
+            static Permission** _loadedPermissions; ///< Loaded permissions array.
+            static int _loadedPermissionsSize; ///< Size of loaded permissions array.
         public:
             Permission(); ///< A plain constructor.
             Permission(std::string name); ///< \brief A constructor with name.
             ///< \param name Name of permitted user/group.
+            virtual ~Permission(); ///< A destructor
             std::string getName(); ///< \brief A function that returns name of permitted user/group.
             ///< \return Name of permitted user/group.
             virtual std::string getPermissionType(); ///< \brief A function that returns permission type.
             ///< \return Permission type.
-            virtual void load(std::string name); ///< \brief A function that loads permission from file.
-            ///< \param name Permission name.
             virtual void save(); ///< A function that saves permission from file.
             virtual bool valid(); ///< \brief If permission is valid to save or process.
             ///< \return Boolean.
+            static void free(); ///< Frees the memory.
         };
     }
 }

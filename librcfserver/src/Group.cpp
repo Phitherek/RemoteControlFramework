@@ -26,7 +26,7 @@ Group::Group(Group& cpy) {
     if(cpy._users == NULL && cpy._usersSize == 0) {
         _users = cpy._users;
     } else {
-        _users = new User[cpy._usersSize];
+        _users = new User*[cpy._usersSize];
         for(int i = 0; i < cpy._usersSize; i++) {
             _users[i] = cpy._users[i];
         }
@@ -59,7 +59,15 @@ void Group::setUsersEnd() {
     }
 }
 
-void Group::load(std::string name) {
+Group* Group::load(std::string name) {
+     if(_loadedPermissions != NULL && _loadedPermissionsSize > 0) {
+        for(int i = 0; i < _loadedPermissionsSize; i++) {
+            if(_loadedPermissions[i]->getName() == name && _loadedPermissions[i]->getPermissionType() == "group") {
+                return dynamic_cast<Group*>(_loadedPermissions[i]);
+            }
+        }
+    }
+    Group* g = new Group;
     RCF::Common::HelperFunctions hf;
     boost::filesystem::path confdir = hf.getHomeDirectory();
     confdir += "/.rcfserver";
@@ -88,7 +96,7 @@ void Group::load(std::string name) {
                     throw RCF::Common::ParserException(filepath, lineno, "Expected parameter in [], got " + line + "!");
                 }
             } else if(ps == "name") {
-                _name = line;
+                g->_name = line;
                 ps = "toplevel";
             } else if(ps == "users") {
                 if(line[0] == '[' && line[line.length()-1] == ']') {
@@ -98,9 +106,8 @@ void Group::load(std::string name) {
                         throw RCF::Common::ParserException(filepath, lineno, "Expected [usersend] or username, got " + line + "!");
                     }
                 } else {
-                    User u;
-                    u.load(line);
-                    addUser(u);
+                    User* u = User::load(line);
+                    g->addUser(u);
                 }
             } else {
                 throw RCF::Common::ParserException(filepath, lineno, "Unknown parameter: " + line + "!");
@@ -108,6 +115,18 @@ void Group::load(std::string name) {
         }
     }
     in.close();
+    int newLoadedPermissionsSize = _loadedPermissionsSize + 1;
+    Permission** newLoadedPermissions = new Permission*[newLoadedPermissionsSize];
+    if(_loadedPermissions != NULL && _loadedPermissionsSize > 0) {
+        for(int i = 0; i < _loadedPermissionsSize; i++) {
+            newLoadedPermissions[i] = _loadedPermissions[i];
+        }
+        delete[] _loadedPermissions;
+    }
+    newLoadedPermissions[newLoadedPermissionsSize-1] = g;
+    _loadedPermissions = newLoadedPermissions;
+    _loadedPermissionsSize = newLoadedPermissionsSize;
+    return g;
 }
 
 void Group::save() {
@@ -138,7 +157,7 @@ void Group::save() {
         if(_usersSize > 0) {
             out << "[users]" << std::endl;
             for(int i = 0; i < _usersSize; i++) {
-                out << _users[i].getName() << std::endl;
+                out << _users[i]->getName() << std::endl;
             }
             out << "[usersend]" << std::endl;
         }
@@ -152,15 +171,15 @@ std::string Group::getPermissionType() {
     return "group";
 }
 
-void Group::addUser(User u) {
+void Group::addUser(User* u) {
     for(int i = 0; i < _usersSize; i++) {
-        if(_users[i].getName() == u.getName()) {
-            throw RCF::Common::AlreadyExistsException(u.getName(), "User already exists in group!");
+        if(_users[i]->getName() == u->getName()) {
+            throw RCF::Common::AlreadyExistsException(u->getName(), "User already exists in group!");
         }
     }
-    if(u.valid()) {
+    if(u->valid()) {
         int newSize = _usersSize+1;
-        User* newUsers  = new User[newSize];
+        User** newUsers  = new User*[newSize];
         if(_users != NULL) {
             for(int i = 0; i < _usersSize; i++) {
                 newUsers[i] = _users[i];
@@ -180,7 +199,7 @@ void Group::addUser(User u) {
 void Group::removeUser(std::string username) {
     int torem = -1;
     for(int i = 0; i < _usersSize; i++) {
-        if(_users[i].getName() == username) {
+        if(_users[i]->getName() == username) {
             torem = i;
             break;
         }
@@ -189,7 +208,7 @@ void Group::removeUser(std::string username) {
         throw RCF::Common::NotFoundException(username, "User could not be found and cannot be removed from the group!");
     }
     int newSize = _usersSize - 1;
-    User* newUsers = new User[newSize];
+    User** newUsers = new User*[newSize];
     for(int i = 0; i < torem; i++) {
         newUsers[i] = _users[i];
     }
@@ -207,14 +226,14 @@ void Group::removeUser(std::string username) {
 
 bool Group::hasUser(std::string username) {
     for(int i = 0; i < _usersSize; i++) {
-        if(_users[i].getName() == username) {
+        if(_users[i]->getName() == username) {
             return true;
         }
     }
     return false;
 }
 
-User Group::getNextUser() {
+User* Group::getNextUser() {
     if(_usersIterator < _usersSize-1) {
         _usersIterator++;
         setUsersEnd();

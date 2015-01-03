@@ -5,7 +5,18 @@
 #include <vector>
 #include <sstream>
 #include <fstream>
+#include <iostream>
 using namespace RCF::Server;
+
+Command::Command() {
+    _name = "";
+    _exec = "";
+    _perms = NULL;
+    _permsSize = 0;
+    _permsIterator = -1;
+    _permsEnd = true;
+    _numParams = 0;
+}
 
 Command::Command(std::string name, std::string exec) {
     _name = name;
@@ -253,7 +264,7 @@ int Command::execute(std::string* output, std::string* error) {
 }
 
 int Command::execute(std::string* output, std::string* error, std::vector<std::string> params) {
-    std::string exec = getExec();
+    std::string exec = getExec(params);
     return ExecuteImpl::execute(exec, output, error);
 }
 
@@ -317,7 +328,7 @@ void Command::load(std::string name) {
     cmddir += "/commands";
     boost::filesystem::path filepath = cmddir;
     filepath += "/";
-    filepath += _name;
+    filepath += name;
     filepath += ".rcfcmd";
     if(!boost::filesystem::exists(filepath)) {
         throw RCF::Common::FilesystemException(filepath, "Does not exist!");
@@ -328,7 +339,13 @@ void Command::load(std::string name) {
     int lineno = 0;
     while(!in.eof()) {
         std::string line = "";
-        in >> line;
+        char c;
+        do {
+            c = in.get();
+            if(c != '\n' && in) {
+                line += c;
+            }
+        } while(c != '\n' && in);
         if(in) {
             lineno++;
             if(ps == "toplevel") {
@@ -345,6 +362,7 @@ void Command::load(std::string name) {
                 ps = "toplevel";
             } else if(ps == "num_params") {
                 _numParams = atoi(line.c_str());
+                ps = "toplevel";
             } else if(ps == "users") {
                 if(line[0] == '[' && line[line.length()-1] == ']') {
                     if(line.substr(1, line.length()-2) == "usersend") {
@@ -353,9 +371,8 @@ void Command::load(std::string name) {
                         throw RCF::Common::ParserException(filepath, lineno, "Expected [usersend] or username, got " + line + "!");
                     }
                 } else {
-                    User u;
-                    u.load(line);
-                    addPermission(&u);
+                    User* u = User::load(line);
+                    addPermission(u);
                 }
             } else if(ps == "groups") {
                 if(line[0] == '[' && line[line.length()-1] == ']') {
@@ -365,9 +382,8 @@ void Command::load(std::string name) {
                         throw RCF::Common::ParserException(filepath, lineno, "Expected [groupsend] or username, got " + line + "!");
                     }
                 } else {
-                    Group g;
-                    g.load(line);
-                    addPermission(&g);
+                    Group*  g = Group::load(line);
+                    addPermission(g);
                 }
             } else {
                 throw RCF::Common::ParserException(filepath, lineno, "Unknown parameter: " + line + "!");

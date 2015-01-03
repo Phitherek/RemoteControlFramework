@@ -47,6 +47,9 @@ int ExecuteImpl::execute(std::string exec, std::string* stdout_target, std::stri
             close(out[1]);
             close(err[1]);
             char buffer[4096];
+            for(int i = 0; i < 4096; i++) {
+                buffer[i] = '\0';
+            }
             // Read stdout
             while(1) {
                 ssize_t count = read(out[0], buffer, sizeof(buffer));
@@ -63,6 +66,9 @@ int ExecuteImpl::execute(std::string exec, std::string* stdout_target, std::stri
                 } else {
                     *stdout_target += buffer;
                 }
+            }
+            for(int i = 0; i < 4096; i++) {
+                buffer[i] = '\0';
             }
             // Read stderr
             while(1) {
@@ -100,7 +106,7 @@ int ExecuteImpl::execute(std::string exec, std::string* stdout_target, std::stri
             if(!dup(err[1])) {
                 ;
             }
-            execl(exec.c_str(), exec.substr(0, exec.find(' ')-1).c_str(), NULL);
+            execl("/bin/sh", "sh", "-c", exec.c_str(), NULL);
         } else {
             std::string err = "Cannot fork: ";
             err += strerror(errno);

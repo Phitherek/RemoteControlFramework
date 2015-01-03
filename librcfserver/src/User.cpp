@@ -19,6 +19,8 @@ User::User() {
     _hashed_password = "";
 }
 
+User::~User() {}
+
 User::User(std::string name, std::string password) {
     _name = name;
     RCF::Common::MHashEngine mhe;
@@ -32,7 +34,15 @@ User::User(std::string name, std::string password) {
     _hashed_password = mhe.getHash(hpss.str());
 }
 
-void User::load(std::string name) {
+User* User::load(std::string name) {
+    if(_loadedPermissions != NULL && _loadedPermissionsSize > 0) {
+        for(int i = 0; i < _loadedPermissionsSize; i++) {
+            if(_loadedPermissions[i]->getName() == name && _loadedPermissions[i]->getPermissionType() == "user") {
+                return dynamic_cast<User*>(_loadedPermissions[i]);
+            }
+        }
+    }
+    User* u = new User;
     RCF::Common::HelperFunctions hf;
     boost::filesystem::path confdir = hf.getHomeDirectory();
     confdir += "/.rcfserver";
@@ -61,13 +71,13 @@ void User::load(std::string name) {
                     throw RCF::Common::ParserException(filepath, lineno, "Expected parameter in [], got " + line + "!");
                 }
             } else if(ps == "name") {
-                _name = line;
+                u->_name = line;
                 ps = "toplevel";
             } else if(ps == "salt") {
-                _salt = line;
+                u->_salt = line;
                 ps = "toplevel";
             } else if(ps == "hashed_password") {
-                _hashed_password = line;
+                u->_hashed_password = line;
                 ps = "toplevel";
             } else {
                 throw RCF::Common::ParserException(filepath, lineno, "Unknown parameter: " + line + "!");
@@ -75,6 +85,18 @@ void User::load(std::string name) {
         }
     }
     in.close();
+    int newLoadedPermissionsSize = _loadedPermissionsSize + 1;
+    Permission** newLoadedPermissions = new Permission*[newLoadedPermissionsSize];
+    if(_loadedPermissions != NULL && _loadedPermissionsSize > 0) {
+        for(int i = 0; i < _loadedPermissionsSize; i++) {
+            newLoadedPermissions[i] = _loadedPermissions[i];
+        }
+        delete[] _loadedPermissions;
+    }
+    newLoadedPermissions[newLoadedPermissionsSize-1] = u;
+    _loadedPermissions = newLoadedPermissions;
+    _loadedPermissionsSize = newLoadedPermissionsSize;
+    return u;
 }
 
 void User::save() {

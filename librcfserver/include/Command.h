@@ -31,6 +31,7 @@ namespace RCF {
             int _numParams;
             void setPermsEnd();
         public:
+            Command(); ///< A plain constructor.
             Command(std::string name, std::string exec); ///< \brief A constructor with command name and command on server
             ///< \param name Command name.
             ///< \param exec Command on server.

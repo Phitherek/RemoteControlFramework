@@ -13,13 +13,16 @@ int main() {
             cout << "getPermissionType() failed!" << endl;
             return EXIT_FAILURE;
         }
-        RCF::Server::User u1;
-        u1.load("Test"); // After running ServerUserTest this already exists
-        RCF::Server::User u2("Test2", "test2");
-        RCF::Server::User u3; // Invalid user
-        RCF::Server::User u4("Test4", "test4"); // Not in group
-        u2.save();
-        u4.save();
+        RCF::Server::User* u1 = RCF::Server::User::load("Test"); // After running ServerUserTest this already exists
+        RCF::Server::User* u2 = new RCF::Server::User("Test2", "test2");
+        RCF::Server::User* u3 = new RCF::Server::User; // Invalid user
+        RCF::Server::User* u4 = new RCF::Server::User("Test4", "test4"); // Not in group
+        try {
+            u2->save();
+            u4->save();
+        } catch(RCF::Common::FilesystemException& e) {
+            cout << "Already exists..." << endl;
+        }
         g.addUser(u1);
         g.addUser(u2);
         try {
@@ -34,10 +37,10 @@ int main() {
        bool t1 = false, t2 = false;
        while(!g.usersAtEnd()) {
            try {
-               RCF::Server::User ru = g.getNextUser();
-               if(ru.getName() == "Test") {
+               RCF::Server::User* ru = g.getNextUser();
+               if(ru->getName() == "Test") {
                    t1 = true;
-               } else if(ru.getName() == "Test2") {
+               } else if(ru->getName() == "Test2") {
                    t2 = true;
                }
            } catch(RCF::Common::AtEndException& e) {
@@ -49,16 +52,19 @@ int main() {
            return EXIT_FAILURE;
        }
        g.resetUsersIterator();
-       g.save();
-       RCF::Server::Group g2;
-       g2.load("testgroup");
+       try {
+           g.save();
+       } catch(RCF::Common::FilesystemException& e) {
+           cout << "Already exists..." << endl;
+       }
+       RCF::Server::Group* g2 = RCF::Server::Group::load("testgroup");
        t1 = false, t2 = false;
-       while(!g2.usersAtEnd()) {
+       while(!g2->usersAtEnd()) {
           try {
-               RCF::Server::User ru = g2.getNextUser();
-               if(ru.getName() == "Test") {
+               RCF::Server::User* ru = g2->getNextUser();
+               if(ru->getName() == "Test") {
                    t1 = true;
-               } else if(ru.getName() == "Test2") {
+               } else if(ru->getName() == "Test2") {
                    t2 = true;
                }
            } catch(RCF::Common::AtEndException& e) {
@@ -69,15 +75,15 @@ int main() {
            cout << "File failure!" << endl;
            return EXIT_FAILURE;
        }
-       g2.resetUsersIterator();
+       g2->resetUsersIterator();
        RCF::Server::Group g3 = g;
        t1 = false, t2 = false;
        while(!g3.usersAtEnd()) {
            try {
-               RCF::Server::User ru = g3.getNextUser();
-               if(ru.getName() == "Test") {
+               RCF::Server::User* ru = g3.getNextUser();
+               if(ru->getName() == "Test") {
                    t1 = true;
-               } else if(ru.getName() == "Test2") {
+               } else if(ru->getName() == "Test2") {
                    t2 = true;
                }
            } catch(RCF::Common::AtEndException& e) {
@@ -92,10 +98,10 @@ int main() {
        t1 = false, t2 = false;
        while(!g3.usersAtEnd()) {
            try {
-               RCF::Server::User ru = g3.getNextUser();
-               if(ru.getName() == "Test") {
+               RCF::Server::User* ru = g3.getNextUser();
+               if(ru->getName() == "Test") {
                    t1 = true;
-               } else if(ru.getName() == "Test2") {
+               } else if(ru->getName() == "Test2") {
                    t2 = true;
                }
            } catch(RCF::Common::AtEndException& e) {
@@ -107,6 +113,9 @@ int main() {
            return EXIT_FAILURE;
        }
        g3.resetUsersIterator();
+       delete u2;
+       delete u3;
+       delete u4;
     } catch(exception& e) {
         cout << "Caught exception: " << e.what() << endl;
         return EXIT_FAILURE;

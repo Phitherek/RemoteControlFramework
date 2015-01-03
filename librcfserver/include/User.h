@@ -24,8 +24,10 @@ namespace RCF {
             User(std::string name, std::string password); ///< \brief A constructor from name and password.
             ///< \param name User name.
             ///< \param password User password (will be encrypted).
-            void load(std::string name); ///< \brief Load user of given name from configuration.
+            ~User(); ///< A destructor
+            static User* load(std::string name); ///< \brief Load user of given name from configuration.
             ///< \param name Name of user to load.
+            ///< \return A pointer to the instance of loaded User.
             void save(); ///< Save user to configuration.
             std::string getPermissionType(); ///< \brief A function that returns permission type.
             ///< \return Permission type.
@@ -34,6 +36,7 @@ namespace RCF {
             ///< \return True if password matches, false otherwise.
             bool valid(); ///< \brief If permission is valid to save or process.
             ///< \return Boolean.
+            static void free(); ///< Free the memory.
         };
     }
 }
