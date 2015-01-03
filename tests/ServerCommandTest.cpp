@@ -131,10 +131,17 @@ int main() {
     string err = "";
     try {
         ret = t1.execute(&out, &err);
-        if(ret != 0 || out != "Stdout test\n" || err != "Stderr test\n") {
-            cerr << "execute() 1 failed!" << endl;
-            return EXIT_FAILURE;
-        }
+        #if BOOST_OS_LINUX || BOOST_OS_MACOS
+            if(ret != 0 || out != "Stdout test\n" || err != "Stderr test\n") {
+                cerr << "execute() 1 failed!" << endl;
+                return EXIT_FAILURE;
+            }
+        #elif BOOST_OS_WINDOWS
+            if(ret != 0 || out != "Stdout test\r\n" || err != "Stderr test\r\n") {
+                cerr << "execute() 1 failed!" << endl;
+                return EXIT_FAILURE;
+            }
+        #endif
     } catch(RCF::Common::RuntimeException& e) {
         cerr << "execute() 1 failed!" << endl;
         return EXIT_FAILURE;
@@ -143,10 +150,17 @@ int main() {
     err = "";
     try {
         ret = t2.execute(&out, &err);
-        if(ret != 1 || out != "Stdout test\n" || err != "Stderr test\n") {
-            cerr << "execute() 2 failed!" << endl;
-            return EXIT_FAILURE;
-        }
+        #if BOOST_OS_LINUX || BOOST_OS_MACOS
+            if(ret != 1 || out != "Stdout test\n" || err != "Stderr test\n") {
+                cerr << "execute() 1 failed!" << endl;
+                return EXIT_FAILURE;
+            }
+        #elif BOOST_OS_WINDOWS
+            if(ret != 1 || out != "Stdout test\r\n" || err != "Stderr test\r\n") {
+                cerr << "execute() 1 failed!" << endl;
+                return EXIT_FAILURE;
+            }
+        #endif
     } catch(RCF::Common::RuntimeException& e) {
         cerr << "execute() 2 failed!" << endl;
         return EXIT_FAILURE;
@@ -155,10 +169,17 @@ int main() {
     err = "";
     try {
         ret = t3.execute(&out, &err, params);
-        if(ret != 1 || out != "Stdout test: good better\n" || err != "Stderr test\n") {
-            cerr << "execute() 3 failed!" << endl;
-            return EXIT_FAILURE;
-        }
+        #if BOOST_OS_LINUX || BOOST_OS_MACOS
+            if(ret != 1 || out != "Stdout test: good better\n" || err != "Stderr test\n") {
+                cerr << "execute() 1 failed!" << endl;
+                return EXIT_FAILURE;
+            }
+        #elif BOOST_OS_WINDOWS
+            if(ret != 1 || out != "Stdout test: good better\r\n" || err != "Stderr test\r\n") {
+                cerr << "execute() 1 failed!" << endl;
+                return EXIT_FAILURE;
+            }
+        #endif
     } catch(RCF::Common::RuntimeException& e) {
         cerr << "execute() 3 failed!" << endl;
         return EXIT_FAILURE;

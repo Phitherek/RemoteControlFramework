@@ -1,6 +1,7 @@
 #include "ExecuteImpl.h"
 #include "librcfcommon/librcfcommon.h"
 //#include <iostream>
+#include <cstring>
 using namespace RCF::Server;
 
 int ExecuteImpl::execute(std::string exec, std::string* stdout_target, std::string* stderr_target) {
@@ -190,10 +191,19 @@ int ExecuteImpl::execute(std::string exec, std::string* stdout_target, std::stri
         }
         TCHAR* cmd = new TCHAR[exec.length()];
         int execLength = exec.length();
+        int cmdLength = strlen(cmd);
+        for(int i = 0; i < cmdLength; i++) {
+            cmd[i] = '\0';
+        }
         for(int i = 0; i < execLength; i++) {
             cmd[i] = exec[i];
         }
-        //std::cout << "RCF::Server::ExecuteImpl::execute_windows DEBUG: exec: " << exec << ", cmd: " << cmd << std::endl;
+        cmdLength = strlen(cmd);
+        // Sometimes weird trash is added at the end of this TCHAR. This gets rid of it.
+        for(int i = execLength; i < cmdLength; i++) {
+            cmd[i] = '\0';
+        }
+        //std::cout << "RCF::Server::ExecuteImpl::execute_windows DEBUG: exec: " << exec << ", cmd: " << cmd << ", execLength: " << execLength << ", cmdLength: " << cmdLength << std::endl;
         PROCESS_INFORMATION pi;
         STARTUPINFO si;
         BOOL success = false;
@@ -238,11 +248,17 @@ int ExecuteImpl::execute(std::string exec, std::string* stdout_target, std::stri
         CloseHandle(errWrite);
         DWORD bytesRead;
         CHAR buffer[4096];
+        for(int i = 0; i < 4096; i++) {
+            buffer[i] = '\0';
+        }
         success = false;
         for(;;) {
             success = ReadFile(outRead, buffer, 4096, &bytesRead, NULL);
             if(!success || bytesRead == 0) break;
             *stdout_target += buffer;
+        }
+        for(int i = 0; i < 4096; i++) {
+            buffer[i] = '\0';
         }
         success = false;
         for(;;) {
