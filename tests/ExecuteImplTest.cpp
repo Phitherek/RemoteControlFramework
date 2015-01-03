@@ -13,7 +13,7 @@ int main() {
     #if BOOST_OS_LINUX || BOOST_OS_MACOS
         code = RCF::Server::ExecuteImpl::execute("./testcmd", &out, &err);
     #elif BOOST_OS_WINDOWS
-        code = RCF::Server::ExecuteImpl::execute("testcmd", &out, &err);
+        code = RCF::Server::ExecuteImpl::execute("testcmd.exe", &out, &err);
     #endif
     cout << "Testcmd" << endl << "Code: " << code << endl << "Stdout: " << endl << out << endl << "Stderr: " << endl << err << endl;
     out = "";
@@ -21,7 +21,7 @@ int main() {
     #if BOOST_OS_LINUX || BOOST_OS_MACOS
         code = RCF::Server::ExecuteImpl::execute("./testcmdd", &out, &err);
     #elif BOOST_OS_WINDOWS
-        code = RCF::Server::ExecuteImpl::execute("testcmdd", &out, &err);
+        code = RCF::Server::ExecuteImpl::execute("testcmdd.exe", &out, &err);
     #endif
     cout << "Testcmdd" << endl << "Code: " << code << endl << "Stdout: " << endl << out << endl << "Stderr: " << endl << err << endl;
     return EXIT_SUCCESS;

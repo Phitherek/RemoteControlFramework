@@ -1,5 +1,6 @@
 #include "ExecuteImpl.h"
 #include "librcfcommon/librcfcommon.h"
+//#include <iostream>
 using namespace RCF::Server;
 
 int ExecuteImpl::execute(std::string exec, std::string* stdout_target, std::string* stderr_target) {
@@ -186,6 +187,7 @@ int ExecuteImpl::execute(std::string exec, std::string* stdout_target, std::stri
         for(int i = 0; i < execLength; i++) {
             cmd[i] = exec[i];
         }
+        //std::cout << "RCF::Server::ExecuteImpl::execute_windows DEBUG: exec: " << exec << ", cmd: " << cmd << std::endl;
         PROCESS_INFORMATION pi;
         STARTUPINFO si;
         BOOL success = false;
@@ -223,6 +225,7 @@ int ExecuteImpl::execute(std::string exec, std::string* stdout_target, std::stri
             throw RCF::Common::RuntimeException(err);
         }
         delete[] cmd;
+        cmd = NULL;
         CloseHandle(pi.hProcess);
         CloseHandle(pi.hThread);
         CloseHandle(outWrite);
