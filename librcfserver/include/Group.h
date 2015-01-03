@@ -34,6 +34,7 @@ namespace RCF {
             static Group* load(std::string name); ///< \brief Load group of given name from configuration.
             ///< \param name Name of group to load.
             ///< \return Found Group.
+            ///< \warning At the end of the code that uses this function, you should call the RCF::Server::Permission::free() function to free the memory.
             void save(); ///< Save group to configuration.
             std::string getPermissionType(); ///< \brief A function that returns permission type.
             ///< \return Permission type.

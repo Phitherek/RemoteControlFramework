@@ -120,6 +120,7 @@ int main() {
         cout << "Caught exception: " << e.what() << endl;
         return EXIT_FAILURE;
     }
+    RCF::Server::Permission::free();
     cout << "Success!" << endl;
     return EXIT_SUCCESS;
 }

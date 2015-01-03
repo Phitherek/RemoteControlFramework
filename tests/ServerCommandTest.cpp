@@ -167,6 +167,7 @@ int main() {
     delete tu2;
     delete tu3;
     delete tg;
+    RCF::Server::Permission::free();
     cout << "Success!" << endl;
     return EXIT_SUCCESS;
 }
