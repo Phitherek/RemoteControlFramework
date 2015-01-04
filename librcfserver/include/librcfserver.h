@@ -3,3 +3,4 @@
 #include "Group.h"
 #include "ExecuteImpl.h"
 #include "Command.h"
+#include "CommandGroup.h"

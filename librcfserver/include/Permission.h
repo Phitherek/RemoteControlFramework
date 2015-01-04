@@ -4,7 +4,7 @@
 /// \file Permission.h
 /// \brief A class that represents a permission to execute the command
 /// \author Phitherek_
-/// \date 2014
+/// \date 2014-2015
 /// \version 0.1
 
 /// \namespace RCF

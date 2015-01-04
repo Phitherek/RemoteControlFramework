@@ -6,7 +6,7 @@
 /// \file Group.h
 /// \brief An implementation of a user permission.
 /// \author Phitherek_
-/// \date 2014
+/// \date 2014-2015
 /// \version 0.1
 
 /// \namespace RCF
