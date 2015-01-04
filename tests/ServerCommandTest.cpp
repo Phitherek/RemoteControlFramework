@@ -7,39 +7,39 @@
 using namespace std;
 
 int main() {
-    RCF::Server::Command c1("test1", "echo Test successful!");
-    RCF::Server::Command c2("test2", "echo Works {rcfparam:0} and {rcfparam:1}!", 2);
-    if(c1.getName() != "test1" || c2.getName() != "test2") {
+    RCF::Server::Command* c1 = new RCF::Server::Command("test1", "echo Test successful!");
+    RCF::Server::Command* c2 = new RCF::Server::Command("test2", "echo Works {rcfparam:0} and {rcfparam:1}!", 2);
+    if(c1->getName() != "test1" || c2->getName() != "test2") {
         cerr << "getName() failed!" << endl;
         return EXIT_FAILURE;
     }
-    if(c1.getExec() != "echo Test successful!") {
+    if(c1->getExec() != "echo Test successful!") {
         cerr << "getExec() 1 failed!" << endl;
         return EXIT_FAILURE;
     }
     try {
-        c2.getExec();
+        c2->getExec();
     } catch(RCF::Common::ParametersNeededException& e) {
         cout << "Cannot execute parametrized command without parameters - OK!" << endl;
     }
     vector<string> params;
     params.push_back("good");
-    if(c1.getExec(params) != "echo Test successful!") {
+    if(c1->getExec(params) != "echo Test successful!") {
         cerr << "getExec() 2 failed (with noparam command)" << endl;
         return EXIT_FAILURE;
     }
     try {
-        c2.getExec(params);
+        c2->getExec(params);
     } catch(RCF::Common::ParametersNeededException& e) {
         cout << "Cannot execute parametrized command with too few parameters - OK!" << endl;
     }
     params.push_back("better");
-    if(c2.getExec(params) != "echo Works good and better!") {
+    if(c2->getExec(params) != "echo Works good and better!") {
         cerr << "getExec() 2 failed (with parametrized command and sufficient nr of params)" << endl;
         return EXIT_FAILURE;
     }
     params.push_back("best");
-    if(c2.getExec(params) != "echo Works good and better!") {
+    if(c2->getExec(params) != "echo Works good and better!") {
         cerr << "getExec() 2 failed (with parametrized command and too many params)" << endl;
         return EXIT_FAILURE;
     }
@@ -57,47 +57,45 @@ int main() {
     } catch(RCF::Common::FilesystemException& e) {
         cout << "Already saved..." << endl;
     }
-    c1.addPermission(tu);
-    c2.addPermission(tg);
-    if(!c1.canExecute("Tu") || !c2.canExecute("Tu2") || !c2.canExecute("Tu3")) {
+    c1->addPermission(tu);
+    c2->addPermission(tg);
+    if(!c1->canExecute("Tu") || !c2->canExecute("Tu2") || !c2->canExecute("Tu3")) {
         cout << "addPermission() or canExecute() failed!" << endl;
         return EXIT_FAILURE;
     }
     try {
-        c1.save();
-        c2.save();
+        c1->save();
+        c2->save();
     } catch(RCF::Common::FilesystemException& e) {
         cout << "Already saved..." << endl;
     }
-    RCF::Server::Command cc1;
-    RCF::Server::Command cc2;
-    cc1.load("test1");
-    cc2.load("test2");
-    if(cc1.getExec() != c1.getExec()) {
+    RCF::Server::Command* cc1 = RCF::Server::Command::load("test1");
+    RCF::Server::Command* cc2 = RCF::Server::Command::load("test2");
+    if(cc1->getExec() != c1->getExec()) {
         cerr << "Loading failed: getExec() 1!" << endl;
         return EXIT_FAILURE;
     }
-    if(cc2.getExec(params) != c2.getExec(params)) {
+    if(cc2->getExec(params) != c2->getExec(params)) {
         cerr << "Loading failed: getExec() 2!" << endl;
         return EXIT_FAILURE;
     }
-    if(cc1.getName() != c1.getName()) {
+    if(cc1->getName() != c1->getName()) {
         cerr << "Loading failed: getName() 1!" << endl;
         return EXIT_FAILURE;
     }
-    if(cc2.getName() != c2.getName()) {
+    if(cc2->getName() != c2->getName()) {
         cerr << "Loading failed: getName() 2!" << endl;
         return EXIT_FAILURE;
     }
-    if(!cc1.canExecute("Tu")) {
+    if(!cc1->canExecute("Tu")) {
         cerr << "Loading failed: canExecute() 1!" << endl;
         return EXIT_FAILURE;
     }
-    if(!cc2.canExecute("Tu2")) {
+    if(!cc2->canExecute("Tu2")) {
         cerr << "Loading failed: canExecute() 2!" << endl;
         return EXIT_FAILURE;
     }
-    if(!cc2.canExecute("Tu3")) {
+    if(!cc2->canExecute("Tu3")) {
         cerr << "Loading failed: canExecute() 3!" << endl;
         return EXIT_FAILURE;
     }
@@ -188,7 +186,10 @@ int main() {
     delete tu2;
     delete tu3;
     delete tg;
+    delete c1;
+    delete c2;
     RCF::Server::Permission::free();
+    RCF::Server::Command::free();
     cout << "Success!" << endl;
     return EXIT_SUCCESS;
 }

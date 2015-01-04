@@ -1,6 +1,9 @@
 #include "CommandGroup.h"
 using namespace RCF::Server;
 
+CommandGroup** CommandGroup::_loadedGroups = NULL;
+int CommandGroup::_loadedGroupsSize = 0;
+
 void CommandGroup::setCommandsEnd() {
     if(_commands != NULL && _commandsIterator < _commandsSize-1) {
         _commandsEnd = false;
@@ -44,7 +47,7 @@ CommandGroup::CommandGroup(std::string name) {
 CommandGroup::CommandGroup(CommandGroup& cpy) {
     _name = cpy._name;
     if(cpy._commands != NULL && cpy._commandsSize > 0) {
-        _commands = new Command[cpy._commandsSize];
+        _commands = new Command*[cpy._commandsSize];
         for(int i = 0; i < cpy._commandsSize; i++) {
             _commands[i] = cpy._commands[i];
         }
@@ -56,7 +59,7 @@ CommandGroup::CommandGroup(CommandGroup& cpy) {
     _commandsIterator = -1;
     setCommandsEnd();
     if(cpy._groups != NULL && cpy._groupsSize > 0) {
-        _groups = new CommandGroup[cpy._groupsSize];
+        _groups = new CommandGroup*[cpy._groupsSize];
         for(int i = 0; i < cpy._groupsSize; i++) {
             _groups[i] = cpy._groups[i];
         }
@@ -90,7 +93,7 @@ bool CommandGroup::hasCommand(std::string name) {
     bool found = false;
     if(_commands != NULL && _commandsSize >  0) {
         for(int i = 0; i < _commandsSize; i++) {
-            if(_commands[i].getName() == name) {
+            if(_commands[i]->getName() == name) {
                 found = true;
                 break;
             }
@@ -103,7 +106,7 @@ bool CommandGroup::recursiveHasCommand(std::string name) {
     bool found = false;
     if(_commands != NULL && _commandsSize >  0) {
         for(int i = 0; i < _commandsSize; i++) {
-            if(_commands[i].getName() == name) {
+            if(_commands[i]->getName() == name) {
                 found = true;
                 break;
             }
@@ -112,7 +115,7 @@ bool CommandGroup::recursiveHasCommand(std::string name) {
     if(!found) {
         if(_groups != NULL && _groupsSize > 0) {
             for(int i = 0; i < _groupsSize; i++) {
-                if(_groups[i].recursiveHasCommand(name)) {
+                if(_groups[i]->recursiveHasCommand(name)) {
                     found = true;
                     break;
                 }
@@ -126,7 +129,7 @@ bool CommandGroup::hasGroup(std::string name) {
     bool found = false;
     if(_groups != NULL && _groupsSize >  0) {
         for(int i = 0; i < _groupsSize; i++) {
-            if(_groups[i].getName() == name) {
+            if(_groups[i]->getName() == name) {
                 found = true;
                 break;
             }
@@ -139,7 +142,7 @@ bool CommandGroup::recursiveHasGroup(std::string name) {
     bool found = false;
     if(_groups != NULL && _groupsSize >  0) {
         for(int i = 0; i < _groupsSize; i++) {
-            if(_groups[i].getName() == name) {
+            if(_groups[i]->getName() == name) {
                 found = true;
                 break;
             }
@@ -148,7 +151,7 @@ bool CommandGroup::recursiveHasGroup(std::string name) {
     if(!found) {
         if(_groups != NULL && _groupsSize > 0) {
             for(int i = 0; i < _groupsSize; i++) {
-                if(_groups[i].recursiveHasGroup(name)) {
+                if(_groups[i]->recursiveHasGroup(name)) {
                     found = true;
                     break;
                 }
@@ -164,7 +167,7 @@ void CommandGroup::addPermission(Permission* p) {
     }
     if(_commands != NULL && _commandsSize >  0) {
         for(int i = 0; i < _commandsSize; i++) {
-            _commands[i].addPermission(p);
+            _commands[i]->addPermission(p);
         }
     }
 }
@@ -175,17 +178,17 @@ void CommandGroup::recursiveAddPermission(Permission* p) {
     }
     if(_commands != NULL && _commandsSize >  0) {
         for(int i = 0; i < _commandsSize; i++) {
-            _commands[i].addPermission(p);
+            _commands[i]->addPermission(p);
         }
     }
     if(_groups != NULL && _groupsSize >  0) {
         for(int i = 0; i < _groupsSize; i++) {
-            _groups[i].recursiveAddPermission(p);
+            _groups[i]->recursiveAddPermission(p);
         }
     }
 }
 
-Command CommandGroup::getNextCommand() {
+Command* CommandGroup::getNextCommand() {
     if(_commandsIterator+1 < _commandsSize) {
         _commandsIterator++;
         setCommandsEnd();
@@ -199,12 +202,12 @@ bool CommandGroup::commandsAtEnd() {
     return _commandsEnd;
 }
 
-void CommandGroup::addCommand(Command c) {
-    if(!c.valid()) {
+void CommandGroup::addCommand(Command* c) {
+    if(!c->valid()) {
         throw RCF::Common::InvalidObjectException("Command is invalid and cannot be added!");
     }
     int newCommandsSize = _commandsSize + 1;
-    Command* newCommands = new Command[newCommandsSize];
+    Command** newCommands = new Command*[newCommandsSize];
     if(_commands != NULL && _commandsSize > 0) {
         for(int i = 0; i < _commandsSize; i++) {
             newCommands[i] = _commands[i];
@@ -222,7 +225,7 @@ void CommandGroup::resetCommandsIterator() {
     setCommandsEnd();
 }
 
-CommandGroup CommandGroup::getNextGroup() {
+CommandGroup* CommandGroup::getNextGroup() {
     if(_groupsIterator+1 < _groupsSize) {
         _groupsIterator++;
         setGroupsEnd();
@@ -236,12 +239,12 @@ bool CommandGroup::groupsAtEnd() {
     return _groupsEnd;
 }
 
-void CommandGroup::addGroup(CommandGroup cg) {
-    if(!cg.valid()) {
+void CommandGroup::addGroup(CommandGroup* cg) {
+    if(!cg->valid()) {
         throw RCF::Common::InvalidObjectException("Command group is invalid and cannot be added!");
     }
     int newGroupsSize = _groupsSize + 1;
-    CommandGroup* newGroups = new CommandGroup[newGroupsSize];
+    CommandGroup** newGroups = new CommandGroup*[newGroupsSize];
     if(_groups != NULL && _groupsSize > 0) {
         for(int i = 0; i < _groupsSize; i++) {
             newGroups[i] = _groups[i];
@@ -286,11 +289,11 @@ void CommandGroup::save() {
         out << "[name]" << std::endl << _name << std::endl;
         out << "[commands]" << std::endl;
         for(int i = 0; i < _commandsSize; i++) {
-            out << _commands[i].getName() << std::endl;
+            out << _commands[i]->getName() << std::endl;
         }
         out << "[commandsend]" << std::endl  << "[groups]" << std::endl;
         for(int i = 0; i < _groupsSize; i++) {
-            out << _groups[i].getName()  << std::endl;
+            out << _groups[i]->getName()  << std::endl;
         }
         out << "[groupsend]" << std::endl;
     } else {
@@ -298,7 +301,15 @@ void CommandGroup::save() {
     }
 }
 
-void CommandGroup::load(std::string name) {
+CommandGroup* CommandGroup::load(std::string name) {
+    if(_loadedGroups != NULL && _loadedGroupsSize > 0) {
+        for(int i = 0; i < _loadedGroupsSize; i++) {
+            if(_loadedGroups[i]->getName() == name) {
+                return _loadedGroups[i];
+            }
+        }
+    }
+    CommandGroup* cg = new CommandGroup;
     RCF::Common::HelperFunctions hf;
     boost::filesystem::path confdir = hf.getHomeDirectory();
     confdir += "/.rcfserver";
@@ -327,7 +338,7 @@ void CommandGroup::load(std::string name) {
                     throw RCF::Common::ParserException(filepath, lineno, "Expected parameter in [], got " + line + "!");
                 }
             } else if(ps == "name")  {
-                _name = line;
+                cg->_name = line;
                 ps = "toplevel";
             } else if(ps == "commands") {
                 if(line[0] == '[' && line[line.length()-1] == ']') {
@@ -337,9 +348,8 @@ void CommandGroup::load(std::string name) {
                         throw RCF::Common::ParserException(filepath, lineno, "Expected [commandsend] or username, got " + line + "!");
                     }
                 } else {
-                    Command c;
-                    c.load(line);
-                    addCommand(c);
+                    Command* c = Command::load(line);
+                    cg->addCommand(c);
                 }
             } else if(ps == "groups") {
                 if(line[0] == '[' && line[line.length()-1] == ']') {
@@ -349,15 +359,27 @@ void CommandGroup::load(std::string name) {
                         throw RCF::Common::ParserException(filepath, lineno, "Expected [groupsend] or username, got " + line + "!");
                     }
                 } else {
-                    CommandGroup cg;
-                    cg.load(line);
-                    addGroup(cg);
+                    CommandGroup* bcg = CommandGroup::load(line);
+                    cg->addGroup(bcg);
                 }
             } else {
                 throw RCF::Common::ParserException(filepath, lineno, "Unknown parameter: " + line + "!");
             }
         }
     }
+    in.close();
+    int newLoadedGroupsSize = _loadedGroupsSize + 1;
+    CommandGroup** newLoadedGroups = new CommandGroup*[newLoadedGroupsSize];
+    if(_loadedGroups != NULL && _loadedGroupsSize > 0) {
+        for(int i = 0; i < _loadedGroupsSize; i++) {
+            newLoadedGroups[i] = _loadedGroups[i];
+        }
+        delete[] _loadedGroups;
+    }
+    newLoadedGroups[newLoadedGroupsSize-1] = cg;
+    _loadedGroups = newLoadedGroups;
+    _loadedGroupsSize = newLoadedGroupsSize;
+    return cg;
 }
 
 bool CommandGroup::valid() {
@@ -365,4 +387,15 @@ bool CommandGroup::valid() {
         return true;
     }
     return false;
+}
+
+void CommandGroup::free() {
+    if(_loadedGroups != NULL && _loadedGroupsSize > 0) {
+        for(int i = 0; i < _loadedGroupsSize; i++) {
+            delete _loadedGroups[i];
+        }
+        delete[] _loadedGroups;
+    }
+    _loadedGroups = NULL;
+    _loadedGroupsSize = 0;
 }

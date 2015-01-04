@@ -20,14 +20,16 @@ namespace RCF {
         class CommandGroup {
         private:
             std::string _name;
-            Command* _commands;
+            Command** _commands;
             int _commandsSize;
             int _commandsIterator;
             bool _commandsEnd;
-            CommandGroup* _groups;
+            CommandGroup** _groups;
             int _groupsSize;
             int _groupsIterator;
             bool _groupsEnd;
+            static CommandGroup** _loadedGroups;
+            static int _loadedGroupsSize;
             void setCommandsEnd();
             void setGroupsEnd();
          public:
@@ -55,25 +57,28 @@ namespace RCF {
              ///< \param p A pointer to Permission to add.
              void recursiveAddPermission(Permission* p); ///< \brief Adds permission to all commands in this group and groups below.
              ///< \param p A pointer to Permission to add.
-             Command getNextCommand(); ///< \brief Gets next command in the command group.
+             Command* getNextCommand(); ///< \brief Gets next command in the command group.
              ///< \return Next command in the command group.
              bool commandsAtEnd(); ///< \brief Checks if commands iterator reached the end.
              ///< \return Boolean.
-             void addCommand(Command c); ///< \brief Adds a command to the command group.
+             void addCommand(Command* c); ///< \brief Adds a command to the command group.
              ///< \param c A command to add.
              void resetCommandsIterator(); ///< Resets the command iterator.
-             CommandGroup getNextGroup(); ///< \brief Gets next command group in the command group.
+             CommandGroup* getNextGroup(); ///< \brief Gets next command group in the command group.
              ///< \return Next command group in the command group.
              bool groupsAtEnd(); ///< \brief Checks if command groups iterator reached the end.
              ///< \return Boolean.
-             void addGroup(CommandGroup cg); ///< \brief Adds a command group to the command group.
+             void addGroup(CommandGroup* cg); ///< \brief Adds a command group to the command group.
              ///< \param cg A command group to add.
              void resetGroupsIterator(); ///< Resets the command groups iterator.
              void save(); ///< Saves the command group.
-             void load(std::string name); ///< Loads command group of given name.
+             static CommandGroup* load(std::string name); ///< Loads command group of given name.
              ///< \param name Name of a command group.
+             ///< \return Loaded command group.
+             ///< \warning At the end of the code that uses this function, use RCF::Server::CommandGroup::free() function to free the memory.
              bool valid(); ///< \brief Checks if command group is valid.
              ///< \return Boolean.
+             static void free(); ///< Frees the memory.
         };
     }
 }

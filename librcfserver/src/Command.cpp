@@ -8,6 +8,9 @@
 #include <iostream>
 using namespace RCF::Server;
 
+Command** Command::_loadedCommands = NULL;
+int Command::_loadedCommandsSize = 0;
+
 Command::Command() {
     _name = "";
     _exec = "";
@@ -320,7 +323,15 @@ void Command::save() {
     }
 }
 
-void Command::load(std::string name) {
+Command* Command::load(std::string name) {
+    if(_loadedCommands != NULL && _loadedCommandsSize > 0) {
+        for(int i = 0; i < _loadedCommandsSize; i++) {
+            if(_loadedCommands[i]->getName() == name) {
+                return _loadedCommands[i];
+            }
+        }
+    }
+    Command* cmd = new Command;
     RCF::Common::HelperFunctions hf;
     boost::filesystem::path confdir = hf.getHomeDirectory();
     confdir += "/.rcfserver";
@@ -355,13 +366,13 @@ void Command::load(std::string name) {
                     throw RCF::Common::ParserException(filepath, lineno, "Expected parameter in [], got " + line + "!");
                 }
             } else if(ps == "name")  {
-                _name = line;
+                cmd->_name = line;
                 ps = "toplevel";
             } else if(ps == "exec") {
-                _exec = line;
+                cmd->_exec = line;
                 ps = "toplevel";
             } else if(ps == "num_params") {
-                _numParams = atoi(line.c_str());
+                cmd->_numParams = atoi(line.c_str());
                 ps = "toplevel";
             } else if(ps == "users") {
                 if(line[0] == '[' && line[line.length()-1] == ']') {
@@ -372,7 +383,7 @@ void Command::load(std::string name) {
                     }
                 } else {
                     User* u = User::load(line);
-                    addPermission(u);
+                    cmd->addPermission(u);
                 }
             } else if(ps == "groups") {
                 if(line[0] == '[' && line[line.length()-1] == ']') {
@@ -383,13 +394,26 @@ void Command::load(std::string name) {
                     }
                 } else {
                     Group*  g = Group::load(line);
-                    addPermission(g);
+                    cmd->addPermission(g);
                 }
             } else {
                 throw RCF::Common::ParserException(filepath, lineno, "Unknown parameter: " + line + "!");
             }
         }
     }
+    in.close();
+    int newLoadedCommandsSize = _loadedCommandsSize + 1;
+    Command** newLoadedCommands = new Command*[newLoadedCommandsSize];
+    if(_loadedCommands != NULL && _loadedCommandsSize > 0) {
+        for(int i = 0; i < _loadedCommandsSize; i++) {
+            newLoadedCommands[i] = _loadedCommands[i];
+        }
+        delete[] _loadedCommands;
+    }
+    newLoadedCommands[newLoadedCommandsSize-1] = cmd;
+    _loadedCommands = newLoadedCommands;
+    _loadedCommandsSize = newLoadedCommandsSize;
+    return cmd;
 }
 
 bool Command::valid() {
@@ -398,4 +422,15 @@ bool Command::valid() {
 
 int Command::numParams() {
     return _numParams;
+}
+
+void Command::free() {
+    if(_loadedCommands != NULL && _loadedCommandsSize > 0) {
+        for(int i = 0; i < _loadedCommandsSize; i++) {
+            delete _loadedCommands[i];
+        }
+        delete[] _loadedCommands;
+    }
+    _loadedCommands = NULL;
+    _loadedCommandsSize = 0;
 }
