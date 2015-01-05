@@ -59,6 +59,9 @@ namespace RCF {
              ///< \param p A pointer to Permission to add.
              Command* getNextCommand(); ///< \brief Gets next command in the command group.
              ///< \return Next command in the command group.
+             Command* getCommandByName(std::string name); ///< \brief Gets command from command group by name.
+             ///< \param name Name of the command.
+             ///< \return Command of given name from the command group.
              bool commandsAtEnd(); ///< \brief Checks if commands iterator reached the end.
              ///< \return Boolean.
              void addCommand(Command* c); ///< \brief Adds a command to the command group.
@@ -66,6 +69,9 @@ namespace RCF {
              void resetCommandsIterator(); ///< Resets the command iterator.
              CommandGroup* getNextGroup(); ///< \brief Gets next command group in the command group.
              ///< \return Next command group in the command group.
+             CommandGroup* getGroupByName(std::string name); ///< \brief Gets command group from command group by name.
+             ///< \param name Name of the command group.
+             ///< \return Command group of given name from the command group.
              bool groupsAtEnd(); ///< \brief Checks if command groups iterator reached the end.
              ///< \return Boolean.
              void addGroup(CommandGroup* cg); ///< \brief Adds a command group to the command group.
@@ -75,7 +81,7 @@ namespace RCF {
              static CommandGroup* load(std::string name); ///< Loads command group of given name.
              ///< \param name Name of a command group.
              ///< \return Loaded command group.
-             ///< \warning At the end of the code that uses this function, use RCF::Server::CommandGroup::free() function to free the memory.
+             ///< \warning At the end of the code that uses this function, use RCF::Server::CommandGroup::free() function to free the memory, RCF::Server::Command::free() to free the commands if any command was specified inside any group and RCF::Server::Permission::free() to free the permissions if any command had any permission specified.
              bool valid(); ///< \brief Checks if command group is valid.
              ///< \return Boolean.
              static void free(); ///< Frees the memory.

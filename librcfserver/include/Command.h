@@ -74,7 +74,7 @@ namespace RCF {
             static Command* load(std::string name); ///< \brief Loads the command from the server configuration.
             ///< \param name Name of the command.
             ///< \return Loaded command.
-            ///< \warning At the end of the code that uses this function, use RCF::Server::Command::free() function to free the memory.
+            ///< \warning At the end of the code that uses this function, use RCF::Server::Command::free() function to free the memory and RCF::Server::Permission::free() to free the memory of permissions if any permission was specified in the command.
             bool valid(); ///< \brief If command is valid.
             ///< \return Boolean.
             int numParams(); ///< \brief Returns the number of parameters that command requires.

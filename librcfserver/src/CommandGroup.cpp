@@ -197,6 +197,15 @@ Command* CommandGroup::getNextCommand() {
     throw RCF::Common::AtEndException("Commands iterator reached its end!");
 }
 
+Command* CommandGroup::getCommandByName(std::string name) {
+    for(int i = 0; i < _commandsSize; i++) {
+        if(_commands[i]->getName() == name) {
+            return _commands[i];
+        }
+    }
+    throw RCF::Common::NotFoundException(name, "Command could not be found in the command group!");
+}
+
 bool CommandGroup::commandsAtEnd() {
     setCommandsEnd();
     return _commandsEnd;
@@ -232,6 +241,15 @@ CommandGroup* CommandGroup::getNextGroup() {
         return _groups[_groupsIterator];
     }
     throw RCF::Common::AtEndException("Groups iterator reached its end!");
+}
+
+CommandGroup* CommandGroup::getGroupByName(std::string name) {
+    for(int i = 0; i < _groupsSize; i++) {
+        if(_groups[i]->getName() == name) {
+            return _groups[i];
+        }
+    }
+    throw RCF::Common::NotFoundException(name, "Command group could not be found in the command group!");
 }
 
 bool CommandGroup::groupsAtEnd() {

@@ -13,6 +13,7 @@ all:
 	g++ -o testcmdd testcmdd.cpp
 	g++ -o testcmd2 testcmd2.cpp
 	g++ -o ExecuteImplTest ExecuteImplTest.cpp `pkg-config --cflags --libs librcfserver librcfcommon` -lboost_filesystem -lboost_system
+	g++ -o ServerCommandGroupTest ServerCommandGroupTest.cpp `pkg-config --cflags --libs librcfserver librcfcommon` -lboost_filesystem -lboost_system
 debug:
 	g++ -o SSLTestServer SSLTestServer.cpp -lboost_system -lssl -lcrypto -lpthread -g
 	g++ -o SSLTestClient SSLTestClient.cpp -lboost_system -lssl -lcrypto -lpthread -g
@@ -28,5 +29,6 @@ debug:
 	g++ -o testcmdd testcmdd.cpp -g
 	g++ -o testcmd2 testcmd2.cpp -g
 	g++ -o ExecuteImplTest ExecuteImplTest.cpp `pkg-config --cflags --libs librcfserver librcfcommon` -lboost_filesystem -lboost_system -g
+	g++ -o ServerCommandGroupTest ServerCommandGroupTest.cpp `pkg-config --cflags --libs librcfserver librcfcommon` -lboost_filesystem -lboost_system -g
 clean:
-	rm -rf SSLTestServer SSLTestClient StringsTest MHashEngineTest ServerPermissionTest ServerUserTest HelperFunctionsTest CommonExceptionsTest ServerGroupTest ServerCommandTest testcmd ExecuteImplTest
+	rm -rf SSLTestServer SSLTestClient StringsTest MHashEngineTest ServerPermissionTest ServerUserTest HelperFunctionsTest CommonExceptionsTest ServerGroupTest ServerCommandTest testcmd testcmdd testcmd2 ExecuteImplTest ServerCommandGroupTest
