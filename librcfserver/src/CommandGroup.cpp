@@ -314,6 +314,7 @@ void CommandGroup::save() {
             out << _groups[i]->getName()  << std::endl;
         }
         out << "[groupsend]" << std::endl;
+        out.close();
     } else {
         throw RCF::Common::InvalidObjectException("Command group is invalid and cannot be saved!");
     }

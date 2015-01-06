@@ -318,6 +318,7 @@ void Command::save() {
             }
         }
         out << "[groupsend]" << std::endl;
+        out.close();
     } else {
         throw RCF::Common::InvalidObjectException("Command is invalid and cannot be saved!");
     }
