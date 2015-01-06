@@ -28,18 +28,17 @@ Client::~Client() {
 
 std::string Client::read() {
     std::string out = "";
-    while(true) {
+    bool finish = false;
+    while(!finish) {
         for(int i = 0; i < max_length; i++) {
             _data[i] = '\0';
         }
         int length = _sock->read_some(boost::asio::buffer(_data, max_length));
-        if(_data[length-1] == 3) {
-            for(int i = 0; i < length-1; i++) {
-                out += _data[i];
-            }
-            break;
-        } else {
-            for(int i = 0; i < length; i++) {
+        for(int i = 0; i < length; i++) {
+            if(_data[i] == 3) {
+                finish = true;
+                break;
+            } else {
                 out += _data[i];
             }
         }

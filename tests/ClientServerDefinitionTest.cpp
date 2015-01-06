@@ -9,12 +9,12 @@ int main() {
     RCF::Common::HelperFunctions hf;
     boost::filesystem::path certfile = hf.getHomeDirectory();
     certfile += "/rcfcerts/localtest/rcfservercert.pem";
-    RCF::Client::ServerDefinition sd("localtest", "localhost", certfile.string());
+    RCF::Client::ServerDefinition sd("localtest", "127.0.0.1", certfile.string());
     if(sd.getName() != "localtest") {
         cerr << "getName() failed!" << endl;
         return EXIT_FAILURE;
     }
-    if(sd.getHostname() != "localhost") {
+    if(sd.getHostname() != "127.0.0.1") {
         cerr << "getHostname() failed!" << endl;
         return EXIT_FAILURE;
     }

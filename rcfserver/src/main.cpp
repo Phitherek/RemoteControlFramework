@@ -10,8 +10,9 @@ using namespace std;
 
 void mainfn(RCF::Server::Server* srv, boost::asio::ssl::stream<boost::asio::ip::tcp::socket>* sock) {
     try {
-        srv->handshake(sock);
         cout << "Client connected!" << endl;
+        srv->handshake(sock);
+        cout << "Client handshaked properly!" << endl;
         RCF::Server::User* logged_user = srv->authorize(sock);
         srv->handlePostauth(sock, logged_user);
     } catch(exception& e) {

@@ -93,6 +93,23 @@ Server::Server(boost::asio::io_service& service, unsigned int port, void (*mainf
         }
         cmditer++;
     }
+    int groupsSize = _groups.size();
+    for(int i = 0; i < groupsSize; i++) {
+        bool destroy = false;
+        for(int j = 0; j < groupsSize; j++) {
+            if(i != j) {
+                if(_groups[j]->recursiveHasGroup(_groups[i]->getName())) {
+                    destroy = true;
+                    break;
+                }
+            }
+        }
+        if(destroy) {
+            _groups.erase(_groups.begin()+i);
+            i--;
+            groupsSize--;
+        }
+    }
     _mainfn = mainfn;
 }
 
@@ -188,15 +205,18 @@ User* Server::authorize(ssl_socket* sock) {
 }
 
 void Server::handlePostauth(ssl_socket* sock, User* logged_user) {
-    std::string cmd = read(sock);
-    if(cmd == "LIST") {
-        handleList(sock, logged_user);
-    } else if(cmd.substr(0, 4) == "EXEC") {
-        handleExecute(sock, cmd.substr(5, std::string::npos), logged_user);
-    } else if(cmd == "CLOSE") {
-        close(sock);
-    } else {
-        throw RCF::Common::ProtocolException("Unknown protocol command received!");
+    while(true) {
+        std::string cmd = read(sock);
+        if(cmd == "LIST") {
+            handleList(sock, logged_user);
+        } else if(cmd.substr(0, 4) == "EXEC") {
+            handleExecute(sock, cmd.substr(5, std::string::npos), logged_user);
+        } else if(cmd == "CLOSE") {
+            close(sock);
+            break;
+        } else {
+            throw RCF::Common::ProtocolException("Unknown protocol command received!");
+        }
     }
 }
 
@@ -227,6 +247,7 @@ void Server::handleExecute(ssl_socket* sock, std::string query, User* logged_use
             part += query[i];
         }
     }
+    splittedQuery.push_back(part);
     int splittedQuerySize = splittedQuery.size();
     CommandGroup* curgrp = NULL;
     for(int i = 0; i < splittedQuerySize; i++) {
@@ -370,18 +391,17 @@ void Server::handleException(ssl_socket* sock, std::exception& e) {
 std::string Server::read(ssl_socket* sock) {
     char data[max_length];
     std::string out = "";
-    while(true) {
+    bool finish = false;
+    while(!finish) {
         for(int i = 0; i < max_length; i++) {
             data[i] = '\0';
         }
         int length = sock->read_some(boost::asio::buffer(data, max_length));
-        if(data[length-1] == 3) {
-            for(int i = 0; i < length-1; i++) {
-                out += data[i];
-            }
-            break;
-        } else {
-            for(int i = 0; i < length; i++) {
+        for(int i = 0; i < length; i++) {
+            if(data[i] == 3) {
+                finish = true;
+                break;
+            } else {
                 out += data[i];
             }
         }
