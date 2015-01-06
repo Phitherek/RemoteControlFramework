@@ -125,6 +125,18 @@ namespace RCF {
             const char* what() const throw(); ///< \brief A function describing the error.
             ///< \return What has happened.
         };
+        /// \class ProtocolException
+        /// \brief An exception related to an error during RCF Protocol communication.
+        class ProtocolException: public std::exception {
+        private:
+            std::string _error;
+        public:
+            ProtocolException(std::string error); ///< \brief A constructor from error.
+            ///< \param error What has happened.
+            ~ProtocolException() throw(); ///< A destructor required by std::exception.
+            const char* what() const throw(); ///< \brief A function describing the error.
+            ///< \return What has happened.
+        };
     }
 }
 #endif

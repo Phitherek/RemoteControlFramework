@@ -95,6 +95,17 @@ int main() {
         cout << "RuntimeException is wrong!"  << endl;
         return EXIT_FAILURE;
     }
+    try {
+        throw RCF::Common::ProtocolException("Something went wrong");
+    } catch(RCF::Common::ProtocolException& e) {
+        if(strcmp(e.what(), "Something went wrong") != 0) {
+            fail = true;
+        }
+    }
+    if(fail) {
+        cout << "ProtocolException is wrong!"  << endl;
+        return EXIT_FAILURE;
+    }
     cout << "Success!" << endl;
     return EXIT_SUCCESS;
 }

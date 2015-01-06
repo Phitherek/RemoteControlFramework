@@ -113,3 +113,12 @@ const char* RuntimeException::what() const throw() {
     return _error.c_str();
 }
 
+ProtocolException::ProtocolException(std::string error) {
+    _error = error;
+}
+
+ProtocolException::~ProtocolException() throw() {}
+
+const char* ProtocolException::what() const throw() {
+    return _error.c_str();
+}

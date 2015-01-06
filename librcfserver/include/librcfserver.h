@@ -4,3 +4,4 @@
 #include "ExecuteImpl.h"
 #include "Command.h"
 #include "CommandGroup.h"
+#include "Server.h"
