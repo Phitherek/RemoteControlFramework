@@ -3,13 +3,15 @@ comp = meson.get_compiler('cpp')
 inc = include_directories('include')
 if build.name() == 'windows'
     dep = find_library('libsrcfcommon', required : false)
-    dep = dependency('boost', modules: ['filesystem', 'system', 'asio'], required: false)
+    boost_dep = dependency('boost', modules: ['filesystem', 'system', 'asio'], required: false)
+    ossl_dep = dependency('openssl', required: false)
 else
     dep = dependency('librcfcommon')
-    dep = dependency('boost', modules: ['filesystem', 'system', 'asio'])
+    boost_dep = dependency('boost', modules: ['filesystem', 'system', 'asio'])
+    ossl_dep = dependency('openssl')
 endif
 subdir('include')
 subdir('src')
 if build.name() != 'windows'
-    pkgconfig_gen(libraries : librcfcli, version : '0.1', name : 'librcfclient', filebase : 'librcfclient', description : 'A library of client-side classes for RemoteControlFramework', include_directories: inc, install : true, dependencies : dep)
+    pkgconfig_gen(libraries : librcfcli, version : '0.1', name : 'librcfclient', filebase : 'librcfclient', description : 'A library of client-side classes for RemoteControlFramework', include_directories: inc, install : true, dependencies : [dep, boost_dep, ossl_dep])
 endif

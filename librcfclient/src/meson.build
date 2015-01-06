@@ -1,4 +1,4 @@
 if build.name() != 'windows'
-    librcfcli = shared_library('rcfclient', 'ServerDefinition.cpp', 'Client.cpp',  include_directories : inc, install : true, dependencies : dep, version: '0.1', soversion: 0)
+    librcfcli = shared_library('rcfclient', 'ServerDefinition.cpp', 'Client.cpp',  include_directories : inc, install : true, dependencies : [dep, boost_dep, ossl_dep], version: '0.1', soversion: 0)
 endif
-libsrcfcli = static_library('srcfclient', 'ServerDefinition.cpp', 'Client.cpp',  include_directories : inc, install : true, dependencies : dep)
+libsrcfcli = static_library('srcfclient', 'ServerDefinition.cpp', 'Client.cpp',  include_directories : inc, install : true, dependencies : [dep, boost_dep, ossl_dep])
