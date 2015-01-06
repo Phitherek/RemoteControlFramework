@@ -50,8 +50,10 @@ Server::Server(boost::asio::io_service& service, unsigned int port, void (*mainf
                 break;
             }
         }
-        if(load) {
+        if(load && (*permiter).path().extension().string() == ".rcfgroup") {
             _perms.push_back(RCF::Server::Group::load((*permiter).path().stem().string()));
+        } else if(load && (*permiter).path().extension().string() == ".rcfuser") {
+            _perms.push_back(RCF::Server::User::load((*permiter).path().stem().string()));
         }
         permiter++;
     }

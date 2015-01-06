@@ -11,7 +11,6 @@
 #include <boost/asio/ssl.hpp>
 #include <boost/thread.hpp>
 #include <exception>
-#include <typeinfo>
 #include <vector>
 /// \file Server.h
 /// \brief A class that can be used to create RCF server and contains useful RCF protocol methods.
