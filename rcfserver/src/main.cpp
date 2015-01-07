@@ -1,7 +1,12 @@
-#include <librcfserver/librcfserver.h>
-#include <librcfcommon/librcfcommon.h>
+#include <boost/predef.h>
+#if BOOST_OS_WINDOWS
+    #define _WIN32_WINNT 0x0501
+    #define WINVER 0x0501
+#endif
 #include <boost/asio.hpp>
 #include <boost/asio/ssl.hpp>
+#include <librcfserver/librcfserver.h>
+#include <librcfcommon/librcfcommon.h>
 #include <iostream>
 #include <cstdlib>
 #include <string>

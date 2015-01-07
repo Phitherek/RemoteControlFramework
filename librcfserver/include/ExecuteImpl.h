@@ -6,6 +6,7 @@
 #include <string>
 #include <boost/predef.h>
 #if BOOST_OS_WINDOWS
+#define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 #include <tchar.h>
 #elif BOOST_OS_LINUX || BOOST_OS_MACOS

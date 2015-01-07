@@ -57,7 +57,8 @@ void ServerDefinition::save() {
         if(boost::filesystem::exists(filepath)) {
             throw RCF::Common::FilesystemException(filepath, "Already exists!");
         }
-        std::ofstream out(filepath.c_str());
+        std::string filepathstr = filepath.string();
+        std::ofstream out(filepathstr.c_str());
         out << "[name]" << std::endl << _name << std::endl << "[hostname]" << std::endl << _hostname << std::endl << "[certfile]" << std::endl << _certfile.string() << std::endl;
         out.close();
     } else {

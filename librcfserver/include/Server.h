@@ -1,17 +1,22 @@
 #ifndef _SERVER_H
 #define _SERVER_H
-#include "Permission.h"
-#include "User.h"
-#include "Group.h"
-#include "ExecuteImpl.h"
-#include "Command.h"
-#include "CommandGroup.h"
+#include <boost/predef.h>
+#if BOOST_OS_WINDOWS
+    #define _WIN32_WINNT 0x0501
+    #define WINVER 0x0501
+#endif
 #include <librcfcommon/librcfcommon.h>
 #include <boost/asio.hpp>
 #include <boost/asio/ssl.hpp>
 #include <boost/thread.hpp>
 #include <exception>
 #include <vector>
+#include "Permission.h"
+#include "User.h"
+#include "Group.h"
+#include "ExecuteImpl.h"
+#include "Command.h"
+#include "CommandGroup.h"
 /// \file Server.h
 /// \brief A class that can be used to create RCF server and contains useful RCF protocol methods.
 /// \author Phitherek_

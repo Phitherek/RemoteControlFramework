@@ -2,16 +2,12 @@
 #define _SERVERDEFINITION_H
 #include <librcfcommon/librcfcommon.h>
 #include <boost/filesystem.hpp>
-#include <boost/asio.hpp>
-#include <boost/asio/ssl.hpp>
 #include <string>
 /// \file ServerDefinition.h
 /// \brief A class that represents server definition for client.
 /// \author Phitherek_
 /// \date 2015
 /// \version 0.1
-
-typedef boost::asio::ssl::stream<boost::asio::ip::tcp::socket> ssl_socket;
 
 /// \namespace RCF
 /// \brief A global namespace for RemoteControlFramework

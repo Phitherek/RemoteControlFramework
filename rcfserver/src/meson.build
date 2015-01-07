@@ -1,1 +1,1 @@
-rcfserver = executable('rcfserver', 'main.cpp', install: true, dependencies: [rcfsdep, rcfcmdep, boostdep, ossldep])
+rcfserver = executable('rcfserver', 'main.cpp', install: true, dependencies: [rcfsdep, rcfcmdep, boostdep, ossldep], link_args: linkargs)

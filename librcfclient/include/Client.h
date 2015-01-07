@@ -1,7 +1,14 @@
 #ifndef _CLIENT_H
 #define _CLIENT_H
+#include <boost/predef.h>
+#if BOOST_OS_WINDOWS
+    #define _WIN32_WINNT 0x0501
+    #define WINVER 0x0501
+#endif
 #include <librcfcommon/librcfcommon.h>
 #include <boost/filesystem.hpp>
+#include <boost/asio.hpp>
+#include <boost/asio/ssl.hpp>
 #include <string>
 #include "ServerDefinition.h"
 /// \file Client.h
