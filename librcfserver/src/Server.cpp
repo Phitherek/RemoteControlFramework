@@ -110,6 +110,22 @@ Server::Server(boost::asio::io_service& service, unsigned int port, void (*mainf
             groupsSize--;
         }
     }
+    groupsSize = _groups.size();
+    int commandsSize = _commands.size();
+    for(int i = 0; i < commandsSize; i++) {
+        bool destroy = false;
+        for(int j = 0; j < groupsSize; j++) {
+            if(_groups[j]->recursiveHasCommand(_commands[i]->getName())) {
+                destroy = true;
+                break;
+            }
+        }
+        if(destroy) {
+            _commands.erase(_commands.begin()+i);
+            i--;
+            commandsSize--;
+        }
+    }
     _mainfn = mainfn;
 }
 
