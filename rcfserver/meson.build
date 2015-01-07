@@ -12,6 +12,5 @@ else
     rcfcmdep = dependency('librcfcommon')
     boostdep = dependency('boost', modules: ['filesystem', 'system', 'predef', 'asio', 'thread'])
     ossldep = dependency('openssl')
-    linkargs = ''
 endif
 subdir('src')

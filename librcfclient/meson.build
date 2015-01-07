@@ -6,7 +6,7 @@ if build.name() == 'windows'
     boost_dep = dependency('boost', modules: ['filesystem', 'system', 'asio'], required: false)
     ossl_dep = dependency('openssl', required: false)
     ws_dep = dependency('libws2_32', required: false)
-    add_global_arguments('-lsrcfcommon -lboost_filesystem -lboost_system -lboost_asio -lssleay32 -leay32 -lws2_32', language: 'cpp')
+    add_global_arguments('-lsrcfcommon -lboost_filesystem -lboost_system -lssleay32 -leay32 -lws2_32', language: 'cpp')
 else
     dep = dependency('librcfcommon')
     boost_dep = dependency('boost', modules: ['filesystem', 'system', 'asio'])
