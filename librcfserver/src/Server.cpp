@@ -315,7 +315,11 @@ void Server::handleExecute(ssl_socket* sock, std::string query, User* logged_use
                                 return;
                             }
                         } else {
-                            throw RCF::Common::NotFoundException(query, "Query could not be resolved!");
+                            std::string msg = "NCERROR ";
+                            msg += query;
+                            msg += ": Query could not be resolved!";
+                            write(sock, msg);
+                            return;
                         }
                         break;
                     }
@@ -367,7 +371,11 @@ void Server::handleExecute(ssl_socket* sock, std::string query, User* logged_use
                             }
                     }
                 } else {
-                    throw RCF::Common::NotFoundException(query, "Query could not be resolved!");
+                    std::string msg = "NCERROR ";
+                    msg += query;
+                    msg += ": Query could not be resolved!";
+                    write(sock, msg);
+                    return;
                 }
             }
         } else {
@@ -380,18 +388,30 @@ void Server::handleExecute(ssl_socket* sock, std::string query, User* logged_use
                     }
                 }
                 if(curgrp == NULL) {
-                    throw RCF::Common::NotFoundException(query, "Query could not be resolved!");
+                    std::string msg = "ERROR ";
+                    msg += query;
+                    msg += ": Query could not be resolved!";
+                    write(sock, msg);
+                    return;
                 }
             } else {
                 if(curgrp->hasGroup(splittedQuery[i])) {
                     curgrp = curgrp->getGroupByName(splittedQuery[i]);
                 } else {
-                    throw RCF::Common::NotFoundException(query, "Query could not be resolved!");
+                    std::string msg = "NCERROR ";
+                    msg += query;
+                    msg += ": Query could not be resolved!";
+                    write(sock, msg);
+                    return;
                 }
             }
         }
     }
-    throw RCF::Common::NotFoundException(query, "Query could not be resolved!");
+    std::string msg = "NCERROR ";
+    msg += query;
+    msg += ": Query could not be resolved!";
+    write(sock, msg);
+    return;
 }
 
 void Server::close(ssl_socket* sock) {
@@ -399,7 +419,8 @@ void Server::close(ssl_socket* sock) {
 }
 
 void Server::handleException(ssl_socket* sock, std::exception& e) {
-    std::string msg = "ERROR ";
+    std::string msg = "";
+    msg += "ERROR ";
     msg += e.what();
     write(sock, msg);
 }

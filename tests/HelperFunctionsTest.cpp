@@ -9,5 +9,12 @@ int main() {
     cout << "Function result: " << hf.getPlainHomeDirectory() << endl;
     cout << "getHomeDirectory():" << endl;
     cout << "Function result: " << hf.getHomeDirectory().string() << endl;
+    cout << "Enter something: ";
+    std::string sensitive;
+    hf.setInputEcho(false);
+    cin >> sensitive;
+    hf.setInputEcho(true);
+    cout << endl;
+    cout << "You entered: " << sensitive << endl;
     return EXIT_SUCCESS;
 }

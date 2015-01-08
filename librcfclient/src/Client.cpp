@@ -1,4 +1,7 @@
 #include "Client.h"
+#include <cstdlib>
+#include <sstream>
+#include <iostream>
 using namespace RCF::Client;
 
 Client::Client(boost::asio::io_service& service, std::string sdName): _io_service(service), _ctx(boost::asio::ssl::context::sslv23), _rslvr(service)  {
@@ -24,6 +27,131 @@ Client::Client(boost::asio::io_service& service, std::string sdName): _io_servic
 
 Client::~Client() {
     delete _sock;
+}
+
+ServerDefinition* Client::getServerDefinition() {
+    return _srvdef;
+}
+
+void Client::handshake() {
+    write("RCFINIT");
+    std::string resp = read();
+    if(resp != "RCFINIT") {
+        throw RCF::Common::ProtocolException("Server did not properly respond to RCF Protocol handshake!");
+    }
+}
+
+void Client::authorize(std::string username, std::string password) {
+    std::string msg = "";
+    std::string resp = "";
+    msg += "USER ";
+    msg += username;
+    write(msg);
+    resp = read();
+    if(resp == "PASS") {
+        msg = "PASS ";
+        msg += password;
+        write(msg);
+        resp = read();
+        if(resp != "AUTHORIZED" && resp.substr(0, 5) == "ERROR") {
+            std::string err = resp.substr(6, std::string::npos);
+            throw RCF::Common::ProtocolException(err);
+        }
+    } else if(resp.substr(0, 5) == "ERROR") {
+        std::string err = resp.substr(6, std::string::npos);
+        throw RCF::Common::ProtocolException(err);
+    }
+}
+
+std::string Client::list() {
+    std::string outlist = "";
+    std::stringstream outlistss;
+    outlistss.str("");
+    std::string msg = "";
+    std::string resp = "";
+    msg = "LIST";
+    write(msg);
+    resp = read();
+    if(resp == "BEGINLIST") {
+        while(resp != "ENDLIST") {
+            resp = read();
+            if(resp != "ENDLIST") {
+                outlistss << resp << std::endl;
+            }
+        }
+    } else {
+        throw RCF::Common::ProtocolException("Unexpected protocol message!");
+    }
+    outlist = outlistss.str();
+    return outlist;
+}
+
+int Client::execute(std::string query, std::string* stdout_target, std::string* stderr_target, std::string (*paramProvider)()) {
+    std::string msg = "";
+    std::string resp = "";
+    int code;
+    std::string ps = "toplevel";
+    msg += "EXEC ";
+    msg += query;
+    write(msg);
+    do {
+        resp = read();
+        if(ps == "toplevel") {
+            if(resp == "PARAM") {
+                std::string param;
+                param = paramProvider();
+                write(param);
+            } else if(resp == "EXECBEGIN") {
+                ps = "inexec";
+            } else if(resp == "OUTBEGIN") {
+                ps = "out";
+            } else if(resp == "ERRBEGIN") {
+                ps = "err";
+            } else if(resp.substr(0, 5) == "ERROR") {
+                std::string err = msg.substr(6, std::string::npos);
+                throw RCF::Common::ProtocolException(err);
+            } else if(resp.substr(0, 7) == "NCERROR") {
+                std::string err = msg.substr(8, std::string::npos);
+                throw RCF::Common::NotFoundException("From server", err);
+            } else {
+                throw RCF::Common::ProtocolException("Unexpected protocol message!");
+            }
+        } else if(ps == "inexec") {
+            if(resp.substr(0, 7) == "EXECEND") {
+                std::string scode = resp.substr(8, std::string::npos);
+                code = atoi(scode.c_str());
+                ps = "toplevel";
+            } else {
+                if(resp.substr(0, 5) == "ERROR") {
+                    std::string err = msg.substr(6, std::string::npos);
+                    throw RCF::Common::ProtocolException(err);
+                } else {
+                    throw RCF::Common::ProtocolException("Unexpected protocol message!");
+                }
+            }
+        } else if(ps == "out") {
+            if(resp == "OUTEND") {
+                ps = "toplevel";
+            } else {
+                *stdout_target += resp;
+            }
+        } else if(ps == "err") {
+            if(resp == "ERREND") {
+                ps = "toplevel";
+            } else {
+                *stderr_target += resp;
+            }
+        }
+    } while(resp != "ERREND");
+    return code;
+}
+
+void Client::close() {
+    write("CLOSE");
+    std::string resp = read();
+    if(resp != "CLOSE") {
+        throw RCF::Common::ProtocolException("Unexpected protocol message!");
+    }
 }
 
 std::string Client::read() {

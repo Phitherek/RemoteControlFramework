@@ -3,10 +3,10 @@ comp = meson.get_compiler('cpp')
 inc = include_directories('include')
 if build.name() == 'windows'
     dep = find_library('mhash', required : false)
-    boost_dep = dependency('boost', modules : ['filesystem', 'system'], required : false)
+    boost_dep = dependency('boost', modules : ['filesystem', 'system', 'predef'], required : false)
 else
     dep = find_library('mhash')
-    boost_dep = dependency('boost', modules : ['filesystem', 'system'])
+    boost_dep = dependency('boost', modules : ['filesystem', 'system', 'predef'])
 endif
 subdir('include')
 subdir('src')

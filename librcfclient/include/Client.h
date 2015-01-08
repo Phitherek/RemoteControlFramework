@@ -41,6 +41,21 @@ namespace RCF {
             Client(boost::asio::io_service& service, std::string sdName); ///< \brief A constructor from boost::asio::io_service and server definition name.
             ///< \param sdName Server definition name.
             ~Client(); ///< A destructor.
+            ServerDefinition* getServerDefinition(); ///< \brief Returns the server definition this client has been connected to.
+            ///< \return A pointer to ServerDefinition which was used to connect.
+            void handshake(); ///< Performs the handshake with the server.
+            void authorize(std::string username, std::string password); ///< \brief Authorize the user on the server.
+            ///< \param username A username to authorize with.
+            ///< \param password A password to authorize with.
+            std::string list(); ///< \brief Obtains a list of commands for currently logged in user.
+            ///< \return List of commands to be parsed by the client.
+            int execute(std::string query, std::string* stdout_target, std::string* stderr_target, std::string (*paramProvider)()); ///< \brief Executes a command on the server.
+            ///< \param query A command query - includes command name preceded by the hierarchy of groups that command belongs to, separated by : sign. Example: administration:network:mycommand, where mycommand belongs to the network group, and network group belongs to administration group which is top-level on the server.
+            ///< \param stdout_target A target string where command stdout should be placed.
+            ///< \param stderr_target A target string where command stderr should be placed.
+            ///< \param paramProvider A function that provides additional parameters for the command (in response to PARAM protocol message). Takes no arguments, returns std::string.
+            ///< \return Command exit code.
+            void close(); ///< Closes the connection.
             std::string read(); ///< \brief Reads next portion of the transmission.
             ///< \return Received data without ending separator as std::string.
             void write(std::string trans); ///< \brief Writes next portion of the transmission, adding the ending separator.
