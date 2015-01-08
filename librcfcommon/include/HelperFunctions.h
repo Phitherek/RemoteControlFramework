@@ -4,6 +4,7 @@
 #include <boost/filesystem.hpp>
 #include <boost/predef.h>
 #if BOOST_OS_WINDOWS
+#define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 #elif BOOST_OS_LINUX || BOOST_OS_MACOS
 #include <unistd.h>

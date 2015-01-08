@@ -30,11 +30,11 @@ void HelperFunctions::setInputEcho(bool e) {
     DWORD cmode;
     GetConsoleMode(stdinHandle, &cmode);
     if(e) {
-        mode |= ENABLE_ECHO_INPUT;
+        cmode |= ENABLE_ECHO_INPUT;
     } else {
-        mode &= ~ENABLE_ECHO_INPUT;
+        cmode &= ~ENABLE_ECHO_INPUT;
     }
-    SetConsoleMode(stdinHandle, &cmode);
+    SetConsoleMode(stdinHandle, cmode);
 #elif BOOST_OS_LINUX || BOOST_OS_MACOS
     termios term;
     tcgetattr(STDIN_FILENO, &term);

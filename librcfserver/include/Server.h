@@ -5,9 +5,9 @@
     #define _WIN32_WINNT 0x0501
     #define WINVER 0x0501
 #endif
-#include <librcfcommon/librcfcommon.h>
 #include <boost/asio.hpp>
 #include <boost/asio/ssl.hpp>
+#include <librcfcommon/librcfcommon.h>
 #include <boost/thread.hpp>
 #include <exception>
 #include <vector>
