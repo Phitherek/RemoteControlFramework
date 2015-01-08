@@ -49,7 +49,7 @@ int main(int argc, char** argv) {
         try {
             RCF::Client::ServerDefinition sd(name, hostname, certpath);
             sd.save();
-            cout << "New server definition created successfully!" << endl;
+            cout << "Success!" << endl;
         } catch(exception& e) {
             cout << "Caught exception while trying to create new server definition: " << e.what() << endl;
             return EXIT_FAILURE;
