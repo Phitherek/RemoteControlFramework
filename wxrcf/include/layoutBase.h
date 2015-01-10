@@ -7,7 +7,14 @@
 
 #ifndef __LAYOUTBASE_H__
 #define __LAYOUTBASE_H__
-
+#include <boost/predef.h>
+#if BOOST_OS_WINDOWS
+    #define _WIN32_WINNT 0x0501
+    #define WINVER 0x0501
+    #define WIN32_LEAN_AND_MEAN
+    #define WX_LEAN_AND_MEAN
+#endif
+#include <boost/asio.hpp>
 #include <wx/artprov.h>
 #include <wx/xrc/xmlres.h>
 #include <wx/string.h>
