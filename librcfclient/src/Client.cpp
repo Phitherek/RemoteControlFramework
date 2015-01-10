@@ -90,6 +90,10 @@ std::string Client::list() {
 int Client::execute(std::string query, std::string* stdout_target, std::string* stderr_target, std::string (*paramProvider)()) {
     std::string msg = "";
     std::string resp = "";
+    std::stringstream outss;
+    outss.str("");
+    std::stringstream errss;
+    errss.str("");
     int code;
     std::string ps = "toplevel";
     msg += "EXEC ";
@@ -134,16 +138,18 @@ int Client::execute(std::string query, std::string* stdout_target, std::string* 
             if(resp == "OUTEND") {
                 ps = "toplevel";
             } else {
-                *stdout_target += resp;
+                outss << resp << std::endl;
             }
         } else if(ps == "err") {
             if(resp == "ERREND") {
                 ps = "toplevel";
             } else {
-                *stderr_target += resp;
+                errss << resp << std::endl;
             }
         }
     } while(resp != "ERREND");
+    *stdout_target = outss.str();
+    *stderr_target = errss.str();
     return code;
 }
 

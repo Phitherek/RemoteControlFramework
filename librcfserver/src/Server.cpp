@@ -284,16 +284,45 @@ void Server::handleExecute(ssl_socket* sock, std::string query, User* logged_use
                                 int code;
                                 std::string out;
                                 std::string err;
+                                std::string line = "";
                                 code = _commands[j]->execute(&out, &err, params);
                                 std::stringstream msgss;
                                 msgss.str("");
                                 msgss << "EXECEND " << code;
                                 write(sock, msgss.str());
                                 write(sock, "OUTBEGIN");
-                                write(sock, out);
+                                int outLength = out.length();
+                                for(int l = 0; l < outLength; l++) {
+                                    if(out[l] == '\n' || out[l] == '\r') {
+                                        if(line != "") {
+                                            write(sock, line);
+                                        }
+                                        line = "";
+                                    } else {
+                                        line += out[l];
+                                    }
+                                }
+                                if(line != "") {
+                                    write(sock, line);
+                                }
+                                line = "";
                                 write(sock, "OUTEND");
                                 write(sock, "ERRBEGIN");
-                                write(sock, err);
+                                int errLength = err.length();
+                                for(int l = 0; l < errLength; l++) {
+                                    if(err[l] == '\n' || err[l] == '\r') {
+                                        if(line != "") {
+                                            write(sock, line);
+                                        }
+                                        line = "";
+                                    } else {
+                                        line += err[l];
+                                    }
+                                }
+                                if(line != "") {
+                                    write(sock, line);
+                                }
+                                line = "";
                                 write(sock, "ERREND");
                                 return;
                             } else {
@@ -301,16 +330,45 @@ void Server::handleExecute(ssl_socket* sock, std::string query, User* logged_use
                                 int code;
                                 std::string out;
                                 std::string err;
+                                std::string line = "";
                                 code = _commands[j]->execute(&out, &err);
                                 std::stringstream msgss;
                                 msgss.str("");
                                 msgss << "EXECEND " << code;
                                 write(sock, msgss.str());
                                 write(sock, "OUTBEGIN");
-                                write(sock, out);
+                                int outLength = out.length();
+                                for(int l = 0; l < outLength; l++) {
+                                    if(out[l] == '\n' || out[l] == '\r') {
+                                        if(line != "") {
+                                            write(sock, line);
+                                        }
+                                        line = "";
+                                    } else {
+                                        line += out[l];
+                                    }
+                                }
+                                if(line != "") {
+                                    write(sock, line);
+                                }
+                                line = "";
                                 write(sock, "OUTEND");
                                 write(sock, "ERRBEGIN");
-                                write(sock, err);
+                                int errLength = err.length();
+                                for(int l = 0; l < errLength; l++) {
+                                    if(err[l] == '\n' || err[l] == '\r') {
+                                        if(line != "") {
+                                            write(sock, line);
+                                        }
+                                        line = "";
+                                    } else {
+                                        line += err[l];
+                                    }
+                                }
+                                if(line != "") {
+                                    write(sock, line);
+                                }
+                                line = "";
                                 write(sock, "ERREND");
                                 return;
                             }
@@ -329,46 +387,104 @@ void Server::handleExecute(ssl_socket* sock, std::string query, User* logged_use
                     Command* cmd = curgrp->getCommandByName(splittedQuery[i]);
                     if(cmd->canExecute(logged_user->getName())) {
                         if(cmd->numParams() > 0) {
-                                std::vector<std::string> params;
-                                for(int k = 0; k < cmd->numParams(); k++) {
-                                    write(sock, "PARAM");
-                                    std::string param = read(sock);
-                                    params.push_back(param);
-                                }
-                                write(sock, "EXECBEGIN");
-                                int code;
-                                std::string out;
-                                std::string err;
-                                code = cmd->execute(&out, &err, params);
-                                std::stringstream msgss;
-                                msgss.str("");
-                                msgss << "EXECEND " << code;
-                                write(sock, msgss.str());
-                                write(sock, "OUTBEGIN");
-                                write(sock, out);
-                                write(sock, "OUTEND");
-                                write(sock, "ERRBEGIN");
-                                write(sock, err);
-                                write(sock, "ERREND");
-                                return;
-                            } else {
-                                write(sock, "EXECBEGIN");
-                                int code;
-                                std::string out;
-                                std::string err;
-                                code = cmd->execute(&out, &err);
-                                std::stringstream msgss;
-                                msgss.str("");
-                                msgss << "EXECEND " << code;
-                                write(sock, msgss.str());
-                                write(sock, "OUTBEGIN");
-                                write(sock, out);
-                                write(sock, "OUTEND");
-                                write(sock, "ERRBEGIN");
-                                write(sock, err);
-                                write(sock, "ERREND");
-                                return;
+                            std::vector<std::string> params;
+                            for(int k = 0; k < cmd->numParams(); k++) {
+                                write(sock, "PARAM");
+                                std::string param = read(sock);
+                                params.push_back(param);
                             }
+                            write(sock, "EXECBEGIN");
+                            int code;
+                            std::string out;
+                            std::string err;
+                            std::string line = "";
+                            code = cmd->execute(&out, &err, params);
+                            std::stringstream msgss;
+                            msgss.str("");
+                            msgss << "EXECEND " << code;
+                            write(sock, msgss.str());
+                            write(sock, "OUTBEGIN");
+                                int outLength = out.length();
+                                for(int l = 0; l < outLength; l++) {
+                                    if(out[l] == '\n' || out[l] == '\r') {
+                                        if(line != "") {
+                                            write(sock, line);
+                                        }
+                                        line = "";
+                                    } else {
+                                        line += out[l];
+                                    }
+                                }
+                                if(line != "") {
+                                    write(sock, line);
+                                }
+                                line = "";
+                                write(sock, "OUTEND");
+                                write(sock, "ERRBEGIN");
+                                int errLength = err.length();
+                                for(int l = 0; l < errLength; l++) {
+                                    if(err[l] == '\n' || err[l] == '\r') {
+                                        if(line != "") {
+                                            write(sock, line);
+                                        }
+                                        line = "";
+                                    } else {
+                                        line += err[l];
+                                    }
+                                }
+                                if(line != "") {
+                                    write(sock, line);
+                                }
+                                line = "";
+                                write(sock, "ERREND");
+                            return;
+                        } else {
+                            write(sock, "EXECBEGIN");
+                            int code;
+                            std::string out;
+                            std::string err;
+                            std::string line = "";
+                            code = cmd->execute(&out, &err);
+                            std::stringstream msgss;
+                            msgss.str("");
+                            msgss << "EXECEND " << code;
+                            write(sock, msgss.str());
+                            write(sock, "OUTBEGIN");
+                                int outLength = out.length();
+                                for(int l = 0; l < outLength; l++) {
+                                    if(out[l] == '\n' || out[l] == '\r') {
+                                        if(line != "") {
+                                            write(sock, line);
+                                        }
+                                        line = "";
+                                    } else {
+                                        line += out[l];
+                                    }
+                                }
+                                if(line != "") {
+                                    write(sock, line);
+                                }
+                                line = "";
+                                write(sock, "OUTEND");
+                                write(sock, "ERRBEGIN");
+                                int errLength = err.length();
+                                for(int l = 0; l < errLength; l++) {
+                                    if(err[l] == '\n' || err[l] == '\r') {
+                                        if(line != "") {
+                                            write(sock, line);
+                                        }
+                                        line = "";
+                                    } else {
+                                        line += err[l];
+                                    }
+                                }
+                                if(line != "") {
+                                    write(sock, line);
+                                }
+                                line = "";
+                                write(sock, "ERREND");
+                            return;
+                        }
                     }
                 } else {
                     std::string msg = "NCERROR ";
