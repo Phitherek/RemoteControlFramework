@@ -4,6 +4,8 @@
 #include <sstream>
 using namespace wxRCF;
 
+wxDEFINE_EVENT(wxEVT_COMMAND_EXECUTETHREAD_NEEDS_PARAMETER, wxThreadEvent);
+
 ServerData::ServerData() {
     cli = NULL;
     sdef = NULL;
@@ -113,26 +115,109 @@ void CommandGroup::addToTreeCtrl(wxTreeCtrl* control, wxTreeItemId parentId) {
     }
 }
 
-std::string wxRCF::paramProvider(RCF::Client::Client* cli) {
-    std::string param;
-    std::string title = "";
-    title += '[';
-    title += cli->getServerDefinition()->getName();
-    title += ": ";
-    title += cli->getLoggedUsername();
-    title += "] Enter command parameter - wxRCF v. 0.1 (C) 2015 by Phitherek_";
-    paramQueryDialog* pqdialog = new paramQueryDialog(NULL, (wxString&)title, &param);
-    pqdialog->ShowModal();
-    return param;
+ExecuteThread::ExecuteThread(int id, std::string query, ServerData* sd, void (*handler)(int, std::string, ServerData*, mainWindow*), mainWindow* mw) {
+    _id = id;
+    _query = query;
+    _sd = sd;
+    _handler = handler;
+    _mw = mw;
 }
 
-void wxRCF::execute(std::string query, ServerData* sd) {
+ExecuteThread::~ExecuteThread() {}
+
+wxThread::ExitCode ExecuteThread::Entry()  {
+    _handler(_id, _query, _sd, _mw);
+    return (wxThread::ExitCode)0;
+}
+
+std::string ExecuteThread::getServerName() {
+    return _sd->sdef->getName();
+}
+
+std::string ExecuteThread::getLoggedUsername() {
+    return _sd->username;
+}
+
+// Complete refactor of the execute for wxWidgets threading model.
+void wxRCF::execute(int threadId, std::string query, ServerData* sd, mainWindow* mw) {
     sd->lastcode = -1;
     sd->lastout = "";
     sd->lasterr = "";
     sd->status = "Processing";
     try {
-        sd->lastcode = sd->cli->execute(query, &(sd->lastout), &(sd->lasterr), wxRCF::paramProvider);
+        std::string msg = "";
+        std::string resp = "";
+        int code;
+        std::string ps = "toplevel";
+        msg += "EXEC ";
+        msg += query;
+        sd->cli->write(msg);
+        do {
+            resp = sd->cli->read();
+            if(ps == "toplevel") {
+                if(resp == "PARAM") {
+                    std::string param;
+                    wxThreadEvent* event = new wxThreadEvent(wxEVT_COMMAND_EXECUTETHREAD_NEEDS_PARAMETER);
+                    event->SetInt(threadId);
+                    wxQueueEvent(mw, event);
+                    bool cont = false;
+                    do {
+                        mw->sharedParameterCS.Enter();
+                        if(mw->sharedParameterModified == true && mw->sharedParameterForThreadId == threadId) {
+                            cont = true;
+                        } else {
+                            mw->sharedParameterCS.Leave();
+                        }
+                    } while(!cont);
+                    param = mw->sharedParameter;
+                    mw->sharedParameter = "";
+                    mw->sharedParameterModified = false;
+                    mw->sharedParameterForThreadId = -1;
+                    mw->sharedParameterCS.Leave();
+                    sd->cli->write(param);
+                } else if(resp == "EXECBEGIN") {
+                    ps = "inexec";
+                } else if(resp == "OUTBEGIN") {
+                    ps = "out";
+                } else if(resp == "ERRBEGIN") {
+                    ps = "err";
+                } else if(resp.substr(0, 5) == "ERROR") {
+                    std::string err = msg.substr(6, std::string::npos);
+                    throw RCF::Common::ProtocolException(err);
+                } else if(resp.substr(0, 7) == "NCERROR") {
+                    std::string err = msg.substr(8, std::string::npos);
+                    throw RCF::Common::NotFoundException("From server", err);
+                } else {
+                    throw RCF::Common::ProtocolException("Unexpected protocol message!");
+                }
+            } else if(ps == "inexec") {
+                if(resp.substr(0, 7) == "EXECEND") {
+                    std::string scode = resp.substr(8, std::string::npos);
+                    code = atoi(scode.c_str());
+                    ps = "toplevel";
+                } else {
+                    if(resp.substr(0, 5) == "ERROR") {
+                        std::string err = msg.substr(6, std::string::npos);
+                        throw RCF::Common::ProtocolException(err);
+                    } else {
+                        throw RCF::Common::ProtocolException("Unexpected protocol message!");
+                    }
+                }
+            } else if(ps == "out") {
+                if(resp == "OUTEND") {
+                    ps = "toplevel";
+                } else {
+                    sd->lastout += resp;
+                }
+            } else if(ps == "err") {
+                if(resp == "ERREND") {
+                    ps = "toplevel";
+                } else {
+                    sd->lasterr += resp;
+                }
+            }
+        } while(resp != "ERREND");
+        sd->lastcode = code;
         sd->status = "Idle";
     } catch(std::exception& e) {
         sd->status = "Exception: ";
@@ -140,7 +225,12 @@ void wxRCF::execute(std::string query, ServerData* sd) {
     }
 }
 
-mainWindow::mainWindow(wxWindow* parent): mainWindowBase(parent) {}
+mainWindow::mainWindow(wxWindow* parent): mainWindowBase(parent) {
+    sharedParameter = "";
+    sharedParameterModified = false;
+    sharedParameterForThreadId = -1;
+    this->Connect(wxEVT_COMMAND_EXECUTETHREAD_NEEDS_PARAMETER, wxThreadEventHandler(mainWindow::executeThreadNeedsParameterHandler));
+}
 
 void mainWindow::serverConnectItemOnMenuSelection( wxCommandEvent& event ) {
     wxRCF::ServerData* sd = NULL;
@@ -338,6 +428,32 @@ void mainWindow::closeButtonOnButtonClick( wxCommandEvent& event ) {
     this->Close();
 }
 
+void mainWindow::executeThreadNeedsParameterHandler( wxThreadEvent& event) {
+    int threadId = event.GetInt();
+    bool cont = false;
+    do {
+        sharedParameterCS.Enter();
+        if(!sharedParameterModified) {
+            cont = true;
+        } else {
+            sharedParameterCS.Leave();
+        }
+    } while(!cont);
+    std::string title = "";
+    ExecuteThread* thread = tv[threadId];
+    title += "[";
+    title += thread->getServerName();
+    title += ": ";
+    title += thread->getLoggedUsername();
+    title += "] Enter command parameter - wxRCF v. 0.1 (C) 2015 by Phitherek_";
+    wxString wxtitle = title;
+    paramQueryDialog pqdialog(this, wxtitle, &sharedParameter);
+    pqdialog.ShowModal();
+    sharedParameterModified = true;
+    sharedParameterForThreadId = threadId;
+    sharedParameterCS.Leave();
+}
+
 connectDialog::connectDialog(wxWindow* parent, ServerData** target_sd): connectDialogBase(parent) {
     _target_sd = target_sd;
 }
@@ -532,7 +648,9 @@ void listDialog::listExecuteButtonOnButtonClick( wxCommandEvent& event ) {
         }
         int processedServersSize = _processedServers.size();
         for(int i = 0; i < processedServersSize; i++) {
-            CallAfter(boost::bind(&wxRCF::execute, query, _processedServers[i]));
+            ExecuteThread* thrd = new ExecuteThread(dynamic_cast<mainWindow*>(this->GetParent())->tv.size(), query, _processedServers[i], &wxRCF::execute, dynamic_cast<mainWindow*>(this->GetParent()));
+            thrd->Run();
+            dynamic_cast<mainWindow*>(this->GetParent())->tv.push_back(thrd);
         }
         this->Close();
     } else {

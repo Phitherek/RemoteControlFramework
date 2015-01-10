@@ -15,6 +15,7 @@
 #include <boost/thread.hpp>
 #include <boost/filesystem.hpp>
 #include <vector>
+wxDECLARE_EVENT(wxEVT_COMMAND_EXECUTETHREAD_NEEDS_PARAMETER, wxThreadEvent);
 namespace wxRCF {
     struct ServerData {
         RCF::Client::Client* cli;
@@ -41,8 +42,7 @@ namespace wxRCF {
         void addToTreeCtrl(wxTreeCtrl* control, wxTreeItemId parentId);
     };
 
-    std::string paramProvider(RCF::Client::Client* cli);
-    void execute(std::string query, ServerData* sd);
+    class ExecuteThread;
 
     class mainWindow : public mainWindowBase {
     private:
@@ -54,8 +54,31 @@ namespace wxRCF {
         void closeActionButtonOnButtonClick( wxCommandEvent& event );
         void refreshStatusButtonOnButtonClick( wxCommandEvent& event );
         void closeButtonOnButtonClick( wxCommandEvent& event );
+        void executeThreadNeedsParameterHandler( wxThreadEvent& event );
     public:
         mainWindow(wxWindow* parent);
+        std::vector<ExecuteThread*> tv;
+        std::string sharedParameter;
+        bool sharedParameterModified;
+        int sharedParameterForThreadId;
+        wxCriticalSection sharedParameterCS;
+    };
+
+    void execute(int threadId, std::string query, ServerData* sd, mainWindow* mw);
+
+    class ExecuteThread : public wxThread {
+    public:
+        ExecuteThread(int id, std::string query, ServerData* sd, void (*handler)(int, std::string, ServerData*, mainWindow*), mainWindow* mw);
+        ~ExecuteThread();
+        std::string getServerName();
+        std::string getLoggedUsername();
+    private:
+        int _id;
+        std::string _query;
+        ServerData* _sd;
+        void (*_handler)(int, std::string, ServerData*, mainWindow*);
+        mainWindow* _mw;
+        wxThread::ExitCode Entry();
     };
 
     class connectDialog : public connectDialogBase {
