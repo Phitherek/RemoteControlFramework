@@ -57,6 +57,7 @@ namespace wxRCF
 			wxBoxSizer* actionButtonsSizer;
 			wxButton* listActionButton;
 			wxButton* closeActionButton;
+			wxButton* refreshStatusButton;
 			wxStaticLine* m_staticline1;
 			wxStaticText* lastCommandStatusLabel;
 			wxStaticText* commandExitCodeLabel;
@@ -74,6 +75,7 @@ namespace wxRCF
 			virtual void activeServersListOnListBox( wxCommandEvent& event ) { event.Skip(); }
 			virtual void listActionButtonOnButtonClick( wxCommandEvent& event ) { event.Skip(); }
 			virtual void closeActionButtonOnButtonClick( wxCommandEvent& event ) { event.Skip(); }
+			virtual void refreshStatusButtonOnButtonClick( wxCommandEvent& event ) { event.Skip(); }
 			virtual void closeButtonOnButtonClick( wxCommandEvent& event ) { event.Skip(); }
 			
 		

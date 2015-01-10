@@ -275,6 +275,7 @@ void mainWindow::closeActionButtonOnButtonClick( wxCommandEvent& event ) {
         mainPanelSizer->Replace((wxWindow*)oldActiveServersList, (wxWindow*)newActiveServersList);
         activeServersList = newActiveServersList;
         delete oldActiveServersList;
+        activeServersList->Connect( wxEVT_COMMAND_LISTBOX_SELECTED, wxCommandEventHandler( mainWindow::activeServersListOnListBox ), NULL, this );
     } else {
         wxListBox* newActiveServersList = new wxListBox( mainPanel, wxID_ANY, wxDefaultPosition, wxSize( 800,100 ), 0, NULL, wxLB_MULTIPLE );
         wxListBox* oldActiveServersList = activeServersList;
@@ -283,6 +284,48 @@ void mainWindow::closeActionButtonOnButtonClick( wxCommandEvent& event ) {
         delete oldActiveServersList;
     }
     this->Layout();
+}
+
+void mainWindow::refreshStatusButtonOnButtonClick( wxCommandEvent& event ) {
+    wxArrayInt selections;
+    int selectionsLength;
+    selectionsLength = activeServersList->GetSelections(selections);
+    if(selectionsLength == 1) {
+        int idx = selections.Item(0);
+        std::string statusLabel = "Last command status: ";
+        statusLabel += vsd[idx]->status;
+        std::string exitCodeLabel = "";
+        std::stringstream ssecl;
+        ssecl.str("");
+        ssecl << "Command exit status: ";
+        if(vsd[idx]->lastcode == -1) {
+            ssecl << "None";
+        } else {
+            ssecl << vsd[idx]->lastcode;
+        }
+        exitCodeLabel = ssecl.str();
+        wxStaticText* newLastCommandStatusLabel = new wxStaticText(mainPanel, wxID_ANY, (wxString)statusLabel);
+        wxStaticText* oldLastCommandStatusLabel = lastCommandStatusLabel;
+        mainPanelSizer->Replace((wxWindow*)oldLastCommandStatusLabel, (wxWindow*)newLastCommandStatusLabel);
+        delete oldLastCommandStatusLabel;
+        lastCommandStatusLabel = newLastCommandStatusLabel;
+        wxStaticText* newCommandExitCodeLabel = new wxStaticText(mainPanel, wxID_ANY, (wxString)exitCodeLabel);
+        wxStaticText* oldCommandExitCodeLabel = commandExitCodeLabel;
+        mainPanelSizer->Replace((wxWindow*)oldCommandExitCodeLabel, (wxWindow*)newCommandExitCodeLabel);
+        delete oldCommandExitCodeLabel;
+        commandExitCodeLabel = newCommandExitCodeLabel;
+        wxTextCtrl* newCommandOutputText = new wxTextCtrl(mainPanel, wxID_ANY, (wxString)(vsd[idx]->lastout), wxDefaultPosition, wxSize( 800,150 ), wxHSCROLL|wxTE_MULTILINE|wxTE_READONLY);
+        wxTextCtrl* oldCommandOutputText = commandOutputText;
+        mainPanelSizer->Replace((wxWindow*)oldCommandOutputText, (wxWindow*)newCommandOutputText);
+        delete oldCommandOutputText;
+        commandOutputText = newCommandOutputText;
+        wxTextCtrl* newCommandErrorText = new wxTextCtrl(mainPanel, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 800,150 ), wxHSCROLL|wxTE_MULTILINE|wxTE_READONLY|wxTE_WORDWRAP);
+        wxTextCtrl* oldCommandErrorText = commandErrorText;
+        mainPanelSizer->Replace((wxWindow*)oldCommandErrorText, (wxWindow*)newCommandErrorText);
+        delete oldCommandErrorText;
+        commandErrorText = newCommandErrorText;
+        this->Layout();
+    }
 }
 
 void mainWindow::closeButtonOnButtonClick( wxCommandEvent& event ) {
@@ -489,7 +532,7 @@ void listDialog::listExecuteButtonOnButtonClick( wxCommandEvent& event ) {
         }
         int processedServersSize = _processedServers.size();
         for(int i = 0; i < processedServersSize; i++) {
-            boost::thread exec(execute, query, _processedServers[i]);
+            CallAfter(boost::bind(&wxRCF::execute, query, _processedServers[i]));
         }
         this->Close();
     } else {
@@ -508,4 +551,5 @@ void paramQueryDialog::paramQueryDialogBaseOnInitDialog( wxInitDialogEvent& even
 
 void paramQueryDialog::paramContinueButtonOnButtonClick( wxCommandEvent& event ) {
     *_paramTarget = paramInput->GetLineText(0).ToStdString();
+    this->Close();
 }

@@ -52,6 +52,7 @@ namespace wxRCF {
         void activeServersListOnListBox( wxCommandEvent& event );
         void listActionButtonOnButtonClick( wxCommandEvent& event );
         void closeActionButtonOnButtonClick( wxCommandEvent& event );
+        void refreshStatusButtonOnButtonClick( wxCommandEvent& event );
         void closeButtonOnButtonClick( wxCommandEvent& event );
     public:
         mainWindow(wxWindow* parent);

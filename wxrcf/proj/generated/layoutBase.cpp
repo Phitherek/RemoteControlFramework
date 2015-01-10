@@ -49,6 +49,9 @@ mainWindowBase::mainWindowBase( wxWindow* parent, wxWindowID id, const wxString&
 	closeActionButton = new wxButton( mainPanel, wxID_ANY, wxT("Close connection"), wxDefaultPosition, wxDefaultSize, 0 );
 	actionButtonsSizer->Add( closeActionButton, 0, wxALIGN_CENTER|wxALL, 5 );
 	
+	refreshStatusButton = new wxButton( mainPanel, wxID_ANY, wxT("Refresh server status"), wxDefaultPosition, wxDefaultSize, 0 );
+	actionButtonsSizer->Add( refreshStatusButton, 0, wxALIGN_CENTER_VERTICAL|wxALL, 5 );
+	
 	
 	mainPanelSizer->Add( actionButtonsSizer, 1, wxEXPAND, 5 );
 	
@@ -109,6 +112,7 @@ mainWindowBase::mainWindowBase( wxWindow* parent, wxWindowID id, const wxString&
 	activeServersList->Connect( wxEVT_COMMAND_LISTBOX_SELECTED, wxCommandEventHandler( mainWindowBase::activeServersListOnListBox ), NULL, this );
 	listActionButton->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( mainWindowBase::listActionButtonOnButtonClick ), NULL, this );
 	closeActionButton->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( mainWindowBase::closeActionButtonOnButtonClick ), NULL, this );
+	refreshStatusButton->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( mainWindowBase::refreshStatusButtonOnButtonClick ), NULL, this );
 	closeButton->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( mainWindowBase::closeButtonOnButtonClick ), NULL, this );
 }
 
@@ -120,6 +124,7 @@ mainWindowBase::~mainWindowBase()
 	activeServersList->Disconnect( wxEVT_COMMAND_LISTBOX_SELECTED, wxCommandEventHandler( mainWindowBase::activeServersListOnListBox ), NULL, this );
 	listActionButton->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( mainWindowBase::listActionButtonOnButtonClick ), NULL, this );
 	closeActionButton->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( mainWindowBase::closeActionButtonOnButtonClick ), NULL, this );
+	refreshStatusButton->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( mainWindowBase::refreshStatusButtonOnButtonClick ), NULL, this );
 	closeButton->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( mainWindowBase::closeButtonOnButtonClick ), NULL, this );
 	
 }
