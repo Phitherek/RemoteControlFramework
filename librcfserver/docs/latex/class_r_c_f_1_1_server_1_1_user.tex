@@ -1,0 +1,168 @@
+\hypertarget{class_r_c_f_1_1_server_1_1_user}{}\section{R\+C\+F\+:\+:Server\+:\+:User Class Reference}
+\label{class_r_c_f_1_1_server_1_1_user}\index{R\+C\+F\+::\+Server\+::\+User@{R\+C\+F\+::\+Server\+::\+User}}
+
+
+An implementation of a \hyperlink{class_r_c_f_1_1_server_1_1_user}{User} permission.  
+
+
+
+
+{\ttfamily \#include $<$User.\+h$>$}
+
+
+
+Inheritance diagram for R\+C\+F\+:\+:Server\+:\+:User\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=210pt]{class_r_c_f_1_1_server_1_1_user__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for R\+C\+F\+:\+:Server\+:\+:User\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=327pt]{class_r_c_f_1_1_server_1_1_user__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_r_c_f_1_1_server_1_1_user_ae9aafa1ba796f51cc4a2e30a9dd898d6}{}\hyperlink{class_r_c_f_1_1_server_1_1_user_ae9aafa1ba796f51cc4a2e30a9dd898d6}{User} ()\label{class_r_c_f_1_1_server_1_1_user_ae9aafa1ba796f51cc4a2e30a9dd898d6}
+
+\begin{DoxyCompactList}\small\item\em A plain constructor. \end{DoxyCompactList}\item 
+\hyperlink{class_r_c_f_1_1_server_1_1_user_a4aa87a8b0db79394463e8c42f5de3ae2}{User} (std\+::string name, std\+::string password)
+\begin{DoxyCompactList}\small\item\em A constructor from name and password. \end{DoxyCompactList}\item 
+\hypertarget{class_r_c_f_1_1_server_1_1_user_afb31dd6c504b06109ace809caf170856}{}\hyperlink{class_r_c_f_1_1_server_1_1_user_afb31dd6c504b06109ace809caf170856}{$\sim$\+User} ()\label{class_r_c_f_1_1_server_1_1_user_afb31dd6c504b06109ace809caf170856}
+
+\begin{DoxyCompactList}\small\item\em A destructor. \end{DoxyCompactList}\item 
+\hypertarget{class_r_c_f_1_1_server_1_1_user_ac8fc8fb8562ba7a1d45fa723372f3eb4}{}void \hyperlink{class_r_c_f_1_1_server_1_1_user_ac8fc8fb8562ba7a1d45fa723372f3eb4}{save} ()\label{class_r_c_f_1_1_server_1_1_user_ac8fc8fb8562ba7a1d45fa723372f3eb4}
+
+\begin{DoxyCompactList}\small\item\em Save user to configuration. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{class_r_c_f_1_1_server_1_1_user_acb9ca59d39d60acb9429d248aac5e0a3}{get\+Permission\+Type} ()
+\begin{DoxyCompactList}\small\item\em A function that returns permission type. \end{DoxyCompactList}\item 
+bool \hyperlink{class_r_c_f_1_1_server_1_1_user_a8800a92ececa3ce0921e5af963e6e792}{check\+Password} (std\+::string password)
+\begin{DoxyCompactList}\small\item\em A function that returns if given password for user is correct. \end{DoxyCompactList}\item 
+bool \hyperlink{class_r_c_f_1_1_server_1_1_user_ae9dd4687b66e16cd3bd7635580574834}{valid} ()
+\begin{DoxyCompactList}\small\item\em If permission is valid to save or process. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{class_r_c_f_1_1_server_1_1_user}{User} $\ast$ \hyperlink{class_r_c_f_1_1_server_1_1_user_a6c737b62c8eb966bc82c87461ce8f6d2}{load} (std\+::string name)
+\begin{DoxyCompactList}\small\item\em Load user of given name from configuration. \end{DoxyCompactList}\item 
+\hypertarget{class_r_c_f_1_1_server_1_1_user_ad00a8df2a935feb2504073f9146c9fe1}{}static void \hyperlink{class_r_c_f_1_1_server_1_1_user_ad00a8df2a935feb2504073f9146c9fe1}{free} ()\label{class_r_c_f_1_1_server_1_1_user_ad00a8df2a935feb2504073f9146c9fe1}
+
+\begin{DoxyCompactList}\small\item\em Free the memory. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+An implementation of a \hyperlink{class_r_c_f_1_1_server_1_1_user}{User} permission. 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_r_c_f_1_1_server_1_1_user_a4aa87a8b0db79394463e8c42f5de3ae2}{}\index{R\+C\+F\+::\+Server\+::\+User@{R\+C\+F\+::\+Server\+::\+User}!User@{User}}
+\index{User@{User}!R\+C\+F\+::\+Server\+::\+User@{R\+C\+F\+::\+Server\+::\+User}}
+\subsubsection[{User}]{\setlength{\rightskip}{0pt plus 5cm}R\+C\+F\+::\+Server\+::\+User\+::\+User (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{name, }
+\item[{std\+::string}]{password}
+\end{DoxyParamCaption}
+)}\label{class_r_c_f_1_1_server_1_1_user_a4aa87a8b0db79394463e8c42f5de3ae2}
+
+
+A constructor from name and password. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & \hyperlink{class_r_c_f_1_1_server_1_1_user}{User} name. \\
+\hline
+{\em password} & \hyperlink{class_r_c_f_1_1_server_1_1_user}{User} password (will be encrypted). \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_r_c_f_1_1_server_1_1_user_a8800a92ececa3ce0921e5af963e6e792}{}\index{R\+C\+F\+::\+Server\+::\+User@{R\+C\+F\+::\+Server\+::\+User}!check\+Password@{check\+Password}}
+\index{check\+Password@{check\+Password}!R\+C\+F\+::\+Server\+::\+User@{R\+C\+F\+::\+Server\+::\+User}}
+\subsubsection[{check\+Password}]{\setlength{\rightskip}{0pt plus 5cm}bool R\+C\+F\+::\+Server\+::\+User\+::check\+Password (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{password}
+\end{DoxyParamCaption}
+)}\label{class_r_c_f_1_1_server_1_1_user_a8800a92ececa3ce0921e5af963e6e792}
+
+
+A function that returns if given password for user is correct. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em password} & Password to check. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if password matches, false otherwise. 
+\end{DoxyReturn}
+\hypertarget{class_r_c_f_1_1_server_1_1_user_acb9ca59d39d60acb9429d248aac5e0a3}{}\index{R\+C\+F\+::\+Server\+::\+User@{R\+C\+F\+::\+Server\+::\+User}!get\+Permission\+Type@{get\+Permission\+Type}}
+\index{get\+Permission\+Type@{get\+Permission\+Type}!R\+C\+F\+::\+Server\+::\+User@{R\+C\+F\+::\+Server\+::\+User}}
+\subsubsection[{get\+Permission\+Type}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string R\+C\+F\+::\+Server\+::\+User\+::get\+Permission\+Type (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{class_r_c_f_1_1_server_1_1_user_acb9ca59d39d60acb9429d248aac5e0a3}
+
+
+A function that returns permission type. 
+
+\begin{DoxyReturn}{Returns}
+\hyperlink{class_r_c_f_1_1_server_1_1_permission}{Permission} type. 
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{class_r_c_f_1_1_server_1_1_permission_a5aa502140c4bccfb74ce596de0ff88b0}{R\+C\+F\+::\+Server\+::\+Permission}.
+
+\hypertarget{class_r_c_f_1_1_server_1_1_user_a6c737b62c8eb966bc82c87461ce8f6d2}{}\index{R\+C\+F\+::\+Server\+::\+User@{R\+C\+F\+::\+Server\+::\+User}!load@{load}}
+\index{load@{load}!R\+C\+F\+::\+Server\+::\+User@{R\+C\+F\+::\+Server\+::\+User}}
+\subsubsection[{load}]{\setlength{\rightskip}{0pt plus 5cm}static {\bf User}$\ast$ R\+C\+F\+::\+Server\+::\+User\+::load (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{name}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\label{class_r_c_f_1_1_server_1_1_user_a6c737b62c8eb966bc82c87461ce8f6d2}
+
+
+Load user of given name from configuration. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & Name of user to load. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A pointer to the instance of loaded \hyperlink{class_r_c_f_1_1_server_1_1_user}{User}. 
+\end{DoxyReturn}
+\begin{DoxyWarning}{Warning}
+At the end of the code that uses this function, you should call the \hyperlink{class_r_c_f_1_1_server_1_1_permission_ab022718461c9a1772e1c992769cadc56}{R\+C\+F\+::\+Server\+::\+Permission\+::free()} function to free the memory. 
+\end{DoxyWarning}
+\hypertarget{class_r_c_f_1_1_server_1_1_user_ae9dd4687b66e16cd3bd7635580574834}{}\index{R\+C\+F\+::\+Server\+::\+User@{R\+C\+F\+::\+Server\+::\+User}!valid@{valid}}
+\index{valid@{valid}!R\+C\+F\+::\+Server\+::\+User@{R\+C\+F\+::\+Server\+::\+User}}
+\subsubsection[{valid}]{\setlength{\rightskip}{0pt plus 5cm}bool R\+C\+F\+::\+Server\+::\+User\+::valid (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{class_r_c_f_1_1_server_1_1_user_ae9dd4687b66e16cd3bd7635580574834}
+
+
+If permission is valid to save or process. 
+
+\begin{DoxyReturn}{Returns}
+Boolean. 
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{class_r_c_f_1_1_server_1_1_permission_a49a881e193458e71d0249f2f6d5a8b56}{R\+C\+F\+::\+Server\+::\+Permission}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/\hyperlink{_user_8h}{User.\+h}\end{DoxyCompactItemize}

@@ -1,0 +1,251 @@
+\hypertarget{class_r_c_f_1_1_server_1_1_group}{}\section{R\+C\+F\+:\+:Server\+:\+:Group Class Reference}
+\label{class_r_c_f_1_1_server_1_1_group}\index{R\+C\+F\+::\+Server\+::\+Group@{R\+C\+F\+::\+Server\+::\+Group}}
+
+
+An implementation of a \hyperlink{class_r_c_f_1_1_server_1_1_group}{Group} permission.  
+
+
+
+
+{\ttfamily \#include $<$Group.\+h$>$}
+
+
+
+Inheritance diagram for R\+C\+F\+:\+:Server\+:\+:Group\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=210pt]{class_r_c_f_1_1_server_1_1_group__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for R\+C\+F\+:\+:Server\+:\+:Group\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=327pt]{class_r_c_f_1_1_server_1_1_group__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_r_c_f_1_1_server_1_1_group_a0ec104eb31b7abf182413cbf416ff15c}{}\hyperlink{class_r_c_f_1_1_server_1_1_group_a0ec104eb31b7abf182413cbf416ff15c}{Group} ()\label{class_r_c_f_1_1_server_1_1_group_a0ec104eb31b7abf182413cbf416ff15c}
+
+\begin{DoxyCompactList}\small\item\em A plain constructor. \end{DoxyCompactList}\item 
+\hypertarget{class_r_c_f_1_1_server_1_1_group_a58bc57a716aceb8eb4943e8697725301}{}\hyperlink{class_r_c_f_1_1_server_1_1_group_a58bc57a716aceb8eb4943e8697725301}{$\sim$\+Group} ()\label{class_r_c_f_1_1_server_1_1_group_a58bc57a716aceb8eb4943e8697725301}
+
+\begin{DoxyCompactList}\small\item\em A destructor. \end{DoxyCompactList}\item 
+\hyperlink{class_r_c_f_1_1_server_1_1_group_aad28dfbbe7a195265b9b058f8615463c}{Group} (std\+::string name)
+\begin{DoxyCompactList}\small\item\em A constructor from name. \end{DoxyCompactList}\item 
+\hyperlink{class_r_c_f_1_1_server_1_1_group_ac4bed3ee6740db08910cbbb446a6e4e7}{Group} (\hyperlink{class_r_c_f_1_1_server_1_1_group}{Group} \&cpy)
+\begin{DoxyCompactList}\small\item\em A copy constructor. \end{DoxyCompactList}\item 
+\hypertarget{class_r_c_f_1_1_server_1_1_group_a72ea007f636d841ea6fa5451372f9867}{}void \hyperlink{class_r_c_f_1_1_server_1_1_group_a72ea007f636d841ea6fa5451372f9867}{save} ()\label{class_r_c_f_1_1_server_1_1_group_a72ea007f636d841ea6fa5451372f9867}
+
+\begin{DoxyCompactList}\small\item\em Save group to configuration. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{class_r_c_f_1_1_server_1_1_group_ab163fc5265542a643719e4b5ba938fc9}{get\+Permission\+Type} ()
+\begin{DoxyCompactList}\small\item\em A function that returns permission type. \end{DoxyCompactList}\item 
+void \hyperlink{class_r_c_f_1_1_server_1_1_group_a1d2797048cc2848018959e5ea3987f38}{add\+User} (\hyperlink{class_r_c_f_1_1_server_1_1_user}{User} $\ast$u)
+\begin{DoxyCompactList}\small\item\em Adds a user to group. \end{DoxyCompactList}\item 
+void \hyperlink{class_r_c_f_1_1_server_1_1_group_aed955c18531ec902f7aaa707adffb843}{remove\+User} (std\+::string name)
+\begin{DoxyCompactList}\small\item\em Removes user from group. \end{DoxyCompactList}\item 
+bool \hyperlink{class_r_c_f_1_1_server_1_1_group_ac03146268c35aaee7e6082ff12d4ea51}{has\+User} (std\+::string name)
+\begin{DoxyCompactList}\small\item\em Checks if user of given name belongs to group. \end{DoxyCompactList}\item 
+\hyperlink{class_r_c_f_1_1_server_1_1_user}{User} $\ast$ \hyperlink{class_r_c_f_1_1_server_1_1_group_aaa52fa08e644d75147adfef311ad062a}{get\+Next\+User} ()
+\begin{DoxyCompactList}\small\item\em Gets next user from the group based on internal iterator. \end{DoxyCompactList}\item 
+bool \hyperlink{class_r_c_f_1_1_server_1_1_group_ad23bac50d5d3fd209ae9dc667caef2ce}{users\+At\+End} ()
+\begin{DoxyCompactList}\small\item\em Checks if users iterator is at the end. \end{DoxyCompactList}\item 
+\hypertarget{class_r_c_f_1_1_server_1_1_group_a7432af6488f5af0aeea60d000816e93e}{}void \hyperlink{class_r_c_f_1_1_server_1_1_group_a7432af6488f5af0aeea60d000816e93e}{reset\+Users\+Iterator} ()\label{class_r_c_f_1_1_server_1_1_group_a7432af6488f5af0aeea60d000816e93e}
+
+\begin{DoxyCompactList}\small\item\em Resets users internal iterator. \end{DoxyCompactList}\item 
+bool \hyperlink{class_r_c_f_1_1_server_1_1_group_aa0b9294484009ddc44e2dcfa5bd0e86c}{valid} ()
+\begin{DoxyCompactList}\small\item\em If permission is valid to save or process. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{class_r_c_f_1_1_server_1_1_group}{Group} $\ast$ \hyperlink{class_r_c_f_1_1_server_1_1_group_a0f69bdea7deadce188c9f2f0d54eb05e}{load} (std\+::string name)
+\begin{DoxyCompactList}\small\item\em Load group of given name from configuration. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+An implementation of a \hyperlink{class_r_c_f_1_1_server_1_1_group}{Group} permission. 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_r_c_f_1_1_server_1_1_group_aad28dfbbe7a195265b9b058f8615463c}{}\index{R\+C\+F\+::\+Server\+::\+Group@{R\+C\+F\+::\+Server\+::\+Group}!Group@{Group}}
+\index{Group@{Group}!R\+C\+F\+::\+Server\+::\+Group@{R\+C\+F\+::\+Server\+::\+Group}}
+\subsubsection[{Group}]{\setlength{\rightskip}{0pt plus 5cm}R\+C\+F\+::\+Server\+::\+Group\+::\+Group (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{name}
+\end{DoxyParamCaption}
+)}\label{class_r_c_f_1_1_server_1_1_group_aad28dfbbe7a195265b9b058f8615463c}
+
+
+A constructor from name. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & \hyperlink{class_r_c_f_1_1_server_1_1_group}{Group} name. \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_r_c_f_1_1_server_1_1_group_ac4bed3ee6740db08910cbbb446a6e4e7}{}\index{R\+C\+F\+::\+Server\+::\+Group@{R\+C\+F\+::\+Server\+::\+Group}!Group@{Group}}
+\index{Group@{Group}!R\+C\+F\+::\+Server\+::\+Group@{R\+C\+F\+::\+Server\+::\+Group}}
+\subsubsection[{Group}]{\setlength{\rightskip}{0pt plus 5cm}R\+C\+F\+::\+Server\+::\+Group\+::\+Group (
+\begin{DoxyParamCaption}
+\item[{{\bf Group} \&}]{cpy}
+\end{DoxyParamCaption}
+)}\label{class_r_c_f_1_1_server_1_1_group_ac4bed3ee6740db08910cbbb446a6e4e7}
+
+
+A copy constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em cpy} & Object to copy. \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_r_c_f_1_1_server_1_1_group_a1d2797048cc2848018959e5ea3987f38}{}\index{R\+C\+F\+::\+Server\+::\+Group@{R\+C\+F\+::\+Server\+::\+Group}!add\+User@{add\+User}}
+\index{add\+User@{add\+User}!R\+C\+F\+::\+Server\+::\+Group@{R\+C\+F\+::\+Server\+::\+Group}}
+\subsubsection[{add\+User}]{\setlength{\rightskip}{0pt plus 5cm}void R\+C\+F\+::\+Server\+::\+Group\+::add\+User (
+\begin{DoxyParamCaption}
+\item[{{\bf User} $\ast$}]{u}
+\end{DoxyParamCaption}
+)}\label{class_r_c_f_1_1_server_1_1_group_a1d2797048cc2848018959e5ea3987f38}
+
+
+Adds a user to group. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em u} & A pointer to \hyperlink{class_r_c_f_1_1_server_1_1_user}{User} to add. \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_r_c_f_1_1_server_1_1_group_aaa52fa08e644d75147adfef311ad062a}{}\index{R\+C\+F\+::\+Server\+::\+Group@{R\+C\+F\+::\+Server\+::\+Group}!get\+Next\+User@{get\+Next\+User}}
+\index{get\+Next\+User@{get\+Next\+User}!R\+C\+F\+::\+Server\+::\+Group@{R\+C\+F\+::\+Server\+::\+Group}}
+\subsubsection[{get\+Next\+User}]{\setlength{\rightskip}{0pt plus 5cm}{\bf User}$\ast$ R\+C\+F\+::\+Server\+::\+Group\+::get\+Next\+User (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{class_r_c_f_1_1_server_1_1_group_aaa52fa08e644d75147adfef311ad062a}
+
+
+Gets next user from the group based on internal iterator. 
+
+\begin{DoxyReturn}{Returns}
+Next user from the group. 
+\end{DoxyReturn}
+\hypertarget{class_r_c_f_1_1_server_1_1_group_ab163fc5265542a643719e4b5ba938fc9}{}\index{R\+C\+F\+::\+Server\+::\+Group@{R\+C\+F\+::\+Server\+::\+Group}!get\+Permission\+Type@{get\+Permission\+Type}}
+\index{get\+Permission\+Type@{get\+Permission\+Type}!R\+C\+F\+::\+Server\+::\+Group@{R\+C\+F\+::\+Server\+::\+Group}}
+\subsubsection[{get\+Permission\+Type}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string R\+C\+F\+::\+Server\+::\+Group\+::get\+Permission\+Type (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{class_r_c_f_1_1_server_1_1_group_ab163fc5265542a643719e4b5ba938fc9}
+
+
+A function that returns permission type. 
+
+\begin{DoxyReturn}{Returns}
+\hyperlink{class_r_c_f_1_1_server_1_1_permission}{Permission} type. 
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{class_r_c_f_1_1_server_1_1_permission_a5aa502140c4bccfb74ce596de0ff88b0}{R\+C\+F\+::\+Server\+::\+Permission}.
+
+\hypertarget{class_r_c_f_1_1_server_1_1_group_ac03146268c35aaee7e6082ff12d4ea51}{}\index{R\+C\+F\+::\+Server\+::\+Group@{R\+C\+F\+::\+Server\+::\+Group}!has\+User@{has\+User}}
+\index{has\+User@{has\+User}!R\+C\+F\+::\+Server\+::\+Group@{R\+C\+F\+::\+Server\+::\+Group}}
+\subsubsection[{has\+User}]{\setlength{\rightskip}{0pt plus 5cm}bool R\+C\+F\+::\+Server\+::\+Group\+::has\+User (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{name}
+\end{DoxyParamCaption}
+)}\label{class_r_c_f_1_1_server_1_1_group_ac03146268c35aaee7e6082ff12d4ea51}
+
+
+Checks if user of given name belongs to group. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & Name of the user. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+If user belongs to group. 
+\end{DoxyReturn}
+\hypertarget{class_r_c_f_1_1_server_1_1_group_a0f69bdea7deadce188c9f2f0d54eb05e}{}\index{R\+C\+F\+::\+Server\+::\+Group@{R\+C\+F\+::\+Server\+::\+Group}!load@{load}}
+\index{load@{load}!R\+C\+F\+::\+Server\+::\+Group@{R\+C\+F\+::\+Server\+::\+Group}}
+\subsubsection[{load}]{\setlength{\rightskip}{0pt plus 5cm}static {\bf Group}$\ast$ R\+C\+F\+::\+Server\+::\+Group\+::load (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{name}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\label{class_r_c_f_1_1_server_1_1_group_a0f69bdea7deadce188c9f2f0d54eb05e}
+
+
+Load group of given name from configuration. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & Name of group to load. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Found \hyperlink{class_r_c_f_1_1_server_1_1_group}{Group}. 
+\end{DoxyReturn}
+\begin{DoxyWarning}{Warning}
+At the end of the code that uses this function, you should call the \hyperlink{class_r_c_f_1_1_server_1_1_permission_ab022718461c9a1772e1c992769cadc56}{R\+C\+F\+::\+Server\+::\+Permission\+::free()} function to free the memory. 
+\end{DoxyWarning}
+\hypertarget{class_r_c_f_1_1_server_1_1_group_aed955c18531ec902f7aaa707adffb843}{}\index{R\+C\+F\+::\+Server\+::\+Group@{R\+C\+F\+::\+Server\+::\+Group}!remove\+User@{remove\+User}}
+\index{remove\+User@{remove\+User}!R\+C\+F\+::\+Server\+::\+Group@{R\+C\+F\+::\+Server\+::\+Group}}
+\subsubsection[{remove\+User}]{\setlength{\rightskip}{0pt plus 5cm}void R\+C\+F\+::\+Server\+::\+Group\+::remove\+User (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{name}
+\end{DoxyParamCaption}
+)}\label{class_r_c_f_1_1_server_1_1_group_aed955c18531ec902f7aaa707adffb843}
+
+
+Removes user from group. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & Name of the user. \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_r_c_f_1_1_server_1_1_group_ad23bac50d5d3fd209ae9dc667caef2ce}{}\index{R\+C\+F\+::\+Server\+::\+Group@{R\+C\+F\+::\+Server\+::\+Group}!users\+At\+End@{users\+At\+End}}
+\index{users\+At\+End@{users\+At\+End}!R\+C\+F\+::\+Server\+::\+Group@{R\+C\+F\+::\+Server\+::\+Group}}
+\subsubsection[{users\+At\+End}]{\setlength{\rightskip}{0pt plus 5cm}bool R\+C\+F\+::\+Server\+::\+Group\+::users\+At\+End (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{class_r_c_f_1_1_server_1_1_group_ad23bac50d5d3fd209ae9dc667caef2ce}
+
+
+Checks if users iterator is at the end. 
+
+\begin{DoxyReturn}{Returns}
+If users iterator is at the end. 
+\end{DoxyReturn}
+\hypertarget{class_r_c_f_1_1_server_1_1_group_aa0b9294484009ddc44e2dcfa5bd0e86c}{}\index{R\+C\+F\+::\+Server\+::\+Group@{R\+C\+F\+::\+Server\+::\+Group}!valid@{valid}}
+\index{valid@{valid}!R\+C\+F\+::\+Server\+::\+Group@{R\+C\+F\+::\+Server\+::\+Group}}
+\subsubsection[{valid}]{\setlength{\rightskip}{0pt plus 5cm}bool R\+C\+F\+::\+Server\+::\+Group\+::valid (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{class_r_c_f_1_1_server_1_1_group_aa0b9294484009ddc44e2dcfa5bd0e86c}
+
+
+If permission is valid to save or process. 
+
+\begin{DoxyReturn}{Returns}
+Boolean. 
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{class_r_c_f_1_1_server_1_1_permission_a49a881e193458e71d0249f2f6d5a8b56}{R\+C\+F\+::\+Server\+::\+Permission}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/\hyperlink{_group_8h}{Group.\+h}\end{DoxyCompactItemize}

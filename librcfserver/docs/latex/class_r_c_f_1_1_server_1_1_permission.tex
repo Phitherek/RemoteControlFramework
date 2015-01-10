@@ -1,0 +1,150 @@
+\hypertarget{class_r_c_f_1_1_server_1_1_permission}{}\section{R\+C\+F\+:\+:Server\+:\+:Permission Class Reference}
+\label{class_r_c_f_1_1_server_1_1_permission}\index{R\+C\+F\+::\+Server\+::\+Permission@{R\+C\+F\+::\+Server\+::\+Permission}}
+
+
+A class that represents a permission to execute the command.  
+
+
+
+
+{\ttfamily \#include $<$Permission.\+h$>$}
+
+
+
+Inheritance diagram for R\+C\+F\+:\+:Server\+:\+:Permission\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=306pt]{class_r_c_f_1_1_server_1_1_permission__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for R\+C\+F\+:\+:Server\+:\+:Permission\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=327pt]{class_r_c_f_1_1_server_1_1_permission__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_r_c_f_1_1_server_1_1_permission_a272f0e1806268172ed816b502abcea50}{}\hyperlink{class_r_c_f_1_1_server_1_1_permission_a272f0e1806268172ed816b502abcea50}{Permission} ()\label{class_r_c_f_1_1_server_1_1_permission_a272f0e1806268172ed816b502abcea50}
+
+\begin{DoxyCompactList}\small\item\em A plain constructor. \end{DoxyCompactList}\item 
+\hyperlink{class_r_c_f_1_1_server_1_1_permission_af9145eccbe583e65a2b136ad6b49959b}{Permission} (std\+::string name)
+\begin{DoxyCompactList}\small\item\em A constructor with name. \end{DoxyCompactList}\item 
+\hypertarget{class_r_c_f_1_1_server_1_1_permission_af3de114b564778e0b829b802553f9dd8}{}virtual \hyperlink{class_r_c_f_1_1_server_1_1_permission_af3de114b564778e0b829b802553f9dd8}{$\sim$\+Permission} ()\label{class_r_c_f_1_1_server_1_1_permission_af3de114b564778e0b829b802553f9dd8}
+
+\begin{DoxyCompactList}\small\item\em A destructor. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{class_r_c_f_1_1_server_1_1_permission_a84e14c7681dff3e4abb9f1e7d0d7a0fa}{get\+Name} ()
+\begin{DoxyCompactList}\small\item\em A function that returns name of permitted user/group. \end{DoxyCompactList}\item 
+virtual std\+::string \hyperlink{class_r_c_f_1_1_server_1_1_permission_a5aa502140c4bccfb74ce596de0ff88b0}{get\+Permission\+Type} ()
+\begin{DoxyCompactList}\small\item\em A function that returns permission type. \end{DoxyCompactList}\item 
+\hypertarget{class_r_c_f_1_1_server_1_1_permission_aad022773af6f00d4d195eb75fcfdccde}{}virtual void \hyperlink{class_r_c_f_1_1_server_1_1_permission_aad022773af6f00d4d195eb75fcfdccde}{save} ()\label{class_r_c_f_1_1_server_1_1_permission_aad022773af6f00d4d195eb75fcfdccde}
+
+\begin{DoxyCompactList}\small\item\em A function that saves permission from file. \end{DoxyCompactList}\item 
+virtual bool \hyperlink{class_r_c_f_1_1_server_1_1_permission_a49a881e193458e71d0249f2f6d5a8b56}{valid} ()
+\begin{DoxyCompactList}\small\item\em If permission is valid to save or process. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_r_c_f_1_1_server_1_1_permission_ab022718461c9a1772e1c992769cadc56}{}static void \hyperlink{class_r_c_f_1_1_server_1_1_permission_ab022718461c9a1772e1c992769cadc56}{free} ()\label{class_r_c_f_1_1_server_1_1_permission_ab022718461c9a1772e1c992769cadc56}
+
+\begin{DoxyCompactList}\small\item\em Frees the memory. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_r_c_f_1_1_server_1_1_permission_a3131b4c6d242ec0b482cc7c44e4dabb2}{}std\+::string \hyperlink{class_r_c_f_1_1_server_1_1_permission_a3131b4c6d242ec0b482cc7c44e4dabb2}{\+\_\+name}\label{class_r_c_f_1_1_server_1_1_permission_a3131b4c6d242ec0b482cc7c44e4dabb2}
+
+\begin{DoxyCompactList}\small\item\em Name of permitted user/group. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_r_c_f_1_1_server_1_1_permission_ac9b9ee798f4a039daca0549440292703}{}static \hyperlink{class_r_c_f_1_1_server_1_1_permission}{Permission} $\ast$$\ast$ \hyperlink{class_r_c_f_1_1_server_1_1_permission_ac9b9ee798f4a039daca0549440292703}{\+\_\+loaded\+Permissions}\label{class_r_c_f_1_1_server_1_1_permission_ac9b9ee798f4a039daca0549440292703}
+
+\begin{DoxyCompactList}\small\item\em Loaded permissions array. \end{DoxyCompactList}\item 
+\hypertarget{class_r_c_f_1_1_server_1_1_permission_a48109d7eb29780496b53d90613bb77e0}{}static int \hyperlink{class_r_c_f_1_1_server_1_1_permission_a48109d7eb29780496b53d90613bb77e0}{\+\_\+loaded\+Permissions\+Size}\label{class_r_c_f_1_1_server_1_1_permission_a48109d7eb29780496b53d90613bb77e0}
+
+\begin{DoxyCompactList}\small\item\em Size of loaded permissions array. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A class that represents a permission to execute the command. 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_r_c_f_1_1_server_1_1_permission_af9145eccbe583e65a2b136ad6b49959b}{}\index{R\+C\+F\+::\+Server\+::\+Permission@{R\+C\+F\+::\+Server\+::\+Permission}!Permission@{Permission}}
+\index{Permission@{Permission}!R\+C\+F\+::\+Server\+::\+Permission@{R\+C\+F\+::\+Server\+::\+Permission}}
+\subsubsection[{Permission}]{\setlength{\rightskip}{0pt plus 5cm}R\+C\+F\+::\+Server\+::\+Permission\+::\+Permission (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{name}
+\end{DoxyParamCaption}
+)}\label{class_r_c_f_1_1_server_1_1_permission_af9145eccbe583e65a2b136ad6b49959b}
+
+
+A constructor with name. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & Name of permitted user/group. \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_r_c_f_1_1_server_1_1_permission_a84e14c7681dff3e4abb9f1e7d0d7a0fa}{}\index{R\+C\+F\+::\+Server\+::\+Permission@{R\+C\+F\+::\+Server\+::\+Permission}!get\+Name@{get\+Name}}
+\index{get\+Name@{get\+Name}!R\+C\+F\+::\+Server\+::\+Permission@{R\+C\+F\+::\+Server\+::\+Permission}}
+\subsubsection[{get\+Name}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string R\+C\+F\+::\+Server\+::\+Permission\+::get\+Name (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{class_r_c_f_1_1_server_1_1_permission_a84e14c7681dff3e4abb9f1e7d0d7a0fa}
+
+
+A function that returns name of permitted user/group. 
+
+\begin{DoxyReturn}{Returns}
+Name of permitted user/group. 
+\end{DoxyReturn}
+\hypertarget{class_r_c_f_1_1_server_1_1_permission_a5aa502140c4bccfb74ce596de0ff88b0}{}\index{R\+C\+F\+::\+Server\+::\+Permission@{R\+C\+F\+::\+Server\+::\+Permission}!get\+Permission\+Type@{get\+Permission\+Type}}
+\index{get\+Permission\+Type@{get\+Permission\+Type}!R\+C\+F\+::\+Server\+::\+Permission@{R\+C\+F\+::\+Server\+::\+Permission}}
+\subsubsection[{get\+Permission\+Type}]{\setlength{\rightskip}{0pt plus 5cm}virtual std\+::string R\+C\+F\+::\+Server\+::\+Permission\+::get\+Permission\+Type (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{class_r_c_f_1_1_server_1_1_permission_a5aa502140c4bccfb74ce596de0ff88b0}
+
+
+A function that returns permission type. 
+
+\begin{DoxyReturn}{Returns}
+\hyperlink{class_r_c_f_1_1_server_1_1_permission}{Permission} type. 
+\end{DoxyReturn}
+
+
+Reimplemented in \hyperlink{class_r_c_f_1_1_server_1_1_group_ab163fc5265542a643719e4b5ba938fc9}{R\+C\+F\+::\+Server\+::\+Group}, and \hyperlink{class_r_c_f_1_1_server_1_1_user_acb9ca59d39d60acb9429d248aac5e0a3}{R\+C\+F\+::\+Server\+::\+User}.
+
+\hypertarget{class_r_c_f_1_1_server_1_1_permission_a49a881e193458e71d0249f2f6d5a8b56}{}\index{R\+C\+F\+::\+Server\+::\+Permission@{R\+C\+F\+::\+Server\+::\+Permission}!valid@{valid}}
+\index{valid@{valid}!R\+C\+F\+::\+Server\+::\+Permission@{R\+C\+F\+::\+Server\+::\+Permission}}
+\subsubsection[{valid}]{\setlength{\rightskip}{0pt plus 5cm}virtual bool R\+C\+F\+::\+Server\+::\+Permission\+::valid (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{class_r_c_f_1_1_server_1_1_permission_a49a881e193458e71d0249f2f6d5a8b56}
+
+
+If permission is valid to save or process. 
+
+\begin{DoxyReturn}{Returns}
+Boolean. 
+\end{DoxyReturn}
+
+
+Reimplemented in \hyperlink{class_r_c_f_1_1_server_1_1_group_aa0b9294484009ddc44e2dcfa5bd0e86c}{R\+C\+F\+::\+Server\+::\+Group}, and \hyperlink{class_r_c_f_1_1_server_1_1_user_ae9dd4687b66e16cd3bd7635580574834}{R\+C\+F\+::\+Server\+::\+User}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/\hyperlink{_permission_8h}{Permission.\+h}\end{DoxyCompactItemize}

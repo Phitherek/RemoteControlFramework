@@ -23,10 +23,10 @@ Client::Client(boost::asio::io_service& service, std::string sdName): _io_servic
         }
     }
     _sock->handshake(boost::asio::ssl::stream_base::client);
+    _logged_username = "";
 }
 
 Client::~Client() {
-    delete _sock;
 }
 
 ServerDefinition* Client::getServerDefinition() {
@@ -57,6 +57,7 @@ void Client::authorize(std::string username, std::string password) {
             std::string err = resp.substr(6, std::string::npos);
             throw RCF::Common::ProtocolException(err);
         }
+        _logged_username = username;
     } else if(resp.substr(0, 5) == "ERROR") {
         std::string err = resp.substr(6, std::string::npos);
         throw RCF::Common::ProtocolException(err);
@@ -100,6 +101,66 @@ int Client::execute(std::string query, std::string* stdout_target, std::string* 
             if(resp == "PARAM") {
                 std::string param;
                 param = paramProvider();
+                write(param);
+            } else if(resp == "EXECBEGIN") {
+                ps = "inexec";
+            } else if(resp == "OUTBEGIN") {
+                ps = "out";
+            } else if(resp == "ERRBEGIN") {
+                ps = "err";
+            } else if(resp.substr(0, 5) == "ERROR") {
+                std::string err = msg.substr(6, std::string::npos);
+                throw RCF::Common::ProtocolException(err);
+            } else if(resp.substr(0, 7) == "NCERROR") {
+                std::string err = msg.substr(8, std::string::npos);
+                throw RCF::Common::NotFoundException("From server", err);
+            } else {
+                throw RCF::Common::ProtocolException("Unexpected protocol message!");
+            }
+        } else if(ps == "inexec") {
+            if(resp.substr(0, 7) == "EXECEND") {
+                std::string scode = resp.substr(8, std::string::npos);
+                code = atoi(scode.c_str());
+                ps = "toplevel";
+            } else {
+                if(resp.substr(0, 5) == "ERROR") {
+                    std::string err = msg.substr(6, std::string::npos);
+                    throw RCF::Common::ProtocolException(err);
+                } else {
+                    throw RCF::Common::ProtocolException("Unexpected protocol message!");
+                }
+            }
+        } else if(ps == "out") {
+            if(resp == "OUTEND") {
+                ps = "toplevel";
+            } else {
+                *stdout_target += resp;
+            }
+        } else if(ps == "err") {
+            if(resp == "ERREND") {
+                ps = "toplevel";
+            } else {
+                *stderr_target += resp;
+            }
+        }
+    } while(resp != "ERREND");
+    return code;
+}
+
+int Client::execute(std::string query, std::string* stdout_target, std::string* stderr_target, std::string (*paramProvider)(Client*)) {
+    std::string msg = "";
+    std::string resp = "";
+    int code;
+    std::string ps = "toplevel";
+    msg += "EXEC ";
+    msg += query;
+    write(msg);
+    do {
+        resp = read();
+        if(ps == "toplevel") {
+            if(resp == "PARAM") {
+                std::string param;
+                param = paramProvider(this);
                 write(param);
             } else if(resp == "EXECBEGIN") {
                 ps = "inexec";
@@ -216,4 +277,8 @@ void Client::write(std::string trans) {
         _data[0] = 3;
         _sock->write_some(boost::asio::buffer(_data, max_length));
     }
+}
+
+std::string Client::getLoggedUsername() {
+    return _logged_username;
 }

@@ -1,0 +1,4 @@
+<map id="RCF::Server::Permission" name="RCF::Server::Permission">
+<area shape="rect" id="node2" href="$class_r_c_f_1_1_server_1_1_group.html" title="An implementation of a Group permission. " alt="" coords="5,80,148,107"/>
+<area shape="rect" id="node3" href="$class_r_c_f_1_1_server_1_1_user.html" title="An implementation of a User permission. " alt="" coords="172,80,307,107"/>
+</map>

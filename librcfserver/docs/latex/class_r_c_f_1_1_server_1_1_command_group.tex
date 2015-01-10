@@ -1,0 +1,399 @@
+\hypertarget{class_r_c_f_1_1_server_1_1_command_group}{}\section{R\+C\+F\+:\+:Server\+:\+:Command\+Group Class Reference}
+\label{class_r_c_f_1_1_server_1_1_command_group}\index{R\+C\+F\+::\+Server\+::\+Command\+Group@{R\+C\+F\+::\+Server\+::\+Command\+Group}}
+
+
+A class that represents a group of commands.  
+
+
+
+
+{\ttfamily \#include $<$Command\+Group.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_r_c_f_1_1_server_1_1_command_group_a850fbf1e53b8f26a0c3fe5527250d9d9}{}\hyperlink{class_r_c_f_1_1_server_1_1_command_group_a850fbf1e53b8f26a0c3fe5527250d9d9}{Command\+Group} ()\label{class_r_c_f_1_1_server_1_1_command_group_a850fbf1e53b8f26a0c3fe5527250d9d9}
+
+\begin{DoxyCompactList}\small\item\em A plain constructor. \end{DoxyCompactList}\item 
+\hyperlink{class_r_c_f_1_1_server_1_1_command_group_acf672a4d97c06a89f4c83f0aeefb0b3b}{Command\+Group} (std\+::string name)
+\begin{DoxyCompactList}\small\item\em A constructor from name. \end{DoxyCompactList}\item 
+\hyperlink{class_r_c_f_1_1_server_1_1_command_group_a60cbac1271e03939e0bd906c12436695}{Command\+Group} (\hyperlink{class_r_c_f_1_1_server_1_1_command_group}{Command\+Group} \&cpy)
+\begin{DoxyCompactList}\small\item\em A copy constructor. \end{DoxyCompactList}\item 
+\hypertarget{class_r_c_f_1_1_server_1_1_command_group_a1c7e8249006e32e09206b171ba724afc}{}\hyperlink{class_r_c_f_1_1_server_1_1_command_group_a1c7e8249006e32e09206b171ba724afc}{$\sim$\+Command\+Group} ()\label{class_r_c_f_1_1_server_1_1_command_group_a1c7e8249006e32e09206b171ba724afc}
+
+\begin{DoxyCompactList}\small\item\em A destructor. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{class_r_c_f_1_1_server_1_1_command_group_ac20669db94033c31e1e73044c50807e0}{get\+Name} ()
+\begin{DoxyCompactList}\small\item\em Returns the command group\textquotesingle{} s name. \end{DoxyCompactList}\item 
+bool \hyperlink{class_r_c_f_1_1_server_1_1_command_group_acf4e447d19f9538b5daa773733393780}{has\+Command} (std\+::string name)
+\begin{DoxyCompactList}\small\item\em Checks if this command group contains command of given name. \end{DoxyCompactList}\item 
+bool \hyperlink{class_r_c_f_1_1_server_1_1_command_group_a8bcba675553c37e509abc48722fa49d7}{recursive\+Has\+Command} (std\+::string name)
+\begin{DoxyCompactList}\small\item\em Checks if this group or any of the groups below contain command of given name. \end{DoxyCompactList}\item 
+bool \hyperlink{class_r_c_f_1_1_server_1_1_command_group_a17c152ab87a6486cbde8df0bf800ea26}{has\+Group} (std\+::string name)
+\begin{DoxyCompactList}\small\item\em Checks if this command group contains command group of given name. \end{DoxyCompactList}\item 
+bool \hyperlink{class_r_c_f_1_1_server_1_1_command_group_ae470224e829e141924eaa15d3eecc106}{recursive\+Has\+Group} (std\+::string name)
+\begin{DoxyCompactList}\small\item\em Checks if this group or any of the groups below contain command group of given name. \end{DoxyCompactList}\item 
+void \hyperlink{class_r_c_f_1_1_server_1_1_command_group_a7effd25d875e2f58673d1675821419e7}{add\+Permission} (\hyperlink{class_r_c_f_1_1_server_1_1_permission}{Permission} $\ast$p)
+\begin{DoxyCompactList}\small\item\em Adds permission to all commands in this group. \end{DoxyCompactList}\item 
+void \hyperlink{class_r_c_f_1_1_server_1_1_command_group_a29a13272a4e81871ef4411d3d5e6a6d4}{recursive\+Add\+Permission} (\hyperlink{class_r_c_f_1_1_server_1_1_permission}{Permission} $\ast$p)
+\begin{DoxyCompactList}\small\item\em Adds permission to all commands in this group and groups below. \end{DoxyCompactList}\item 
+\hyperlink{class_r_c_f_1_1_server_1_1_command}{Command} $\ast$ \hyperlink{class_r_c_f_1_1_server_1_1_command_group_ae1ae69b64a21c6948c378b00656389b9}{get\+Next\+Command} ()
+\begin{DoxyCompactList}\small\item\em Gets next command in the command group. \end{DoxyCompactList}\item 
+\hyperlink{class_r_c_f_1_1_server_1_1_command}{Command} $\ast$ \hyperlink{class_r_c_f_1_1_server_1_1_command_group_a46dc930697545cc1c4f1e18c1d50046d}{get\+Command\+By\+Name} (std\+::string name)
+\begin{DoxyCompactList}\small\item\em Gets command from command group by name. \end{DoxyCompactList}\item 
+bool \hyperlink{class_r_c_f_1_1_server_1_1_command_group_a0a1c68d8250edeb73e69d1069a7c07b9}{commands\+At\+End} ()
+\begin{DoxyCompactList}\small\item\em Checks if commands iterator reached the end. \end{DoxyCompactList}\item 
+void \hyperlink{class_r_c_f_1_1_server_1_1_command_group_a269abb1020ce38953c278b7c80ea11a7}{add\+Command} (\hyperlink{class_r_c_f_1_1_server_1_1_command}{Command} $\ast$c)
+\begin{DoxyCompactList}\small\item\em Adds a command to the command group. \end{DoxyCompactList}\item 
+\hypertarget{class_r_c_f_1_1_server_1_1_command_group_a891ad2243e2755104ef055204784b6e7}{}void \hyperlink{class_r_c_f_1_1_server_1_1_command_group_a891ad2243e2755104ef055204784b6e7}{reset\+Commands\+Iterator} ()\label{class_r_c_f_1_1_server_1_1_command_group_a891ad2243e2755104ef055204784b6e7}
+
+\begin{DoxyCompactList}\small\item\em Resets the command iterator. \end{DoxyCompactList}\item 
+\hyperlink{class_r_c_f_1_1_server_1_1_command_group}{Command\+Group} $\ast$ \hyperlink{class_r_c_f_1_1_server_1_1_command_group_aa8eb515abb92af67a5f20843254d0158}{get\+Next\+Group} ()
+\begin{DoxyCompactList}\small\item\em Gets next command group in the command group. \end{DoxyCompactList}\item 
+\hyperlink{class_r_c_f_1_1_server_1_1_command_group}{Command\+Group} $\ast$ \hyperlink{class_r_c_f_1_1_server_1_1_command_group_a44a2fa9f126fe347cbec59a6b49d224f}{get\+Group\+By\+Name} (std\+::string name)
+\begin{DoxyCompactList}\small\item\em Gets command group from command group by name. \end{DoxyCompactList}\item 
+bool \hyperlink{class_r_c_f_1_1_server_1_1_command_group_a4d94f7d1e85eb4e376672eba681b44a6}{groups\+At\+End} ()
+\begin{DoxyCompactList}\small\item\em Checks if command groups iterator reached the end. \end{DoxyCompactList}\item 
+void \hyperlink{class_r_c_f_1_1_server_1_1_command_group_a0aba7531b512d67875a0eaee44595c50}{add\+Group} (\hyperlink{class_r_c_f_1_1_server_1_1_command_group}{Command\+Group} $\ast$cg)
+\begin{DoxyCompactList}\small\item\em Adds a command group to the command group. \end{DoxyCompactList}\item 
+\hypertarget{class_r_c_f_1_1_server_1_1_command_group_acd9685a983f5cf58640e068469813fb3}{}void \hyperlink{class_r_c_f_1_1_server_1_1_command_group_acd9685a983f5cf58640e068469813fb3}{reset\+Groups\+Iterator} ()\label{class_r_c_f_1_1_server_1_1_command_group_acd9685a983f5cf58640e068469813fb3}
+
+\begin{DoxyCompactList}\small\item\em Resets the command groups iterator. \end{DoxyCompactList}\item 
+\hypertarget{class_r_c_f_1_1_server_1_1_command_group_af396c9bfa8fc2a761a7212876e1c808e}{}void \hyperlink{class_r_c_f_1_1_server_1_1_command_group_af396c9bfa8fc2a761a7212876e1c808e}{save} ()\label{class_r_c_f_1_1_server_1_1_command_group_af396c9bfa8fc2a761a7212876e1c808e}
+
+\begin{DoxyCompactList}\small\item\em Saves the command group. \end{DoxyCompactList}\item 
+bool \hyperlink{class_r_c_f_1_1_server_1_1_command_group_ad509cf90975512aed3af87774e4be8ed}{valid} ()
+\begin{DoxyCompactList}\small\item\em Checks if command group is valid. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{class_r_c_f_1_1_server_1_1_command_group}{Command\+Group} $\ast$ \hyperlink{class_r_c_f_1_1_server_1_1_command_group_a22ff2935e5499ea5a279bd835d546ea3}{load} (std\+::string name)
+\item 
+\hypertarget{class_r_c_f_1_1_server_1_1_command_group_a409903e9c4776b9a4729fc76f1512ce0}{}static void \hyperlink{class_r_c_f_1_1_server_1_1_command_group_a409903e9c4776b9a4729fc76f1512ce0}{free} ()\label{class_r_c_f_1_1_server_1_1_command_group_a409903e9c4776b9a4729fc76f1512ce0}
+
+\begin{DoxyCompactList}\small\item\em Frees the memory. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A class that represents a group of commands. 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_r_c_f_1_1_server_1_1_command_group_acf672a4d97c06a89f4c83f0aeefb0b3b}{}\index{R\+C\+F\+::\+Server\+::\+Command\+Group@{R\+C\+F\+::\+Server\+::\+Command\+Group}!Command\+Group@{Command\+Group}}
+\index{Command\+Group@{Command\+Group}!R\+C\+F\+::\+Server\+::\+Command\+Group@{R\+C\+F\+::\+Server\+::\+Command\+Group}}
+\subsubsection[{Command\+Group}]{\setlength{\rightskip}{0pt plus 5cm}R\+C\+F\+::\+Server\+::\+Command\+Group\+::\+Command\+Group (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{name}
+\end{DoxyParamCaption}
+)}\label{class_r_c_f_1_1_server_1_1_command_group_acf672a4d97c06a89f4c83f0aeefb0b3b}
+
+
+A constructor from name. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & Name of a group. \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_r_c_f_1_1_server_1_1_command_group_a60cbac1271e03939e0bd906c12436695}{}\index{R\+C\+F\+::\+Server\+::\+Command\+Group@{R\+C\+F\+::\+Server\+::\+Command\+Group}!Command\+Group@{Command\+Group}}
+\index{Command\+Group@{Command\+Group}!R\+C\+F\+::\+Server\+::\+Command\+Group@{R\+C\+F\+::\+Server\+::\+Command\+Group}}
+\subsubsection[{Command\+Group}]{\setlength{\rightskip}{0pt plus 5cm}R\+C\+F\+::\+Server\+::\+Command\+Group\+::\+Command\+Group (
+\begin{DoxyParamCaption}
+\item[{{\bf Command\+Group} \&}]{cpy}
+\end{DoxyParamCaption}
+)}\label{class_r_c_f_1_1_server_1_1_command_group_a60cbac1271e03939e0bd906c12436695}
+
+
+A copy constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em cpy} & Object to copy. \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_r_c_f_1_1_server_1_1_command_group_a269abb1020ce38953c278b7c80ea11a7}{}\index{R\+C\+F\+::\+Server\+::\+Command\+Group@{R\+C\+F\+::\+Server\+::\+Command\+Group}!add\+Command@{add\+Command}}
+\index{add\+Command@{add\+Command}!R\+C\+F\+::\+Server\+::\+Command\+Group@{R\+C\+F\+::\+Server\+::\+Command\+Group}}
+\subsubsection[{add\+Command}]{\setlength{\rightskip}{0pt plus 5cm}void R\+C\+F\+::\+Server\+::\+Command\+Group\+::add\+Command (
+\begin{DoxyParamCaption}
+\item[{{\bf Command} $\ast$}]{c}
+\end{DoxyParamCaption}
+)}\label{class_r_c_f_1_1_server_1_1_command_group_a269abb1020ce38953c278b7c80ea11a7}
+
+
+Adds a command to the command group. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em c} & A command to add. \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_r_c_f_1_1_server_1_1_command_group_a0aba7531b512d67875a0eaee44595c50}{}\index{R\+C\+F\+::\+Server\+::\+Command\+Group@{R\+C\+F\+::\+Server\+::\+Command\+Group}!add\+Group@{add\+Group}}
+\index{add\+Group@{add\+Group}!R\+C\+F\+::\+Server\+::\+Command\+Group@{R\+C\+F\+::\+Server\+::\+Command\+Group}}
+\subsubsection[{add\+Group}]{\setlength{\rightskip}{0pt plus 5cm}void R\+C\+F\+::\+Server\+::\+Command\+Group\+::add\+Group (
+\begin{DoxyParamCaption}
+\item[{{\bf Command\+Group} $\ast$}]{cg}
+\end{DoxyParamCaption}
+)}\label{class_r_c_f_1_1_server_1_1_command_group_a0aba7531b512d67875a0eaee44595c50}
+
+
+Adds a command group to the command group. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em cg} & A command group to add. \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_r_c_f_1_1_server_1_1_command_group_a7effd25d875e2f58673d1675821419e7}{}\index{R\+C\+F\+::\+Server\+::\+Command\+Group@{R\+C\+F\+::\+Server\+::\+Command\+Group}!add\+Permission@{add\+Permission}}
+\index{add\+Permission@{add\+Permission}!R\+C\+F\+::\+Server\+::\+Command\+Group@{R\+C\+F\+::\+Server\+::\+Command\+Group}}
+\subsubsection[{add\+Permission}]{\setlength{\rightskip}{0pt plus 5cm}void R\+C\+F\+::\+Server\+::\+Command\+Group\+::add\+Permission (
+\begin{DoxyParamCaption}
+\item[{{\bf Permission} $\ast$}]{p}
+\end{DoxyParamCaption}
+)}\label{class_r_c_f_1_1_server_1_1_command_group_a7effd25d875e2f58673d1675821419e7}
+
+
+Adds permission to all commands in this group. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p} & A pointer to \hyperlink{class_r_c_f_1_1_server_1_1_permission}{Permission} to add. \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_r_c_f_1_1_server_1_1_command_group_a0a1c68d8250edeb73e69d1069a7c07b9}{}\index{R\+C\+F\+::\+Server\+::\+Command\+Group@{R\+C\+F\+::\+Server\+::\+Command\+Group}!commands\+At\+End@{commands\+At\+End}}
+\index{commands\+At\+End@{commands\+At\+End}!R\+C\+F\+::\+Server\+::\+Command\+Group@{R\+C\+F\+::\+Server\+::\+Command\+Group}}
+\subsubsection[{commands\+At\+End}]{\setlength{\rightskip}{0pt plus 5cm}bool R\+C\+F\+::\+Server\+::\+Command\+Group\+::commands\+At\+End (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{class_r_c_f_1_1_server_1_1_command_group_a0a1c68d8250edeb73e69d1069a7c07b9}
+
+
+Checks if commands iterator reached the end. 
+
+\begin{DoxyReturn}{Returns}
+Boolean. 
+\end{DoxyReturn}
+\hypertarget{class_r_c_f_1_1_server_1_1_command_group_a46dc930697545cc1c4f1e18c1d50046d}{}\index{R\+C\+F\+::\+Server\+::\+Command\+Group@{R\+C\+F\+::\+Server\+::\+Command\+Group}!get\+Command\+By\+Name@{get\+Command\+By\+Name}}
+\index{get\+Command\+By\+Name@{get\+Command\+By\+Name}!R\+C\+F\+::\+Server\+::\+Command\+Group@{R\+C\+F\+::\+Server\+::\+Command\+Group}}
+\subsubsection[{get\+Command\+By\+Name}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Command}$\ast$ R\+C\+F\+::\+Server\+::\+Command\+Group\+::get\+Command\+By\+Name (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{name}
+\end{DoxyParamCaption}
+)}\label{class_r_c_f_1_1_server_1_1_command_group_a46dc930697545cc1c4f1e18c1d50046d}
+
+
+Gets command from command group by name. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & Name of the command. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\hyperlink{class_r_c_f_1_1_server_1_1_command}{Command} of given name from the command group. 
+\end{DoxyReturn}
+\hypertarget{class_r_c_f_1_1_server_1_1_command_group_a44a2fa9f126fe347cbec59a6b49d224f}{}\index{R\+C\+F\+::\+Server\+::\+Command\+Group@{R\+C\+F\+::\+Server\+::\+Command\+Group}!get\+Group\+By\+Name@{get\+Group\+By\+Name}}
+\index{get\+Group\+By\+Name@{get\+Group\+By\+Name}!R\+C\+F\+::\+Server\+::\+Command\+Group@{R\+C\+F\+::\+Server\+::\+Command\+Group}}
+\subsubsection[{get\+Group\+By\+Name}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Command\+Group}$\ast$ R\+C\+F\+::\+Server\+::\+Command\+Group\+::get\+Group\+By\+Name (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{name}
+\end{DoxyParamCaption}
+)}\label{class_r_c_f_1_1_server_1_1_command_group_a44a2fa9f126fe347cbec59a6b49d224f}
+
+
+Gets command group from command group by name. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & Name of the command group. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\hyperlink{class_r_c_f_1_1_server_1_1_command}{Command} group of given name from the command group. 
+\end{DoxyReturn}
+\hypertarget{class_r_c_f_1_1_server_1_1_command_group_ac20669db94033c31e1e73044c50807e0}{}\index{R\+C\+F\+::\+Server\+::\+Command\+Group@{R\+C\+F\+::\+Server\+::\+Command\+Group}!get\+Name@{get\+Name}}
+\index{get\+Name@{get\+Name}!R\+C\+F\+::\+Server\+::\+Command\+Group@{R\+C\+F\+::\+Server\+::\+Command\+Group}}
+\subsubsection[{get\+Name}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string R\+C\+F\+::\+Server\+::\+Command\+Group\+::get\+Name (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{class_r_c_f_1_1_server_1_1_command_group_ac20669db94033c31e1e73044c50807e0}
+
+
+Returns the command group\textquotesingle{} s name. 
+
+\begin{DoxyReturn}{Returns}
+\hyperlink{class_r_c_f_1_1_server_1_1_command}{Command} group\textquotesingle{} s name. 
+\end{DoxyReturn}
+\hypertarget{class_r_c_f_1_1_server_1_1_command_group_ae1ae69b64a21c6948c378b00656389b9}{}\index{R\+C\+F\+::\+Server\+::\+Command\+Group@{R\+C\+F\+::\+Server\+::\+Command\+Group}!get\+Next\+Command@{get\+Next\+Command}}
+\index{get\+Next\+Command@{get\+Next\+Command}!R\+C\+F\+::\+Server\+::\+Command\+Group@{R\+C\+F\+::\+Server\+::\+Command\+Group}}
+\subsubsection[{get\+Next\+Command}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Command}$\ast$ R\+C\+F\+::\+Server\+::\+Command\+Group\+::get\+Next\+Command (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{class_r_c_f_1_1_server_1_1_command_group_ae1ae69b64a21c6948c378b00656389b9}
+
+
+Gets next command in the command group. 
+
+\begin{DoxyReturn}{Returns}
+Next command in the command group. 
+\end{DoxyReturn}
+\hypertarget{class_r_c_f_1_1_server_1_1_command_group_aa8eb515abb92af67a5f20843254d0158}{}\index{R\+C\+F\+::\+Server\+::\+Command\+Group@{R\+C\+F\+::\+Server\+::\+Command\+Group}!get\+Next\+Group@{get\+Next\+Group}}
+\index{get\+Next\+Group@{get\+Next\+Group}!R\+C\+F\+::\+Server\+::\+Command\+Group@{R\+C\+F\+::\+Server\+::\+Command\+Group}}
+\subsubsection[{get\+Next\+Group}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Command\+Group}$\ast$ R\+C\+F\+::\+Server\+::\+Command\+Group\+::get\+Next\+Group (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{class_r_c_f_1_1_server_1_1_command_group_aa8eb515abb92af67a5f20843254d0158}
+
+
+Gets next command group in the command group. 
+
+\begin{DoxyReturn}{Returns}
+Next command group in the command group. 
+\end{DoxyReturn}
+\hypertarget{class_r_c_f_1_1_server_1_1_command_group_a4d94f7d1e85eb4e376672eba681b44a6}{}\index{R\+C\+F\+::\+Server\+::\+Command\+Group@{R\+C\+F\+::\+Server\+::\+Command\+Group}!groups\+At\+End@{groups\+At\+End}}
+\index{groups\+At\+End@{groups\+At\+End}!R\+C\+F\+::\+Server\+::\+Command\+Group@{R\+C\+F\+::\+Server\+::\+Command\+Group}}
+\subsubsection[{groups\+At\+End}]{\setlength{\rightskip}{0pt plus 5cm}bool R\+C\+F\+::\+Server\+::\+Command\+Group\+::groups\+At\+End (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{class_r_c_f_1_1_server_1_1_command_group_a4d94f7d1e85eb4e376672eba681b44a6}
+
+
+Checks if command groups iterator reached the end. 
+
+\begin{DoxyReturn}{Returns}
+Boolean. 
+\end{DoxyReturn}
+\hypertarget{class_r_c_f_1_1_server_1_1_command_group_acf4e447d19f9538b5daa773733393780}{}\index{R\+C\+F\+::\+Server\+::\+Command\+Group@{R\+C\+F\+::\+Server\+::\+Command\+Group}!has\+Command@{has\+Command}}
+\index{has\+Command@{has\+Command}!R\+C\+F\+::\+Server\+::\+Command\+Group@{R\+C\+F\+::\+Server\+::\+Command\+Group}}
+\subsubsection[{has\+Command}]{\setlength{\rightskip}{0pt plus 5cm}bool R\+C\+F\+::\+Server\+::\+Command\+Group\+::has\+Command (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{name}
+\end{DoxyParamCaption}
+)}\label{class_r_c_f_1_1_server_1_1_command_group_acf4e447d19f9538b5daa773733393780}
+
+
+Checks if this command group contains command of given name. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & Name of the command. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Boolean. 
+\end{DoxyReturn}
+\hypertarget{class_r_c_f_1_1_server_1_1_command_group_a17c152ab87a6486cbde8df0bf800ea26}{}\index{R\+C\+F\+::\+Server\+::\+Command\+Group@{R\+C\+F\+::\+Server\+::\+Command\+Group}!has\+Group@{has\+Group}}
+\index{has\+Group@{has\+Group}!R\+C\+F\+::\+Server\+::\+Command\+Group@{R\+C\+F\+::\+Server\+::\+Command\+Group}}
+\subsubsection[{has\+Group}]{\setlength{\rightskip}{0pt plus 5cm}bool R\+C\+F\+::\+Server\+::\+Command\+Group\+::has\+Group (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{name}
+\end{DoxyParamCaption}
+)}\label{class_r_c_f_1_1_server_1_1_command_group_a17c152ab87a6486cbde8df0bf800ea26}
+
+
+Checks if this command group contains command group of given name. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & Name of the command group. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Boolean. 
+\end{DoxyReturn}
+\hypertarget{class_r_c_f_1_1_server_1_1_command_group_a22ff2935e5499ea5a279bd835d546ea3}{}\index{R\+C\+F\+::\+Server\+::\+Command\+Group@{R\+C\+F\+::\+Server\+::\+Command\+Group}!load@{load}}
+\index{load@{load}!R\+C\+F\+::\+Server\+::\+Command\+Group@{R\+C\+F\+::\+Server\+::\+Command\+Group}}
+\subsubsection[{load}]{\setlength{\rightskip}{0pt plus 5cm}static {\bf Command\+Group}$\ast$ R\+C\+F\+::\+Server\+::\+Command\+Group\+::load (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{name}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\label{class_r_c_f_1_1_server_1_1_command_group_a22ff2935e5499ea5a279bd835d546ea3}
+Loads command group of given name. 
+\begin{DoxyParams}{Parameters}
+{\em name} & Name of a command group. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Loaded command group. 
+\end{DoxyReturn}
+\begin{DoxyWarning}{Warning}
+At the end of the code that uses this function, use \hyperlink{class_r_c_f_1_1_server_1_1_command_group_a409903e9c4776b9a4729fc76f1512ce0}{R\+C\+F\+::\+Server\+::\+Command\+Group\+::free()} function to free the memory, \hyperlink{class_r_c_f_1_1_server_1_1_command_a614b05d63b9c5fb449d1f716f09c5a5d}{R\+C\+F\+::\+Server\+::\+Command\+::free()} to free the commands if any command was specified inside any group and \hyperlink{class_r_c_f_1_1_server_1_1_permission_ab022718461c9a1772e1c992769cadc56}{R\+C\+F\+::\+Server\+::\+Permission\+::free()} to free the permissions if any command had any permission specified. 
+\end{DoxyWarning}
+\hypertarget{class_r_c_f_1_1_server_1_1_command_group_a29a13272a4e81871ef4411d3d5e6a6d4}{}\index{R\+C\+F\+::\+Server\+::\+Command\+Group@{R\+C\+F\+::\+Server\+::\+Command\+Group}!recursive\+Add\+Permission@{recursive\+Add\+Permission}}
+\index{recursive\+Add\+Permission@{recursive\+Add\+Permission}!R\+C\+F\+::\+Server\+::\+Command\+Group@{R\+C\+F\+::\+Server\+::\+Command\+Group}}
+\subsubsection[{recursive\+Add\+Permission}]{\setlength{\rightskip}{0pt plus 5cm}void R\+C\+F\+::\+Server\+::\+Command\+Group\+::recursive\+Add\+Permission (
+\begin{DoxyParamCaption}
+\item[{{\bf Permission} $\ast$}]{p}
+\end{DoxyParamCaption}
+)}\label{class_r_c_f_1_1_server_1_1_command_group_a29a13272a4e81871ef4411d3d5e6a6d4}
+
+
+Adds permission to all commands in this group and groups below. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p} & A pointer to \hyperlink{class_r_c_f_1_1_server_1_1_permission}{Permission} to add. \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_r_c_f_1_1_server_1_1_command_group_a8bcba675553c37e509abc48722fa49d7}{}\index{R\+C\+F\+::\+Server\+::\+Command\+Group@{R\+C\+F\+::\+Server\+::\+Command\+Group}!recursive\+Has\+Command@{recursive\+Has\+Command}}
+\index{recursive\+Has\+Command@{recursive\+Has\+Command}!R\+C\+F\+::\+Server\+::\+Command\+Group@{R\+C\+F\+::\+Server\+::\+Command\+Group}}
+\subsubsection[{recursive\+Has\+Command}]{\setlength{\rightskip}{0pt plus 5cm}bool R\+C\+F\+::\+Server\+::\+Command\+Group\+::recursive\+Has\+Command (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{name}
+\end{DoxyParamCaption}
+)}\label{class_r_c_f_1_1_server_1_1_command_group_a8bcba675553c37e509abc48722fa49d7}
+
+
+Checks if this group or any of the groups below contain command of given name. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & Name of the command. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Boolean. 
+\end{DoxyReturn}
+\hypertarget{class_r_c_f_1_1_server_1_1_command_group_ae470224e829e141924eaa15d3eecc106}{}\index{R\+C\+F\+::\+Server\+::\+Command\+Group@{R\+C\+F\+::\+Server\+::\+Command\+Group}!recursive\+Has\+Group@{recursive\+Has\+Group}}
+\index{recursive\+Has\+Group@{recursive\+Has\+Group}!R\+C\+F\+::\+Server\+::\+Command\+Group@{R\+C\+F\+::\+Server\+::\+Command\+Group}}
+\subsubsection[{recursive\+Has\+Group}]{\setlength{\rightskip}{0pt plus 5cm}bool R\+C\+F\+::\+Server\+::\+Command\+Group\+::recursive\+Has\+Group (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{name}
+\end{DoxyParamCaption}
+)}\label{class_r_c_f_1_1_server_1_1_command_group_ae470224e829e141924eaa15d3eecc106}
+
+
+Checks if this group or any of the groups below contain command group of given name. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & Name of the command group. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Boolean. 
+\end{DoxyReturn}
+\hypertarget{class_r_c_f_1_1_server_1_1_command_group_ad509cf90975512aed3af87774e4be8ed}{}\index{R\+C\+F\+::\+Server\+::\+Command\+Group@{R\+C\+F\+::\+Server\+::\+Command\+Group}!valid@{valid}}
+\index{valid@{valid}!R\+C\+F\+::\+Server\+::\+Command\+Group@{R\+C\+F\+::\+Server\+::\+Command\+Group}}
+\subsubsection[{valid}]{\setlength{\rightskip}{0pt plus 5cm}bool R\+C\+F\+::\+Server\+::\+Command\+Group\+::valid (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{class_r_c_f_1_1_server_1_1_command_group_ad509cf90975512aed3af87774e4be8ed}
+
+
+Checks if command group is valid. 
+
+\begin{DoxyReturn}{Returns}
+Boolean. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/\hyperlink{_command_group_8h}{Command\+Group.\+h}\end{DoxyCompactItemize}

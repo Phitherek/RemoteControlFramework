@@ -19,7 +19,7 @@
 /// \namespace RCF
 /// \brief A global namespace for RemoteControlFramework
 namespace RCF {
-    /// \namespace Common
+    /// \namespace RCF::Common
     /// \brief A namespace for common RemoteControlFramework classes
     namespace Common {
         /// \class HelperFunctions

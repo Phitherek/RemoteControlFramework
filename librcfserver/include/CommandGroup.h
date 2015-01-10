@@ -12,7 +12,7 @@
 /// \namespace RCF
 /// \brief A global namespace for RemoteControlFramework
 namespace RCF {
-    /// \namespace Server
+    /// \namespace RCF::Server
     /// \brief A namespace for RCF server
     namespace Server {
         /// \class CommandGroup

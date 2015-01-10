@@ -29,6 +29,7 @@
 #include <wx/frame.h>
 #include <wx/choice.h>
 #include <wx/dialog.h>
+#include <wx/treectrl.h>
 
 ///////////////////////////////////////////////////////////////////////////
 
@@ -70,6 +71,7 @@ namespace wxRCF
 			// Virtual event handlers, overide them in your derived class
 			virtual void serverConnectItemOnMenuSelection( wxCommandEvent& event ) { event.Skip(); }
 			virtual void helpAboutItemOnMenuSelection( wxCommandEvent& event ) { event.Skip(); }
+			virtual void activeServersListOnListBox( wxCommandEvent& event ) { event.Skip(); }
 			virtual void listActionButtonOnButtonClick( wxCommandEvent& event ) { event.Skip(); }
 			virtual void closeActionButtonOnButtonClick( wxCommandEvent& event ) { event.Skip(); }
 			virtual void closeButtonOnButtonClick( wxCommandEvent& event ) { event.Skip(); }
@@ -77,7 +79,7 @@ namespace wxRCF
 		
 		public:
 			
-			mainWindowBase( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("wxRCF v. 1.0 (C) 2015 by Phitherek_"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 800,-1 ), long style = wxDEFAULT_FRAME_STYLE|wxTAB_TRAVERSAL );
+			mainWindowBase( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("wxRCF v. 0.1 (C) 2015 by Phitherek_"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 800,720 ), long style = wxDEFAULT_FRAME_STYLE|wxTAB_TRAVERSAL );
 			
 			~mainWindowBase();
 		
@@ -143,6 +145,61 @@ namespace wxRCF
 			
 			aboutDialogBase( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("About wxRCF"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = wxDEFAULT_DIALOG_STYLE ); 
 			~aboutDialogBase();
+		
+	};
+	
+	///////////////////////////////////////////////////////////////////////////////
+	/// Class listDialogBase
+	///////////////////////////////////////////////////////////////////////////////
+	class listDialogBase : public wxDialog 
+	{
+		private:
+		
+		protected:
+			wxBoxSizer* listSizer;
+			wxStaticText* commandListLabel;
+			wxTreeCtrl* commandListTree;
+			wxBoxSizer* listDialogActionSizer;
+			wxButton* listCancelButton;
+			wxButton* listExecuteButton;
+			
+			// Virtual event handlers, overide them in your derived class
+			virtual void listDialogBaseOnInitDialog( wxInitDialogEvent& event ) { event.Skip(); }
+			virtual void listCancelButtonOnButtonClick( wxCommandEvent& event ) { event.Skip(); }
+			virtual void listExecuteButtonOnButtonClick( wxCommandEvent& event ) { event.Skip(); }
+			
+		
+		public:
+			
+			listDialogBase( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("List available commands - wxRCF v. 0.1 (C) 2015 by Phitherek_"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = wxDEFAULT_DIALOG_STYLE ); 
+			~listDialogBase();
+		
+	};
+	
+	///////////////////////////////////////////////////////////////////////////////
+	/// Class paramQueryDialogBase
+	///////////////////////////////////////////////////////////////////////////////
+	class paramQueryDialogBase : public wxDialog 
+	{
+		private:
+		
+		protected:
+			wxBoxSizer* paramQuerySizer;
+			wxBoxSizer* paramInputSizer;
+			wxStaticText* paramInputLabel;
+			wxTextCtrl* paramInput;
+			wxBoxSizer* paramDialogActionSizer;
+			wxButton* paramContinueButton;
+			
+			// Virtual event handlers, overide them in your derived class
+			virtual void paramQueryDialogBaseOnInitDialog( wxInitDialogEvent& event ) { event.Skip(); }
+			virtual void paramContinueButtonOnButtonClick( wxCommandEvent& event ) { event.Skip(); }
+			
+		
+		public:
+			
+			paramQueryDialogBase( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Enter command parameter - wxRCF v. 0.1 (C) 2015 by Phitherek_"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = wxDEFAULT_DIALOG_STYLE ); 
+			~paramQueryDialogBase();
 		
 	};
 	

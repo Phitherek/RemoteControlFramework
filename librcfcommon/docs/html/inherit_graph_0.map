@@ -1,0 +1,11 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node2" href="$class_r_c_f_1_1_common_1_1_already_exists_exception.html" title="An exception related to object already existing in given collection. " alt="" coords="158,5,361,47"/>
+<area shape="rect" id="node3" href="$class_r_c_f_1_1_common_1_1_at_end_exception.html" title="An exception related to iterator being at the end of the collection. " alt="" coords="150,71,369,98"/>
+<area shape="rect" id="node4" href="$class_r_c_f_1_1_common_1_1_filesystem_exception.html" title="An exception related to files and filesystem. " alt="" coords="136,122,383,149"/>
+<area shape="rect" id="node5" href="$class_r_c_f_1_1_common_1_1_invalid_object_exception.html" title="An exception related to invalidity of object for given action. " alt="" coords="160,173,359,215"/>
+<area shape="rect" id="node6" href="$class_r_c_f_1_1_common_1_1_not_found_exception.html" title="An exception related to not finding object by given string. " alt="" coords="139,239,380,266"/>
+<area shape="rect" id="node7" href="$class_r_c_f_1_1_common_1_1_parameters_needed_exception.html" title="An exception related to command needing more parameters. " alt="" coords="139,291,380,332"/>
+<area shape="rect" id="node8" href="$class_r_c_f_1_1_common_1_1_parser_exception.html" title="An exception related to parsers and formats. " alt="" coords="148,357,371,383"/>
+<area shape="rect" id="node9" href="$class_r_c_f_1_1_common_1_1_protocol_exception.html" title="An exception related to an error during RCF Protocol communication. " alt="" coords="143,407,375,434"/>
+<area shape="rect" id="node10" href="$class_r_c_f_1_1_common_1_1_runtime_exception.html" title="An exception related to error during program execution. " alt="" coords="144,458,375,485"/>
+</map>

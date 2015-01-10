@@ -1,0 +1,6 @@
+<map id="include/Command.h" name="include/Command.h">
+<area shape="rect" id="node4" href="$_permission_8h.html" title="A class that represents a permission to execute the command. " alt="" coords="149,229,251,256"/>
+<area shape="rect" id="node5" href="$_user_8h.html" title="An implementation of a user permission. " alt="" coords="154,155,217,181"/>
+<area shape="rect" id="node6" href="$_group_8h.html" title="An implementation of a user permission. " alt="" coords="217,80,289,107"/>
+<area shape="rect" id="node7" href="$_execute_impl_8h.html" title="A class that provides cross&#45;platform solution for pipe execution with stdout and stderr capture..." alt="" coords="413,80,523,107"/>
+</map>

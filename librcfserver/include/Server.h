@@ -29,7 +29,7 @@ typedef boost::asio::ssl::stream<boost::asio::ip::tcp::socket> ssl_socket;
 /// \namespace RCF
 /// \brief A global namespace for RemoteControlFramework
 namespace RCF {
-    /// \namespace Server
+    /// \namespace RCF::Server
     /// \brief A namespace for RCF server
     namespace Server {
         /// \class Server
@@ -50,7 +50,7 @@ namespace RCF {
             void handleSublist(ssl_socket* sock, User* logged_user, CommandGroup* grp);
         public:
             Server(boost::asio::io_service& service, unsigned int port, void (*mainfn)(Server*, ssl_socket*)); ///< \brief A constructor from boost::asio::io_service, port and main function.
-            ///< \param _service A reference to boost::asio::io_service, that has to be constructed before server construction and is used for boost::asio communication (refer to boost::asio documentation for more information).
+            ///< \param service A reference to boost::asio::io_service, that has to be constructed before server construction and is used for boost::asio communication (refer to boost::asio documentation for more information).
             ///< \param port A port the server is to be started at.
             ///< \param mainfn A pointer to the function, that returns void and takes two parameters - a pointer to RCF::Server::Server and a pointer to boost::asio::ssl::stream<boost::asio::ip::tcp::socket>. Inside the function define the server functionality using provided with this class RCF protocol methods.
             ~Server(); ///< A destructor.

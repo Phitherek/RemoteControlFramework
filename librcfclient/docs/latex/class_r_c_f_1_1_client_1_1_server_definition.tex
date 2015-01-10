@@ -1,0 +1,152 @@
+\hypertarget{class_r_c_f_1_1_client_1_1_server_definition}{}\section{R\+C\+F\+:\+:Client\+:\+:Server\+Definition Class Reference}
+\label{class_r_c_f_1_1_client_1_1_server_definition}\index{R\+C\+F\+::\+Client\+::\+Server\+Definition@{R\+C\+F\+::\+Client\+::\+Server\+Definition}}
+
+
+A class that represents server definition for client.  
+
+
+
+
+{\ttfamily \#include $<$Server\+Definition.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_r_c_f_1_1_client_1_1_server_definition_aac5283639c40891522960d6223bdc10d}{}\hyperlink{class_r_c_f_1_1_client_1_1_server_definition_aac5283639c40891522960d6223bdc10d}{Server\+Definition} ()\label{class_r_c_f_1_1_client_1_1_server_definition_aac5283639c40891522960d6223bdc10d}
+
+\begin{DoxyCompactList}\small\item\em A plain constructor. \end{DoxyCompactList}\item 
+\hyperlink{class_r_c_f_1_1_client_1_1_server_definition_a8492b1915c3014b9111fd884160a3bf1}{Server\+Definition} (std\+::string name, std\+::string hostname, std\+::string certfilepath)
+\begin{DoxyCompactList}\small\item\em A constructor from name, hostname and certificate file path. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{class_r_c_f_1_1_client_1_1_server_definition_a20f355baa25a4945373051b6d6c70efd}{get\+Name} ()
+\begin{DoxyCompactList}\small\item\em Returns server definition name. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{class_r_c_f_1_1_client_1_1_server_definition_aa7ad5f20250bf2fa557920ef1991e76f}{get\+Hostname} ()
+\begin{DoxyCompactList}\small\item\em Returns server hostname. \end{DoxyCompactList}\item 
+boost\+::filesystem\+::path \hyperlink{class_r_c_f_1_1_client_1_1_server_definition_a3cb06170956a9bd97523bf54cdee6ab6}{get\+Cert\+File} ()
+\begin{DoxyCompactList}\small\item\em Returns a path to server\textquotesingle{} s certificate file. \end{DoxyCompactList}\item 
+bool \hyperlink{class_r_c_f_1_1_client_1_1_server_definition_afb97f6e4203ea56890a9b4bdc99ea45c}{valid} ()
+\begin{DoxyCompactList}\small\item\em Checks if definition is valid to save or process. \end{DoxyCompactList}\item 
+\hypertarget{class_r_c_f_1_1_client_1_1_server_definition_a20ab01827effdf4b5648e0c162766b1e}{}void \hyperlink{class_r_c_f_1_1_client_1_1_server_definition_a20ab01827effdf4b5648e0c162766b1e}{save} ()\label{class_r_c_f_1_1_client_1_1_server_definition_a20ab01827effdf4b5648e0c162766b1e}
+
+\begin{DoxyCompactList}\small\item\em Saves the server definition to file. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{class_r_c_f_1_1_client_1_1_server_definition}{Server\+Definition} $\ast$ \hyperlink{class_r_c_f_1_1_client_1_1_server_definition_ae261f9f4e4033ba00c3bf6f9d892bf4d}{load} (std\+::string name)
+\begin{DoxyCompactList}\small\item\em Loads the server definition from file. \end{DoxyCompactList}\item 
+\hypertarget{class_r_c_f_1_1_client_1_1_server_definition_acdcedb36cdd0e400a4b04c8fcdadcfe9}{}static void \hyperlink{class_r_c_f_1_1_client_1_1_server_definition_acdcedb36cdd0e400a4b04c8fcdadcfe9}{free} ()\label{class_r_c_f_1_1_client_1_1_server_definition_acdcedb36cdd0e400a4b04c8fcdadcfe9}
+
+\begin{DoxyCompactList}\small\item\em Frees the memory. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A class that represents server definition for client. 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_r_c_f_1_1_client_1_1_server_definition_a8492b1915c3014b9111fd884160a3bf1}{}\index{R\+C\+F\+::\+Client\+::\+Server\+Definition@{R\+C\+F\+::\+Client\+::\+Server\+Definition}!Server\+Definition@{Server\+Definition}}
+\index{Server\+Definition@{Server\+Definition}!R\+C\+F\+::\+Client\+::\+Server\+Definition@{R\+C\+F\+::\+Client\+::\+Server\+Definition}}
+\subsubsection[{Server\+Definition}]{\setlength{\rightskip}{0pt plus 5cm}R\+C\+F\+::\+Client\+::\+Server\+Definition\+::\+Server\+Definition (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{name, }
+\item[{std\+::string}]{hostname, }
+\item[{std\+::string}]{certfilepath}
+\end{DoxyParamCaption}
+)}\label{class_r_c_f_1_1_client_1_1_server_definition_a8492b1915c3014b9111fd884160a3bf1}
+
+
+A constructor from name, hostname and certificate file path. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & Server definition name. \\
+\hline
+{\em hostname} & Server hostname or I\+P address. \\
+\hline
+{\em certfilepath} & A path to server\textquotesingle{} s S\+S\+L certificate. \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_r_c_f_1_1_client_1_1_server_definition_a3cb06170956a9bd97523bf54cdee6ab6}{}\index{R\+C\+F\+::\+Client\+::\+Server\+Definition@{R\+C\+F\+::\+Client\+::\+Server\+Definition}!get\+Cert\+File@{get\+Cert\+File}}
+\index{get\+Cert\+File@{get\+Cert\+File}!R\+C\+F\+::\+Client\+::\+Server\+Definition@{R\+C\+F\+::\+Client\+::\+Server\+Definition}}
+\subsubsection[{get\+Cert\+File}]{\setlength{\rightskip}{0pt plus 5cm}boost\+::filesystem\+::path R\+C\+F\+::\+Client\+::\+Server\+Definition\+::get\+Cert\+File (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{class_r_c_f_1_1_client_1_1_server_definition_a3cb06170956a9bd97523bf54cdee6ab6}
+
+
+Returns a path to server\textquotesingle{} s certificate file. 
+
+\begin{DoxyReturn}{Returns}
+A path to server\textquotesingle{} s certificate file, boost\+::filesystem\+::path. 
+\end{DoxyReturn}
+\hypertarget{class_r_c_f_1_1_client_1_1_server_definition_aa7ad5f20250bf2fa557920ef1991e76f}{}\index{R\+C\+F\+::\+Client\+::\+Server\+Definition@{R\+C\+F\+::\+Client\+::\+Server\+Definition}!get\+Hostname@{get\+Hostname}}
+\index{get\+Hostname@{get\+Hostname}!R\+C\+F\+::\+Client\+::\+Server\+Definition@{R\+C\+F\+::\+Client\+::\+Server\+Definition}}
+\subsubsection[{get\+Hostname}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string R\+C\+F\+::\+Client\+::\+Server\+Definition\+::get\+Hostname (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{class_r_c_f_1_1_client_1_1_server_definition_aa7ad5f20250bf2fa557920ef1991e76f}
+
+
+Returns server hostname. 
+
+\begin{DoxyReturn}{Returns}
+Server hostname. 
+\end{DoxyReturn}
+\hypertarget{class_r_c_f_1_1_client_1_1_server_definition_a20f355baa25a4945373051b6d6c70efd}{}\index{R\+C\+F\+::\+Client\+::\+Server\+Definition@{R\+C\+F\+::\+Client\+::\+Server\+Definition}!get\+Name@{get\+Name}}
+\index{get\+Name@{get\+Name}!R\+C\+F\+::\+Client\+::\+Server\+Definition@{R\+C\+F\+::\+Client\+::\+Server\+Definition}}
+\subsubsection[{get\+Name}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string R\+C\+F\+::\+Client\+::\+Server\+Definition\+::get\+Name (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{class_r_c_f_1_1_client_1_1_server_definition_a20f355baa25a4945373051b6d6c70efd}
+
+
+Returns server definition name. 
+
+\begin{DoxyReturn}{Returns}
+Server definition name. 
+\end{DoxyReturn}
+\hypertarget{class_r_c_f_1_1_client_1_1_server_definition_ae261f9f4e4033ba00c3bf6f9d892bf4d}{}\index{R\+C\+F\+::\+Client\+::\+Server\+Definition@{R\+C\+F\+::\+Client\+::\+Server\+Definition}!load@{load}}
+\index{load@{load}!R\+C\+F\+::\+Client\+::\+Server\+Definition@{R\+C\+F\+::\+Client\+::\+Server\+Definition}}
+\subsubsection[{load}]{\setlength{\rightskip}{0pt plus 5cm}static {\bf Server\+Definition}$\ast$ R\+C\+F\+::\+Client\+::\+Server\+Definition\+::load (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{name}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\label{class_r_c_f_1_1_client_1_1_server_definition_ae261f9f4e4033ba00c3bf6f9d892bf4d}
+
+
+Loads the server definition from file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & Server definition name. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A pointer to loaded server definition. 
+\end{DoxyReturn}
+\begin{DoxyWarning}{Warning}
+At the end of code using this function, call \hyperlink{class_r_c_f_1_1_client_1_1_server_definition_acdcedb36cdd0e400a4b04c8fcdadcfe9}{R\+C\+F\+::\+Client\+::\+Server\+Definition\+::free()} function to free the memory. 
+\end{DoxyWarning}
+\hypertarget{class_r_c_f_1_1_client_1_1_server_definition_afb97f6e4203ea56890a9b4bdc99ea45c}{}\index{R\+C\+F\+::\+Client\+::\+Server\+Definition@{R\+C\+F\+::\+Client\+::\+Server\+Definition}!valid@{valid}}
+\index{valid@{valid}!R\+C\+F\+::\+Client\+::\+Server\+Definition@{R\+C\+F\+::\+Client\+::\+Server\+Definition}}
+\subsubsection[{valid}]{\setlength{\rightskip}{0pt plus 5cm}bool R\+C\+F\+::\+Client\+::\+Server\+Definition\+::valid (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{class_r_c_f_1_1_client_1_1_server_definition_afb97f6e4203ea56890a9b4bdc99ea45c}
+
+
+Checks if definition is valid to save or process. 
+
+\begin{DoxyReturn}{Returns}
+Boolean. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/\hyperlink{_server_definition_8h}{Server\+Definition.\+h}\end{DoxyCompactItemize}

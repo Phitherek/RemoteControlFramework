@@ -12,7 +12,7 @@
 /// \namespace RCF
 /// \brief A global namespace for RemoteControlFramework
 namespace RCF {
-    /// \namespace Common
+    /// \namespace RCF::Common
     /// \brief A namespace for common RemoteControlFramework classes
     namespace Common {
         /// \class FilesystemException
@@ -79,7 +79,7 @@ namespace RCF {
             std::string _error;
         public:
             AlreadyExistsException(std::string name, std::string error); ///< \brief A constructor from query and error.
-            ///< \param query Name of an object that already exists.
+            ///< \param name Name of an object that already exists.
             ///< \param error Additional information.
             ~AlreadyExistsException() throw(); ///< A destructor required by std::exception.
             const char* what() const throw(); ///< \brief A function describing the error.

@@ -106,6 +106,7 @@ mainWindowBase::mainWindowBase( wxWindow* parent, wxWindowID id, const wxString&
 	// Connect Events
 	this->Connect( serverConnectItem->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( mainWindowBase::serverConnectItemOnMenuSelection ) );
 	this->Connect( helpAboutItem->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( mainWindowBase::helpAboutItemOnMenuSelection ) );
+	activeServersList->Connect( wxEVT_COMMAND_LISTBOX_SELECTED, wxCommandEventHandler( mainWindowBase::activeServersListOnListBox ), NULL, this );
 	listActionButton->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( mainWindowBase::listActionButtonOnButtonClick ), NULL, this );
 	closeActionButton->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( mainWindowBase::closeActionButtonOnButtonClick ), NULL, this );
 	closeButton->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( mainWindowBase::closeButtonOnButtonClick ), NULL, this );
@@ -116,6 +117,7 @@ mainWindowBase::~mainWindowBase()
 	// Disconnect Events
 	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( mainWindowBase::serverConnectItemOnMenuSelection ) );
 	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( mainWindowBase::helpAboutItemOnMenuSelection ) );
+	activeServersList->Disconnect( wxEVT_COMMAND_LISTBOX_SELECTED, wxCommandEventHandler( mainWindowBase::activeServersListOnListBox ), NULL, this );
 	listActionButton->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( mainWindowBase::listActionButtonOnButtonClick ), NULL, this );
 	closeActionButton->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( mainWindowBase::closeActionButtonOnButtonClick ), NULL, this );
 	closeButton->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( mainWindowBase::closeButtonOnButtonClick ), NULL, this );
@@ -247,5 +249,103 @@ aboutDialogBase::~aboutDialogBase()
 	// Disconnect Events
 	this->Disconnect( wxEVT_INIT_DIALOG, wxInitDialogEventHandler( aboutDialogBase::aboutDialogBaseOnInitDialog ) );
 	aboutCloseButton->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( aboutDialogBase::aboutCloseButtonOnButtonClick ), NULL, this );
+	
+}
+
+listDialogBase::listDialogBase( wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style ) : wxDialog( parent, id, title, pos, size, style )
+{
+	this->SetSizeHints( wxDefaultSize, wxDefaultSize );
+	
+	listSizer = new wxBoxSizer( wxVERTICAL );
+	
+	commandListLabel = new wxStaticText( this, wxID_ANY, wxT("Available commands:"), wxDefaultPosition, wxDefaultSize, 0 );
+	commandListLabel->Wrap( -1 );
+	listSizer->Add( commandListLabel, 0, wxALL, 5 );
+	
+	commandListTree = new wxTreeCtrl( this, wxID_ANY, wxDefaultPosition, wxSize( 500,300 ), wxTR_DEFAULT_STYLE|wxTR_HIDE_ROOT );
+	listSizer->Add( commandListTree, 0, wxALL, 5 );
+	
+	listDialogActionSizer = new wxBoxSizer( wxHORIZONTAL );
+	
+	
+	listDialogActionSizer->Add( 0, 0, 1, wxEXPAND, 5 );
+	
+	listCancelButton = new wxButton( this, wxID_ANY, wxT("Cancel"), wxDefaultPosition, wxDefaultSize, 0 );
+	listDialogActionSizer->Add( listCancelButton, 0, wxALL, 5 );
+	
+	listExecuteButton = new wxButton( this, wxID_ANY, wxT("Execute"), wxDefaultPosition, wxDefaultSize, 0 );
+	listDialogActionSizer->Add( listExecuteButton, 0, wxALL, 5 );
+	
+	
+	listSizer->Add( listDialogActionSizer, 1, wxEXPAND, 5 );
+	
+	
+	this->SetSizer( listSizer );
+	this->Layout();
+	listSizer->Fit( this );
+	
+	this->Centre( wxBOTH );
+	
+	// Connect Events
+	this->Connect( wxEVT_INIT_DIALOG, wxInitDialogEventHandler( listDialogBase::listDialogBaseOnInitDialog ) );
+	listCancelButton->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( listDialogBase::listCancelButtonOnButtonClick ), NULL, this );
+	listExecuteButton->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( listDialogBase::listExecuteButtonOnButtonClick ), NULL, this );
+}
+
+listDialogBase::~listDialogBase()
+{
+	// Disconnect Events
+	this->Disconnect( wxEVT_INIT_DIALOG, wxInitDialogEventHandler( listDialogBase::listDialogBaseOnInitDialog ) );
+	listCancelButton->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( listDialogBase::listCancelButtonOnButtonClick ), NULL, this );
+	listExecuteButton->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( listDialogBase::listExecuteButtonOnButtonClick ), NULL, this );
+	
+}
+
+paramQueryDialogBase::paramQueryDialogBase( wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style ) : wxDialog( parent, id, title, pos, size, style )
+{
+	this->SetSizeHints( wxDefaultSize, wxDefaultSize );
+	
+	paramQuerySizer = new wxBoxSizer( wxVERTICAL );
+	
+	paramInputSizer = new wxBoxSizer( wxHORIZONTAL );
+	
+	paramInputLabel = new wxStaticText( this, wxID_ANY, wxT("Enter command parameter:"), wxDefaultPosition, wxDefaultSize, 0 );
+	paramInputLabel->Wrap( -1 );
+	paramInputSizer->Add( paramInputLabel, 0, wxALIGN_CENTER_VERTICAL|wxALL, 5 );
+	
+	paramInput = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 200,-1 ), 0 );
+	paramInputSizer->Add( paramInput, 0, wxALIGN_CENTER_VERTICAL|wxALL, 5 );
+	
+	
+	paramQuerySizer->Add( paramInputSizer, 1, wxEXPAND, 5 );
+	
+	paramDialogActionSizer = new wxBoxSizer( wxHORIZONTAL );
+	
+	
+	paramDialogActionSizer->Add( 0, 0, 1, wxEXPAND, 5 );
+	
+	paramContinueButton = new wxButton( this, wxID_ANY, wxT("Continue"), wxDefaultPosition, wxDefaultSize, 0 );
+	paramDialogActionSizer->Add( paramContinueButton, 0, wxALL, 5 );
+	
+	
+	paramQuerySizer->Add( paramDialogActionSizer, 1, wxEXPAND, 5 );
+	
+	
+	this->SetSizer( paramQuerySizer );
+	this->Layout();
+	paramQuerySizer->Fit( this );
+	
+	this->Centre( wxBOTH );
+	
+	// Connect Events
+	this->Connect( wxEVT_INIT_DIALOG, wxInitDialogEventHandler( paramQueryDialogBase::paramQueryDialogBaseOnInitDialog ) );
+	paramContinueButton->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( paramQueryDialogBase::paramContinueButtonOnButtonClick ), NULL, this );
+}
+
+paramQueryDialogBase::~paramQueryDialogBase()
+{
+	// Disconnect Events
+	this->Disconnect( wxEVT_INIT_DIALOG, wxInitDialogEventHandler( paramQueryDialogBase::paramQueryDialogBaseOnInitDialog ) );
+	paramContinueButton->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( paramQueryDialogBase::paramContinueButtonOnButtonClick ), NULL, this );
 	
 }

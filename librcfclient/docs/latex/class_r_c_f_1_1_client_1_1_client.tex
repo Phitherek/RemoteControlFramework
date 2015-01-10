@@ -1,0 +1,221 @@
+\hypertarget{class_r_c_f_1_1_client_1_1_client}{}\section{R\+C\+F\+:\+:Client\+:\+:Client Class Reference}
+\label{class_r_c_f_1_1_client_1_1_client}\index{R\+C\+F\+::\+Client\+::\+Client@{R\+C\+F\+::\+Client\+::\+Client}}
+
+
+A class that can be used to create \hyperlink{namespace_r_c_f}{R\+C\+F} client and contains useful \hyperlink{namespace_r_c_f}{R\+C\+F} protocol methods.  
+
+
+
+
+{\ttfamily \#include $<$Client.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_r_c_f_1_1_client_1_1_client_af33c081e68edc60672a985a47a49cbd9}{Client} (boost\+::asio\+::io\+\_\+service \&service, std\+::string sd\+Name)
+\begin{DoxyCompactList}\small\item\em A constructor from boost\+::asio\+::io\+\_\+service and server definition name. \end{DoxyCompactList}\item 
+\hypertarget{class_r_c_f_1_1_client_1_1_client_a73f3268d395a074869a25507fe19f38e}{}\hyperlink{class_r_c_f_1_1_client_1_1_client_a73f3268d395a074869a25507fe19f38e}{$\sim$\+Client} ()\label{class_r_c_f_1_1_client_1_1_client_a73f3268d395a074869a25507fe19f38e}
+
+\begin{DoxyCompactList}\small\item\em A destructor. \end{DoxyCompactList}\item 
+\hyperlink{class_r_c_f_1_1_client_1_1_server_definition}{Server\+Definition} $\ast$ \hyperlink{class_r_c_f_1_1_client_1_1_client_a1459e5b65c1ebdada7a46a8604464099}{get\+Server\+Definition} ()
+\begin{DoxyCompactList}\small\item\em Returns the server definition this client has been connected to. \end{DoxyCompactList}\item 
+\hypertarget{class_r_c_f_1_1_client_1_1_client_a0948bd7c88f562718ef70cd32360adf5}{}void \hyperlink{class_r_c_f_1_1_client_1_1_client_a0948bd7c88f562718ef70cd32360adf5}{handshake} ()\label{class_r_c_f_1_1_client_1_1_client_a0948bd7c88f562718ef70cd32360adf5}
+
+\begin{DoxyCompactList}\small\item\em Performs the handshake with the server. \end{DoxyCompactList}\item 
+void \hyperlink{class_r_c_f_1_1_client_1_1_client_ab08c9ae64d744de85a624a4161e1f8a2}{authorize} (std\+::string username, std\+::string password)
+\begin{DoxyCompactList}\small\item\em Authorize the user on the server. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{class_r_c_f_1_1_client_1_1_client_ac2995dbb6dd0087d5eb8c874e74c3c6c}{list} ()
+\begin{DoxyCompactList}\small\item\em Obtains a list of commands for currently logged in user. \end{DoxyCompactList}\item 
+int \hyperlink{class_r_c_f_1_1_client_1_1_client_a47b9ab652ebbe6de0a104f797ce43a92}{execute} (std\+::string query, std\+::string $\ast$stdout\+\_\+target, std\+::string $\ast$stderr\+\_\+target, std\+::string($\ast$param\+Provider)())
+\begin{DoxyCompactList}\small\item\em Executes a command on the server. \end{DoxyCompactList}\item 
+int \hyperlink{class_r_c_f_1_1_client_1_1_client_a0e2e53ce56c010fb9552c8fa826d2efe}{execute} (std\+::string query, std\+::string $\ast$stdout\+\_\+target, std\+::string $\ast$stderr\+\_\+target, std\+::string($\ast$param\+Provider)(\hyperlink{class_r_c_f_1_1_client_1_1_client}{Client} $\ast$))
+\begin{DoxyCompactList}\small\item\em Executes a command on the server. \end{DoxyCompactList}\item 
+\hypertarget{class_r_c_f_1_1_client_1_1_client_a07c43c20e56147d36048c33849f8a343}{}void \hyperlink{class_r_c_f_1_1_client_1_1_client_a07c43c20e56147d36048c33849f8a343}{close} ()\label{class_r_c_f_1_1_client_1_1_client_a07c43c20e56147d36048c33849f8a343}
+
+\begin{DoxyCompactList}\small\item\em Closes the connection. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{class_r_c_f_1_1_client_1_1_client_addc515db3d84fe809d4b61edca5d08dd}{read} ()
+\begin{DoxyCompactList}\small\item\em Reads next portion of the transmission. \end{DoxyCompactList}\item 
+void \hyperlink{class_r_c_f_1_1_client_1_1_client_a4a291f266e0336a4a0bad5e87683b583}{write} (std\+::string trans)
+\begin{DoxyCompactList}\small\item\em Writes next portion of the transmission, adding the ending separator. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{class_r_c_f_1_1_client_1_1_client_a10f181c9a9dd7624b9ae86a88c90f882}{get\+Logged\+Username} ()
+\begin{DoxyCompactList}\small\item\em Returns the username used to login. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A class that can be used to create \hyperlink{namespace_r_c_f}{R\+C\+F} client and contains useful \hyperlink{namespace_r_c_f}{R\+C\+F} protocol methods. 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_r_c_f_1_1_client_1_1_client_af33c081e68edc60672a985a47a49cbd9}{}\index{R\+C\+F\+::\+Client\+::\+Client@{R\+C\+F\+::\+Client\+::\+Client}!Client@{Client}}
+\index{Client@{Client}!R\+C\+F\+::\+Client\+::\+Client@{R\+C\+F\+::\+Client\+::\+Client}}
+\subsubsection[{Client}]{\setlength{\rightskip}{0pt plus 5cm}R\+C\+F\+::\+Client\+::\+Client\+::\+Client (
+\begin{DoxyParamCaption}
+\item[{boost\+::asio\+::io\+\_\+service \&}]{service, }
+\item[{std\+::string}]{sd\+Name}
+\end{DoxyParamCaption}
+)}\label{class_r_c_f_1_1_client_1_1_client_af33c081e68edc60672a985a47a49cbd9}
+
+
+A constructor from boost\+::asio\+::io\+\_\+service and server definition name. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em service} & A reference to boost\+::asio\+::io\+\_\+service, that has to be constructed before server construction and is used for boost\+::asio communication (refer to boost\+::asio documentation for more information). \\
+\hline
+{\em sd\+Name} & Server definition name. \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_r_c_f_1_1_client_1_1_client_ab08c9ae64d744de85a624a4161e1f8a2}{}\index{R\+C\+F\+::\+Client\+::\+Client@{R\+C\+F\+::\+Client\+::\+Client}!authorize@{authorize}}
+\index{authorize@{authorize}!R\+C\+F\+::\+Client\+::\+Client@{R\+C\+F\+::\+Client\+::\+Client}}
+\subsubsection[{authorize}]{\setlength{\rightskip}{0pt plus 5cm}void R\+C\+F\+::\+Client\+::\+Client\+::authorize (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{username, }
+\item[{std\+::string}]{password}
+\end{DoxyParamCaption}
+)}\label{class_r_c_f_1_1_client_1_1_client_ab08c9ae64d744de85a624a4161e1f8a2}
+
+
+Authorize the user on the server. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em username} & A username to authorize with. \\
+\hline
+{\em password} & A password to authorize with. \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_r_c_f_1_1_client_1_1_client_a47b9ab652ebbe6de0a104f797ce43a92}{}\index{R\+C\+F\+::\+Client\+::\+Client@{R\+C\+F\+::\+Client\+::\+Client}!execute@{execute}}
+\index{execute@{execute}!R\+C\+F\+::\+Client\+::\+Client@{R\+C\+F\+::\+Client\+::\+Client}}
+\subsubsection[{execute}]{\setlength{\rightskip}{0pt plus 5cm}int R\+C\+F\+::\+Client\+::\+Client\+::execute (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{query, }
+\item[{std\+::string $\ast$}]{stdout\+\_\+target, }
+\item[{std\+::string $\ast$}]{stderr\+\_\+target, }
+\item[{std\+::string($\ast$)()}]{param\+Provider}
+\end{DoxyParamCaption}
+)}\label{class_r_c_f_1_1_client_1_1_client_a47b9ab652ebbe6de0a104f797ce43a92}
+
+
+Executes a command on the server. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em query} & A command query -\/ includes command name preceded by the hierarchy of groups that command belongs to, separated by \+: sign. Example\+: administration\+:network\+:mycommand, where mycommand belongs to the network group, and network group belongs to administration group which is top-\/level on the server. \\
+\hline
+{\em stdout\+\_\+target} & A target string where command stdout should be placed. \\
+\hline
+{\em stderr\+\_\+target} & A target string where command stderr should be placed. \\
+\hline
+{\em param\+Provider} & A function that provides additional parameters for the command (in response to P\+A\+R\+A\+M protocol message). Takes no arguments, returns std\+::string. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Command exit code. 
+\end{DoxyReturn}
+\hypertarget{class_r_c_f_1_1_client_1_1_client_a0e2e53ce56c010fb9552c8fa826d2efe}{}\index{R\+C\+F\+::\+Client\+::\+Client@{R\+C\+F\+::\+Client\+::\+Client}!execute@{execute}}
+\index{execute@{execute}!R\+C\+F\+::\+Client\+::\+Client@{R\+C\+F\+::\+Client\+::\+Client}}
+\subsubsection[{execute}]{\setlength{\rightskip}{0pt plus 5cm}int R\+C\+F\+::\+Client\+::\+Client\+::execute (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{query, }
+\item[{std\+::string $\ast$}]{stdout\+\_\+target, }
+\item[{std\+::string $\ast$}]{stderr\+\_\+target, }
+\item[{std\+::string($\ast$)({\bf Client} $\ast$)}]{param\+Provider}
+\end{DoxyParamCaption}
+)}\label{class_r_c_f_1_1_client_1_1_client_a0e2e53ce56c010fb9552c8fa826d2efe}
+
+
+Executes a command on the server. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em query} & A command query -\/ includes command name preceded by the hierarchy of groups that command belongs to, separated by \+: sign. Example\+: administration\+:network\+:mycommand, where mycommand belongs to the network group, and network group belongs to administration group which is top-\/level on the server. \\
+\hline
+{\em stdout\+\_\+target} & A target string where command stdout should be placed. \\
+\hline
+{\em stderr\+\_\+target} & A target string where command stderr should be placed. \\
+\hline
+{\em param\+Provider} & A function that provides additional parameters for the command (in response to P\+A\+R\+A\+M protocol message). Takes a \hyperlink{class_r_c_f_1_1_client_1_1_client}{Client} argument, returns std\+::string. Can be used if additional information from the client module is needed in the function. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Command exit code. 
+\end{DoxyReturn}
+\hypertarget{class_r_c_f_1_1_client_1_1_client_a10f181c9a9dd7624b9ae86a88c90f882}{}\index{R\+C\+F\+::\+Client\+::\+Client@{R\+C\+F\+::\+Client\+::\+Client}!get\+Logged\+Username@{get\+Logged\+Username}}
+\index{get\+Logged\+Username@{get\+Logged\+Username}!R\+C\+F\+::\+Client\+::\+Client@{R\+C\+F\+::\+Client\+::\+Client}}
+\subsubsection[{get\+Logged\+Username}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string R\+C\+F\+::\+Client\+::\+Client\+::get\+Logged\+Username (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{class_r_c_f_1_1_client_1_1_client_a10f181c9a9dd7624b9ae86a88c90f882}
+
+
+Returns the username used to login. 
+
+\begin{DoxyReturn}{Returns}
+Logged in username. 
+\end{DoxyReturn}
+\hypertarget{class_r_c_f_1_1_client_1_1_client_a1459e5b65c1ebdada7a46a8604464099}{}\index{R\+C\+F\+::\+Client\+::\+Client@{R\+C\+F\+::\+Client\+::\+Client}!get\+Server\+Definition@{get\+Server\+Definition}}
+\index{get\+Server\+Definition@{get\+Server\+Definition}!R\+C\+F\+::\+Client\+::\+Client@{R\+C\+F\+::\+Client\+::\+Client}}
+\subsubsection[{get\+Server\+Definition}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Server\+Definition}$\ast$ R\+C\+F\+::\+Client\+::\+Client\+::get\+Server\+Definition (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{class_r_c_f_1_1_client_1_1_client_a1459e5b65c1ebdada7a46a8604464099}
+
+
+Returns the server definition this client has been connected to. 
+
+\begin{DoxyReturn}{Returns}
+A pointer to \hyperlink{class_r_c_f_1_1_client_1_1_server_definition}{Server\+Definition} which was used to connect. 
+\end{DoxyReturn}
+\hypertarget{class_r_c_f_1_1_client_1_1_client_ac2995dbb6dd0087d5eb8c874e74c3c6c}{}\index{R\+C\+F\+::\+Client\+::\+Client@{R\+C\+F\+::\+Client\+::\+Client}!list@{list}}
+\index{list@{list}!R\+C\+F\+::\+Client\+::\+Client@{R\+C\+F\+::\+Client\+::\+Client}}
+\subsubsection[{list}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string R\+C\+F\+::\+Client\+::\+Client\+::list (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{class_r_c_f_1_1_client_1_1_client_ac2995dbb6dd0087d5eb8c874e74c3c6c}
+
+
+Obtains a list of commands for currently logged in user. 
+
+\begin{DoxyReturn}{Returns}
+List of commands to be parsed by the client. 
+\end{DoxyReturn}
+\hypertarget{class_r_c_f_1_1_client_1_1_client_addc515db3d84fe809d4b61edca5d08dd}{}\index{R\+C\+F\+::\+Client\+::\+Client@{R\+C\+F\+::\+Client\+::\+Client}!read@{read}}
+\index{read@{read}!R\+C\+F\+::\+Client\+::\+Client@{R\+C\+F\+::\+Client\+::\+Client}}
+\subsubsection[{read}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string R\+C\+F\+::\+Client\+::\+Client\+::read (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{class_r_c_f_1_1_client_1_1_client_addc515db3d84fe809d4b61edca5d08dd}
+
+
+Reads next portion of the transmission. 
+
+\begin{DoxyReturn}{Returns}
+Received data without ending separator as std\+::string. 
+\end{DoxyReturn}
+\hypertarget{class_r_c_f_1_1_client_1_1_client_a4a291f266e0336a4a0bad5e87683b583}{}\index{R\+C\+F\+::\+Client\+::\+Client@{R\+C\+F\+::\+Client\+::\+Client}!write@{write}}
+\index{write@{write}!R\+C\+F\+::\+Client\+::\+Client@{R\+C\+F\+::\+Client\+::\+Client}}
+\subsubsection[{write}]{\setlength{\rightskip}{0pt plus 5cm}void R\+C\+F\+::\+Client\+::\+Client\+::write (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{trans}
+\end{DoxyParamCaption}
+)}\label{class_r_c_f_1_1_client_1_1_client_a4a291f266e0336a4a0bad5e87683b583}
+
+
+Writes next portion of the transmission, adding the ending separator. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em trans} & Transmission to write. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/\hyperlink{_client_8h}{Client.\+h}\end{DoxyCompactItemize}

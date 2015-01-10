@@ -1,0 +1,244 @@
+\hypertarget{class_r_c_f_1_1_server_1_1_server}{}\section{R\+C\+F\+:\+:Server\+:\+:Server Class Reference}
+\label{class_r_c_f_1_1_server_1_1_server}\index{R\+C\+F\+::\+Server\+::\+Server@{R\+C\+F\+::\+Server\+::\+Server}}
+
+
+A class that can be used to create \hyperlink{namespace_r_c_f}{R\+C\+F} server and contains useful \hyperlink{namespace_r_c_f}{R\+C\+F} protocol methods.  
+
+
+
+
+{\ttfamily \#include $<$Server.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_r_c_f_1_1_server_1_1_server_a75475bf21a8460ac35c472c6a886c61a}{Server} (boost\+::asio\+::io\+\_\+service \&service, unsigned int port, void($\ast$mainfn)(\hyperlink{class_r_c_f_1_1_server_1_1_server}{Server} $\ast$, \hyperlink{_server_8h_a099e2c9fff985800932f4c424a126989}{ssl\+\_\+socket} $\ast$))
+\begin{DoxyCompactList}\small\item\em A constructor from boost\+::asio\+::io\+\_\+service, port and main function. \end{DoxyCompactList}\item 
+\hypertarget{class_r_c_f_1_1_server_1_1_server_ab7f431a9386d410332f53922c17e442d}{}\hyperlink{class_r_c_f_1_1_server_1_1_server_ab7f431a9386d410332f53922c17e442d}{$\sim$\+Server} ()\label{class_r_c_f_1_1_server_1_1_server_ab7f431a9386d410332f53922c17e442d}
+
+\begin{DoxyCompactList}\small\item\em A destructor. \end{DoxyCompactList}\item 
+\hypertarget{class_r_c_f_1_1_server_1_1_server_ac3da2fc648c18271f5024a24fc141d5d}{}void \hyperlink{class_r_c_f_1_1_server_1_1_server_ac3da2fc648c18271f5024a24fc141d5d}{start} ()\label{class_r_c_f_1_1_server_1_1_server_ac3da2fc648c18271f5024a24fc141d5d}
+
+\begin{DoxyCompactList}\small\item\em Starts the server. \end{DoxyCompactList}\item 
+void \hyperlink{class_r_c_f_1_1_server_1_1_server_ad8a82a9353a9a68cfef80cca75a21c83}{handshake} (\hyperlink{_server_8h_a099e2c9fff985800932f4c424a126989}{ssl\+\_\+socket} $\ast$sock)
+\begin{DoxyCompactList}\small\item\em Performs the handshake with the client. \end{DoxyCompactList}\item 
+\hyperlink{class_r_c_f_1_1_server_1_1_user}{User} $\ast$ \hyperlink{class_r_c_f_1_1_server_1_1_server_a7403924e52783469b549326c826ec9c8}{authorize} (\hyperlink{_server_8h_a099e2c9fff985800932f4c424a126989}{ssl\+\_\+socket} $\ast$sock)
+\begin{DoxyCompactList}\small\item\em Authorizes the user. \end{DoxyCompactList}\item 
+void \hyperlink{class_r_c_f_1_1_server_1_1_server_ae126a238b9a511925f13a47142b6a817}{handle\+Postauth} (\hyperlink{_server_8h_a099e2c9fff985800932f4c424a126989}{ssl\+\_\+socket} $\ast$sock, \hyperlink{class_r_c_f_1_1_server_1_1_user}{User} $\ast$logged\+\_\+user)
+\begin{DoxyCompactList}\small\item\em Handles the post-\/authorization process. \end{DoxyCompactList}\item 
+void \hyperlink{class_r_c_f_1_1_server_1_1_server_a7430ddaf9c9c816a3ff18c82d07740be}{handle\+List} (\hyperlink{_server_8h_a099e2c9fff985800932f4c424a126989}{ssl\+\_\+socket} $\ast$sock, \hyperlink{class_r_c_f_1_1_server_1_1_user}{User} $\ast$logged\+\_\+user)
+\begin{DoxyCompactList}\small\item\em Handles the command list query. \end{DoxyCompactList}\item 
+void \hyperlink{class_r_c_f_1_1_server_1_1_server_ac2df80cca2c04444d1829f782c7c8a60}{handle\+Execute} (\hyperlink{_server_8h_a099e2c9fff985800932f4c424a126989}{ssl\+\_\+socket} $\ast$sock, std\+::string query, \hyperlink{class_r_c_f_1_1_server_1_1_user}{User} $\ast$logged\+\_\+user)
+\begin{DoxyCompactList}\small\item\em Handles the command execute query. \end{DoxyCompactList}\item 
+void \hyperlink{class_r_c_f_1_1_server_1_1_server_acf8a3de00138b3c60d542b4d041b68c6}{close} (\hyperlink{_server_8h_a099e2c9fff985800932f4c424a126989}{ssl\+\_\+socket} $\ast$sock)
+\begin{DoxyCompactList}\small\item\em Closes the connection. \end{DoxyCompactList}\item 
+void \hyperlink{class_r_c_f_1_1_server_1_1_server_a16a2d2c9850d5b8ab526f6df4d6cc4c7}{handle\+Exception} (\hyperlink{_server_8h_a099e2c9fff985800932f4c424a126989}{ssl\+\_\+socket} $\ast$sock, std\+::exception \&e)
+\begin{DoxyCompactList}\small\item\em Handles the exceptions. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{class_r_c_f_1_1_server_1_1_server_a7eb3a657281ffe1791a7b8c73df3b714}{read} (\hyperlink{_server_8h_a099e2c9fff985800932f4c424a126989}{ssl\+\_\+socket} $\ast$sock)
+\begin{DoxyCompactList}\small\item\em Reads next portion of the transmission. \end{DoxyCompactList}\item 
+void \hyperlink{class_r_c_f_1_1_server_1_1_server_a7a251b9e3a4c4cbae84c042f94d16a6c}{write} (\hyperlink{_server_8h_a099e2c9fff985800932f4c424a126989}{ssl\+\_\+socket} $\ast$sock, std\+::string trans)
+\begin{DoxyCompactList}\small\item\em Writes next portion of the transmission, adding the ending separator. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A class that can be used to create \hyperlink{namespace_r_c_f}{R\+C\+F} server and contains useful \hyperlink{namespace_r_c_f}{R\+C\+F} protocol methods. 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_r_c_f_1_1_server_1_1_server_a75475bf21a8460ac35c472c6a886c61a}{}\index{R\+C\+F\+::\+Server\+::\+Server@{R\+C\+F\+::\+Server\+::\+Server}!Server@{Server}}
+\index{Server@{Server}!R\+C\+F\+::\+Server\+::\+Server@{R\+C\+F\+::\+Server\+::\+Server}}
+\subsubsection[{Server}]{\setlength{\rightskip}{0pt plus 5cm}R\+C\+F\+::\+Server\+::\+Server\+::\+Server (
+\begin{DoxyParamCaption}
+\item[{boost\+::asio\+::io\+\_\+service \&}]{service, }
+\item[{unsigned int}]{port, }
+\item[{void($\ast$)({\bf Server} $\ast$, {\bf ssl\+\_\+socket} $\ast$)}]{mainfn}
+\end{DoxyParamCaption}
+)}\label{class_r_c_f_1_1_server_1_1_server_a75475bf21a8460ac35c472c6a886c61a}
+
+
+A constructor from boost\+::asio\+::io\+\_\+service, port and main function. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em service} & A reference to boost\+::asio\+::io\+\_\+service, that has to be constructed before server construction and is used for boost\+::asio communication (refer to boost\+::asio documentation for more information). \\
+\hline
+{\em port} & A port the server is to be started at. \\
+\hline
+{\em mainfn} & A pointer to the function, that returns void and takes two parameters -\/ a pointer to \hyperlink{class_r_c_f_1_1_server_1_1_server}{R\+C\+F\+::\+Server\+::\+Server} and a pointer to boost\+::asio\+::ssl\+::stream$<$boost\+::asio\+::ip\+::tcp\+::socket$>$. Inside the function define the server functionality using provided with this class \hyperlink{namespace_r_c_f}{R\+C\+F} protocol methods. \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_r_c_f_1_1_server_1_1_server_a7403924e52783469b549326c826ec9c8}{}\index{R\+C\+F\+::\+Server\+::\+Server@{R\+C\+F\+::\+Server\+::\+Server}!authorize@{authorize}}
+\index{authorize@{authorize}!R\+C\+F\+::\+Server\+::\+Server@{R\+C\+F\+::\+Server\+::\+Server}}
+\subsubsection[{authorize}]{\setlength{\rightskip}{0pt plus 5cm}{\bf User}$\ast$ R\+C\+F\+::\+Server\+::\+Server\+::authorize (
+\begin{DoxyParamCaption}
+\item[{{\bf ssl\+\_\+socket} $\ast$}]{sock}
+\end{DoxyParamCaption}
+)}\label{class_r_c_f_1_1_server_1_1_server_a7403924e52783469b549326c826ec9c8}
+
+
+Authorizes the user. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sock} & A client communication socket. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A pointer to authorized user. 
+\end{DoxyReturn}
+\hypertarget{class_r_c_f_1_1_server_1_1_server_acf8a3de00138b3c60d542b4d041b68c6}{}\index{R\+C\+F\+::\+Server\+::\+Server@{R\+C\+F\+::\+Server\+::\+Server}!close@{close}}
+\index{close@{close}!R\+C\+F\+::\+Server\+::\+Server@{R\+C\+F\+::\+Server\+::\+Server}}
+\subsubsection[{close}]{\setlength{\rightskip}{0pt plus 5cm}void R\+C\+F\+::\+Server\+::\+Server\+::close (
+\begin{DoxyParamCaption}
+\item[{{\bf ssl\+\_\+socket} $\ast$}]{sock}
+\end{DoxyParamCaption}
+)}\label{class_r_c_f_1_1_server_1_1_server_acf8a3de00138b3c60d542b4d041b68c6}
+
+
+Closes the connection. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sock} & A client communication socket. \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_r_c_f_1_1_server_1_1_server_a16a2d2c9850d5b8ab526f6df4d6cc4c7}{}\index{R\+C\+F\+::\+Server\+::\+Server@{R\+C\+F\+::\+Server\+::\+Server}!handle\+Exception@{handle\+Exception}}
+\index{handle\+Exception@{handle\+Exception}!R\+C\+F\+::\+Server\+::\+Server@{R\+C\+F\+::\+Server\+::\+Server}}
+\subsubsection[{handle\+Exception}]{\setlength{\rightskip}{0pt plus 5cm}void R\+C\+F\+::\+Server\+::\+Server\+::handle\+Exception (
+\begin{DoxyParamCaption}
+\item[{{\bf ssl\+\_\+socket} $\ast$}]{sock, }
+\item[{std\+::exception \&}]{e}
+\end{DoxyParamCaption}
+)}\label{class_r_c_f_1_1_server_1_1_server_a16a2d2c9850d5b8ab526f6df4d6cc4c7}
+
+
+Handles the exceptions. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sock} & A client communication socket. \\
+\hline
+{\em e} & The exception. \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_r_c_f_1_1_server_1_1_server_ac2df80cca2c04444d1829f782c7c8a60}{}\index{R\+C\+F\+::\+Server\+::\+Server@{R\+C\+F\+::\+Server\+::\+Server}!handle\+Execute@{handle\+Execute}}
+\index{handle\+Execute@{handle\+Execute}!R\+C\+F\+::\+Server\+::\+Server@{R\+C\+F\+::\+Server\+::\+Server}}
+\subsubsection[{handle\+Execute}]{\setlength{\rightskip}{0pt plus 5cm}void R\+C\+F\+::\+Server\+::\+Server\+::handle\+Execute (
+\begin{DoxyParamCaption}
+\item[{{\bf ssl\+\_\+socket} $\ast$}]{sock, }
+\item[{std\+::string}]{query, }
+\item[{{\bf User} $\ast$}]{logged\+\_\+user}
+\end{DoxyParamCaption}
+)}\label{class_r_c_f_1_1_server_1_1_server_ac2df80cca2c04444d1829f782c7c8a60}
+
+
+Handles the command execute query. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sock} & A client communication socket. \\
+\hline
+{\em query} & \hyperlink{class_r_c_f_1_1_server_1_1_command}{Command} execute query. \\
+\hline
+{\em logged\+\_\+user} & A pointer to logged in user. \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_r_c_f_1_1_server_1_1_server_a7430ddaf9c9c816a3ff18c82d07740be}{}\index{R\+C\+F\+::\+Server\+::\+Server@{R\+C\+F\+::\+Server\+::\+Server}!handle\+List@{handle\+List}}
+\index{handle\+List@{handle\+List}!R\+C\+F\+::\+Server\+::\+Server@{R\+C\+F\+::\+Server\+::\+Server}}
+\subsubsection[{handle\+List}]{\setlength{\rightskip}{0pt plus 5cm}void R\+C\+F\+::\+Server\+::\+Server\+::handle\+List (
+\begin{DoxyParamCaption}
+\item[{{\bf ssl\+\_\+socket} $\ast$}]{sock, }
+\item[{{\bf User} $\ast$}]{logged\+\_\+user}
+\end{DoxyParamCaption}
+)}\label{class_r_c_f_1_1_server_1_1_server_a7430ddaf9c9c816a3ff18c82d07740be}
+
+
+Handles the command list query. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sock} & A client communication socket. \\
+\hline
+{\em logged\+\_\+user} & A pointer to logged in user. \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_r_c_f_1_1_server_1_1_server_ae126a238b9a511925f13a47142b6a817}{}\index{R\+C\+F\+::\+Server\+::\+Server@{R\+C\+F\+::\+Server\+::\+Server}!handle\+Postauth@{handle\+Postauth}}
+\index{handle\+Postauth@{handle\+Postauth}!R\+C\+F\+::\+Server\+::\+Server@{R\+C\+F\+::\+Server\+::\+Server}}
+\subsubsection[{handle\+Postauth}]{\setlength{\rightskip}{0pt plus 5cm}void R\+C\+F\+::\+Server\+::\+Server\+::handle\+Postauth (
+\begin{DoxyParamCaption}
+\item[{{\bf ssl\+\_\+socket} $\ast$}]{sock, }
+\item[{{\bf User} $\ast$}]{logged\+\_\+user}
+\end{DoxyParamCaption}
+)}\label{class_r_c_f_1_1_server_1_1_server_ae126a238b9a511925f13a47142b6a817}
+
+
+Handles the post-\/authorization process. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sock} & A client communication socket. \\
+\hline
+{\em logged\+\_\+user} & A pointer to logged in user. \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_r_c_f_1_1_server_1_1_server_ad8a82a9353a9a68cfef80cca75a21c83}{}\index{R\+C\+F\+::\+Server\+::\+Server@{R\+C\+F\+::\+Server\+::\+Server}!handshake@{handshake}}
+\index{handshake@{handshake}!R\+C\+F\+::\+Server\+::\+Server@{R\+C\+F\+::\+Server\+::\+Server}}
+\subsubsection[{handshake}]{\setlength{\rightskip}{0pt plus 5cm}void R\+C\+F\+::\+Server\+::\+Server\+::handshake (
+\begin{DoxyParamCaption}
+\item[{{\bf ssl\+\_\+socket} $\ast$}]{sock}
+\end{DoxyParamCaption}
+)}\label{class_r_c_f_1_1_server_1_1_server_ad8a82a9353a9a68cfef80cca75a21c83}
+
+
+Performs the handshake with the client. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sock} & A client communication socket. \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_r_c_f_1_1_server_1_1_server_a7eb3a657281ffe1791a7b8c73df3b714}{}\index{R\+C\+F\+::\+Server\+::\+Server@{R\+C\+F\+::\+Server\+::\+Server}!read@{read}}
+\index{read@{read}!R\+C\+F\+::\+Server\+::\+Server@{R\+C\+F\+::\+Server\+::\+Server}}
+\subsubsection[{read}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string R\+C\+F\+::\+Server\+::\+Server\+::read (
+\begin{DoxyParamCaption}
+\item[{{\bf ssl\+\_\+socket} $\ast$}]{sock}
+\end{DoxyParamCaption}
+)}\label{class_r_c_f_1_1_server_1_1_server_a7eb3a657281ffe1791a7b8c73df3b714}
+
+
+Reads next portion of the transmission. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sock} & A client communication socket. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Received data without ending separator as std\+::string. 
+\end{DoxyReturn}
+\hypertarget{class_r_c_f_1_1_server_1_1_server_a7a251b9e3a4c4cbae84c042f94d16a6c}{}\index{R\+C\+F\+::\+Server\+::\+Server@{R\+C\+F\+::\+Server\+::\+Server}!write@{write}}
+\index{write@{write}!R\+C\+F\+::\+Server\+::\+Server@{R\+C\+F\+::\+Server\+::\+Server}}
+\subsubsection[{write}]{\setlength{\rightskip}{0pt plus 5cm}void R\+C\+F\+::\+Server\+::\+Server\+::write (
+\begin{DoxyParamCaption}
+\item[{{\bf ssl\+\_\+socket} $\ast$}]{sock, }
+\item[{std\+::string}]{trans}
+\end{DoxyParamCaption}
+)}\label{class_r_c_f_1_1_server_1_1_server_a7a251b9e3a4c4cbae84c042f94d16a6c}
+
+
+Writes next portion of the transmission, adding the ending separator. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sock} & A client communication socket. \\
+\hline
+{\em trans} & Transmission to write. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/\hyperlink{_server_8h}{Server.\+h}\end{DoxyCompactItemize}

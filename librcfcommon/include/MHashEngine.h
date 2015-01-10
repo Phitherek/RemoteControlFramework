@@ -2,7 +2,7 @@
 #define _MHASHENGINE_H
 #include "mhash.h"
 #include <string>
-/// \file MHashEngine
+/// \file MHashEngine.h
 /// \brief A class that handles MD5 encryption using MHash library (compile with -lmhash)
 /// \author Phitherek_
 /// \date 2014
@@ -11,7 +11,7 @@
 /// \namespace RCF
 /// \brief A global namespace for RemoteControlFramework
 namespace RCF {
-    /// \namespace Common
+    /// \namespace RCF::Common
     /// \brief A namespace for common RemoteControlFramework classes
     namespace Common {
         /// \class MHashEngine

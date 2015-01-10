@@ -1,0 +1,340 @@
+\hypertarget{class_r_c_f_1_1_server_1_1_command}{}\section{R\+C\+F\+:\+:Server\+:\+:Command Class Reference}
+\label{class_r_c_f_1_1_server_1_1_command}\index{R\+C\+F\+::\+Server\+::\+Command@{R\+C\+F\+::\+Server\+::\+Command}}
+
+
+A class that represents a command for server.  
+
+
+
+
+{\ttfamily \#include $<$Command.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{class_r_c_f_1_1_server_1_1_command_a34954d22d17925a4f1b4d74d5d0521a0}{}\hyperlink{class_r_c_f_1_1_server_1_1_command_a34954d22d17925a4f1b4d74d5d0521a0}{Command} ()\label{class_r_c_f_1_1_server_1_1_command_a34954d22d17925a4f1b4d74d5d0521a0}
+
+\begin{DoxyCompactList}\small\item\em A plain constructor. \end{DoxyCompactList}\item 
+\hyperlink{class_r_c_f_1_1_server_1_1_command_a4c1065c5b99b306580cac7ace67f63ac}{Command} (std\+::string name, std\+::string exec)
+\begin{DoxyCompactList}\small\item\em A constructor with command name and command on server. \end{DoxyCompactList}\item 
+\hyperlink{class_r_c_f_1_1_server_1_1_command_a948f35436d5013c2501c128e960953b3}{Command} (std\+::string name, std\+::string exec, int \hyperlink{class_r_c_f_1_1_server_1_1_command_a99a2d8045b47d6c7d7515d02d0e547ea}{num\+Params})
+\begin{DoxyCompactList}\small\item\em A constructor with command name, command on server and number of parameters. \end{DoxyCompactList}\item 
+\hyperlink{class_r_c_f_1_1_server_1_1_command_a7c73aa98349c8dd9f86aa438c70b7c34}{Command} (\hyperlink{class_r_c_f_1_1_server_1_1_command}{Command} \&cpy)
+\begin{DoxyCompactList}\small\item\em A copy constructor. \end{DoxyCompactList}\item 
+\hypertarget{class_r_c_f_1_1_server_1_1_command_abe123f192bc818a1dcb31a7006eff52c}{}\hyperlink{class_r_c_f_1_1_server_1_1_command_abe123f192bc818a1dcb31a7006eff52c}{$\sim$\+Command} ()\label{class_r_c_f_1_1_server_1_1_command_abe123f192bc818a1dcb31a7006eff52c}
+
+\begin{DoxyCompactList}\small\item\em A destructor. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{class_r_c_f_1_1_server_1_1_command_acb05b4f4e0ba511dce1e63464ae16beb}{get\+Name} ()
+\begin{DoxyCompactList}\small\item\em A function that returns command name. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{class_r_c_f_1_1_server_1_1_command_ac7bcfc6e3f170795d396e1a164db6a52}{get\+Exec} ()
+\begin{DoxyCompactList}\small\item\em A function that returns command to execute on the server. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{class_r_c_f_1_1_server_1_1_command_a2c1c0f9dfe3a3d017b1a8b6379432948}{get\+Exec} (std\+::vector$<$ std\+::string $>$ params)
+\begin{DoxyCompactList}\small\item\em A function that returns command to execute on the server with parameters. \end{DoxyCompactList}\item 
+void \hyperlink{class_r_c_f_1_1_server_1_1_command_a6c1f10205090210bf56ed2e1827a1f30}{add\+Permission} (\hyperlink{class_r_c_f_1_1_server_1_1_permission}{Permission} $\ast$perm)
+\begin{DoxyCompactList}\small\item\em A function that adds a permission to the command. \end{DoxyCompactList}\item 
+\hyperlink{class_r_c_f_1_1_server_1_1_permission}{Permission} $\ast$ \hyperlink{class_r_c_f_1_1_server_1_1_command_a1c01f63f343f45221ff8a59499397a50}{get\+Next\+Permission} ()
+\begin{DoxyCompactList}\small\item\em A function, that returns next permission from the permission array. \end{DoxyCompactList}\item 
+bool \hyperlink{class_r_c_f_1_1_server_1_1_command_a93e8c44b1bfc3e5fd216d59b8ec69774}{permissions\+At\+End} ()
+\begin{DoxyCompactList}\small\item\em Returns if permission iterator is at end. \end{DoxyCompactList}\item 
+\hypertarget{class_r_c_f_1_1_server_1_1_command_a79b6dad2cd8d5ad5ef6753d62af9cf8f}{}void \hyperlink{class_r_c_f_1_1_server_1_1_command_a79b6dad2cd8d5ad5ef6753d62af9cf8f}{reset\+Permission\+Iterator} ()\label{class_r_c_f_1_1_server_1_1_command_a79b6dad2cd8d5ad5ef6753d62af9cf8f}
+
+\begin{DoxyCompactList}\small\item\em A function, that resets permission iterator. \end{DoxyCompactList}\item 
+int \hyperlink{class_r_c_f_1_1_server_1_1_command_a2bfddcda74c6eaf33c7305cbfb69abf6}{execute} (std\+::string $\ast$output, std\+::string $\ast$error)
+\begin{DoxyCompactList}\small\item\em A function that executes the command without parameters. \end{DoxyCompactList}\item 
+int \hyperlink{class_r_c_f_1_1_server_1_1_command_a3d73b9e428db4ae2bd37af0a248ab140}{execute} (std\+::string $\ast$output, std\+::string $\ast$error, std\+::vector$<$ std\+::string $>$ params)
+\begin{DoxyCompactList}\small\item\em A function that executes the command with parameters. \end{DoxyCompactList}\item 
+bool \hyperlink{class_r_c_f_1_1_server_1_1_command_afc1653d931edf877589896652b2f8989}{can\+Execute} (std\+::string username)
+\begin{DoxyCompactList}\small\item\em If a user of given username can execute this command. \end{DoxyCompactList}\item 
+\hypertarget{class_r_c_f_1_1_server_1_1_command_a4c93565542dea516b7c3d968f5125a4b}{}void \hyperlink{class_r_c_f_1_1_server_1_1_command_a4c93565542dea516b7c3d968f5125a4b}{save} ()\label{class_r_c_f_1_1_server_1_1_command_a4c93565542dea516b7c3d968f5125a4b}
+
+\begin{DoxyCompactList}\small\item\em Saves command to the server configuration. \end{DoxyCompactList}\item 
+bool \hyperlink{class_r_c_f_1_1_server_1_1_command_ac8907eca3fca9c0fad927f3a04296b6f}{valid} ()
+\begin{DoxyCompactList}\small\item\em If command is valid. \end{DoxyCompactList}\item 
+int \hyperlink{class_r_c_f_1_1_server_1_1_command_a99a2d8045b47d6c7d7515d02d0e547ea}{num\+Params} ()
+\begin{DoxyCompactList}\small\item\em Returns the number of parameters that command requires. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{class_r_c_f_1_1_server_1_1_command}{Command} $\ast$ \hyperlink{class_r_c_f_1_1_server_1_1_command_a8ad91d17c50ec9443919498980919c40}{load} (std\+::string name)
+\begin{DoxyCompactList}\small\item\em Loads the command from the server configuration. \end{DoxyCompactList}\item 
+\hypertarget{class_r_c_f_1_1_server_1_1_command_a614b05d63b9c5fb449d1f716f09c5a5d}{}static void \hyperlink{class_r_c_f_1_1_server_1_1_command_a614b05d63b9c5fb449d1f716f09c5a5d}{free} ()\label{class_r_c_f_1_1_server_1_1_command_a614b05d63b9c5fb449d1f716f09c5a5d}
+
+\begin{DoxyCompactList}\small\item\em Frees the memory. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A class that represents a command for server. 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_r_c_f_1_1_server_1_1_command_a4c1065c5b99b306580cac7ace67f63ac}{}\index{R\+C\+F\+::\+Server\+::\+Command@{R\+C\+F\+::\+Server\+::\+Command}!Command@{Command}}
+\index{Command@{Command}!R\+C\+F\+::\+Server\+::\+Command@{R\+C\+F\+::\+Server\+::\+Command}}
+\subsubsection[{Command}]{\setlength{\rightskip}{0pt plus 5cm}R\+C\+F\+::\+Server\+::\+Command\+::\+Command (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{name, }
+\item[{std\+::string}]{exec}
+\end{DoxyParamCaption}
+)}\label{class_r_c_f_1_1_server_1_1_command_a4c1065c5b99b306580cac7ace67f63ac}
+
+
+A constructor with command name and command on server. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & \hyperlink{class_r_c_f_1_1_server_1_1_command}{Command} name. \\
+\hline
+{\em exec} & \hyperlink{class_r_c_f_1_1_server_1_1_command}{Command} on server. \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_r_c_f_1_1_server_1_1_command_a948f35436d5013c2501c128e960953b3}{}\index{R\+C\+F\+::\+Server\+::\+Command@{R\+C\+F\+::\+Server\+::\+Command}!Command@{Command}}
+\index{Command@{Command}!R\+C\+F\+::\+Server\+::\+Command@{R\+C\+F\+::\+Server\+::\+Command}}
+\subsubsection[{Command}]{\setlength{\rightskip}{0pt plus 5cm}R\+C\+F\+::\+Server\+::\+Command\+::\+Command (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{name, }
+\item[{std\+::string}]{exec, }
+\item[{int}]{num\+Params}
+\end{DoxyParamCaption}
+)}\label{class_r_c_f_1_1_server_1_1_command_a948f35436d5013c2501c128e960953b3}
+
+
+A constructor with command name, command on server and number of parameters. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & \hyperlink{class_r_c_f_1_1_server_1_1_command}{Command} name. \\
+\hline
+{\em exec} & \hyperlink{class_r_c_f_1_1_server_1_1_command}{Command} on server. \\
+\hline
+{\em num\+Params} & Number of command parameters. \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_r_c_f_1_1_server_1_1_command_a7c73aa98349c8dd9f86aa438c70b7c34}{}\index{R\+C\+F\+::\+Server\+::\+Command@{R\+C\+F\+::\+Server\+::\+Command}!Command@{Command}}
+\index{Command@{Command}!R\+C\+F\+::\+Server\+::\+Command@{R\+C\+F\+::\+Server\+::\+Command}}
+\subsubsection[{Command}]{\setlength{\rightskip}{0pt plus 5cm}R\+C\+F\+::\+Server\+::\+Command\+::\+Command (
+\begin{DoxyParamCaption}
+\item[{{\bf Command} \&}]{cpy}
+\end{DoxyParamCaption}
+)}\label{class_r_c_f_1_1_server_1_1_command_a7c73aa98349c8dd9f86aa438c70b7c34}
+
+
+A copy constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em cpy} & Object to copy. \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_r_c_f_1_1_server_1_1_command_a6c1f10205090210bf56ed2e1827a1f30}{}\index{R\+C\+F\+::\+Server\+::\+Command@{R\+C\+F\+::\+Server\+::\+Command}!add\+Permission@{add\+Permission}}
+\index{add\+Permission@{add\+Permission}!R\+C\+F\+::\+Server\+::\+Command@{R\+C\+F\+::\+Server\+::\+Command}}
+\subsubsection[{add\+Permission}]{\setlength{\rightskip}{0pt plus 5cm}void R\+C\+F\+::\+Server\+::\+Command\+::add\+Permission (
+\begin{DoxyParamCaption}
+\item[{{\bf Permission} $\ast$}]{perm}
+\end{DoxyParamCaption}
+)}\label{class_r_c_f_1_1_server_1_1_command_a6c1f10205090210bf56ed2e1827a1f30}
+
+
+A function that adds a permission to the command. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em perm} & A pointer to a \hyperlink{class_r_c_f_1_1_server_1_1_permission}{Permission} object. \\
+\hline
+\end{DoxyParams}
+\hypertarget{class_r_c_f_1_1_server_1_1_command_afc1653d931edf877589896652b2f8989}{}\index{R\+C\+F\+::\+Server\+::\+Command@{R\+C\+F\+::\+Server\+::\+Command}!can\+Execute@{can\+Execute}}
+\index{can\+Execute@{can\+Execute}!R\+C\+F\+::\+Server\+::\+Command@{R\+C\+F\+::\+Server\+::\+Command}}
+\subsubsection[{can\+Execute}]{\setlength{\rightskip}{0pt plus 5cm}bool R\+C\+F\+::\+Server\+::\+Command\+::can\+Execute (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{username}
+\end{DoxyParamCaption}
+)}\label{class_r_c_f_1_1_server_1_1_command_afc1653d931edf877589896652b2f8989}
+
+
+If a user of given username can execute this command. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em username} & Name of the user. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+If given user can execute the command. 
+\end{DoxyReturn}
+\hypertarget{class_r_c_f_1_1_server_1_1_command_a2bfddcda74c6eaf33c7305cbfb69abf6}{}\index{R\+C\+F\+::\+Server\+::\+Command@{R\+C\+F\+::\+Server\+::\+Command}!execute@{execute}}
+\index{execute@{execute}!R\+C\+F\+::\+Server\+::\+Command@{R\+C\+F\+::\+Server\+::\+Command}}
+\subsubsection[{execute}]{\setlength{\rightskip}{0pt plus 5cm}int R\+C\+F\+::\+Server\+::\+Command\+::execute (
+\begin{DoxyParamCaption}
+\item[{std\+::string $\ast$}]{output, }
+\item[{std\+::string $\ast$}]{error}
+\end{DoxyParamCaption}
+)}\label{class_r_c_f_1_1_server_1_1_command_a2bfddcda74c6eaf33c7305cbfb69abf6}
+
+
+A function that executes the command without parameters. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt out}  & {\em output} & \hyperlink{class_r_c_f_1_1_server_1_1_command}{Command} output. \\
+\hline
+\mbox{\tt out}  & {\em error} & \hyperlink{class_r_c_f_1_1_server_1_1_command}{Command} error output. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\hyperlink{class_r_c_f_1_1_server_1_1_command}{Command} return code. 
+\end{DoxyReturn}
+\hypertarget{class_r_c_f_1_1_server_1_1_command_a3d73b9e428db4ae2bd37af0a248ab140}{}\index{R\+C\+F\+::\+Server\+::\+Command@{R\+C\+F\+::\+Server\+::\+Command}!execute@{execute}}
+\index{execute@{execute}!R\+C\+F\+::\+Server\+::\+Command@{R\+C\+F\+::\+Server\+::\+Command}}
+\subsubsection[{execute}]{\setlength{\rightskip}{0pt plus 5cm}int R\+C\+F\+::\+Server\+::\+Command\+::execute (
+\begin{DoxyParamCaption}
+\item[{std\+::string $\ast$}]{output, }
+\item[{std\+::string $\ast$}]{error, }
+\item[{std\+::vector$<$ std\+::string $>$}]{params}
+\end{DoxyParamCaption}
+)}\label{class_r_c_f_1_1_server_1_1_command_a3d73b9e428db4ae2bd37af0a248ab140}
+
+
+A function that executes the command with parameters. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt out}  & {\em output} & \hyperlink{class_r_c_f_1_1_server_1_1_command}{Command} output. \\
+\hline
+\mbox{\tt out}  & {\em error} & \hyperlink{class_r_c_f_1_1_server_1_1_command}{Command} error output. \\
+\hline
+\mbox{\tt in}  & {\em params} & A std\+::vector of std\+::string command parameters. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\hyperlink{class_r_c_f_1_1_server_1_1_command}{Command} return code. 
+\end{DoxyReturn}
+\hypertarget{class_r_c_f_1_1_server_1_1_command_ac7bcfc6e3f170795d396e1a164db6a52}{}\index{R\+C\+F\+::\+Server\+::\+Command@{R\+C\+F\+::\+Server\+::\+Command}!get\+Exec@{get\+Exec}}
+\index{get\+Exec@{get\+Exec}!R\+C\+F\+::\+Server\+::\+Command@{R\+C\+F\+::\+Server\+::\+Command}}
+\subsubsection[{get\+Exec}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string R\+C\+F\+::\+Server\+::\+Command\+::get\+Exec (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{class_r_c_f_1_1_server_1_1_command_ac7bcfc6e3f170795d396e1a164db6a52}
+
+
+A function that returns command to execute on the server. 
+
+\begin{DoxyReturn}{Returns}
+\hyperlink{class_r_c_f_1_1_server_1_1_command}{Command} on server 
+\end{DoxyReturn}
+\hypertarget{class_r_c_f_1_1_server_1_1_command_a2c1c0f9dfe3a3d017b1a8b6379432948}{}\index{R\+C\+F\+::\+Server\+::\+Command@{R\+C\+F\+::\+Server\+::\+Command}!get\+Exec@{get\+Exec}}
+\index{get\+Exec@{get\+Exec}!R\+C\+F\+::\+Server\+::\+Command@{R\+C\+F\+::\+Server\+::\+Command}}
+\subsubsection[{get\+Exec}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string R\+C\+F\+::\+Server\+::\+Command\+::get\+Exec (
+\begin{DoxyParamCaption}
+\item[{std\+::vector$<$ std\+::string $>$}]{params}
+\end{DoxyParamCaption}
+)}\label{class_r_c_f_1_1_server_1_1_command_a2c1c0f9dfe3a3d017b1a8b6379432948}
+
+
+A function that returns command to execute on the server with parameters. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em params} & A std\+::vector of std\+::string command parameters. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\hyperlink{class_r_c_f_1_1_server_1_1_command}{Command} on server with substituted parameters. 
+\end{DoxyReturn}
+\hypertarget{class_r_c_f_1_1_server_1_1_command_acb05b4f4e0ba511dce1e63464ae16beb}{}\index{R\+C\+F\+::\+Server\+::\+Command@{R\+C\+F\+::\+Server\+::\+Command}!get\+Name@{get\+Name}}
+\index{get\+Name@{get\+Name}!R\+C\+F\+::\+Server\+::\+Command@{R\+C\+F\+::\+Server\+::\+Command}}
+\subsubsection[{get\+Name}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string R\+C\+F\+::\+Server\+::\+Command\+::get\+Name (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{class_r_c_f_1_1_server_1_1_command_acb05b4f4e0ba511dce1e63464ae16beb}
+
+
+A function that returns command name. 
+
+\begin{DoxyReturn}{Returns}
+\hyperlink{class_r_c_f_1_1_server_1_1_command}{Command} name 
+\end{DoxyReturn}
+\hypertarget{class_r_c_f_1_1_server_1_1_command_a1c01f63f343f45221ff8a59499397a50}{}\index{R\+C\+F\+::\+Server\+::\+Command@{R\+C\+F\+::\+Server\+::\+Command}!get\+Next\+Permission@{get\+Next\+Permission}}
+\index{get\+Next\+Permission@{get\+Next\+Permission}!R\+C\+F\+::\+Server\+::\+Command@{R\+C\+F\+::\+Server\+::\+Command}}
+\subsubsection[{get\+Next\+Permission}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Permission}$\ast$ R\+C\+F\+::\+Server\+::\+Command\+::get\+Next\+Permission (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{class_r_c_f_1_1_server_1_1_command_a1c01f63f343f45221ff8a59499397a50}
+
+
+A function, that returns next permission from the permission array. 
+
+\begin{DoxyReturn}{Returns}
+A pointer to the \hyperlink{class_r_c_f_1_1_server_1_1_permission}{Permission} object. 
+\end{DoxyReturn}
+\hypertarget{class_r_c_f_1_1_server_1_1_command_a8ad91d17c50ec9443919498980919c40}{}\index{R\+C\+F\+::\+Server\+::\+Command@{R\+C\+F\+::\+Server\+::\+Command}!load@{load}}
+\index{load@{load}!R\+C\+F\+::\+Server\+::\+Command@{R\+C\+F\+::\+Server\+::\+Command}}
+\subsubsection[{load}]{\setlength{\rightskip}{0pt plus 5cm}static {\bf Command}$\ast$ R\+C\+F\+::\+Server\+::\+Command\+::load (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{name}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\label{class_r_c_f_1_1_server_1_1_command_a8ad91d17c50ec9443919498980919c40}
+
+
+Loads the command from the server configuration. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & Name of the command. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Loaded command. 
+\end{DoxyReturn}
+\begin{DoxyWarning}{Warning}
+At the end of the code that uses this function, use \hyperlink{class_r_c_f_1_1_server_1_1_command_a614b05d63b9c5fb449d1f716f09c5a5d}{R\+C\+F\+::\+Server\+::\+Command\+::free()} function to free the memory and \hyperlink{class_r_c_f_1_1_server_1_1_permission_ab022718461c9a1772e1c992769cadc56}{R\+C\+F\+::\+Server\+::\+Permission\+::free()} to free the memory of permissions if any permission was specified in the command. 
+\end{DoxyWarning}
+\hypertarget{class_r_c_f_1_1_server_1_1_command_a99a2d8045b47d6c7d7515d02d0e547ea}{}\index{R\+C\+F\+::\+Server\+::\+Command@{R\+C\+F\+::\+Server\+::\+Command}!num\+Params@{num\+Params}}
+\index{num\+Params@{num\+Params}!R\+C\+F\+::\+Server\+::\+Command@{R\+C\+F\+::\+Server\+::\+Command}}
+\subsubsection[{num\+Params}]{\setlength{\rightskip}{0pt plus 5cm}int R\+C\+F\+::\+Server\+::\+Command\+::num\+Params (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{class_r_c_f_1_1_server_1_1_command_a99a2d8045b47d6c7d7515d02d0e547ea}
+
+
+Returns the number of parameters that command requires. 
+
+\begin{DoxyReturn}{Returns}
+Number of parameters. 
+\end{DoxyReturn}
+\hypertarget{class_r_c_f_1_1_server_1_1_command_a93e8c44b1bfc3e5fd216d59b8ec69774}{}\index{R\+C\+F\+::\+Server\+::\+Command@{R\+C\+F\+::\+Server\+::\+Command}!permissions\+At\+End@{permissions\+At\+End}}
+\index{permissions\+At\+End@{permissions\+At\+End}!R\+C\+F\+::\+Server\+::\+Command@{R\+C\+F\+::\+Server\+::\+Command}}
+\subsubsection[{permissions\+At\+End}]{\setlength{\rightskip}{0pt plus 5cm}bool R\+C\+F\+::\+Server\+::\+Command\+::permissions\+At\+End (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{class_r_c_f_1_1_server_1_1_command_a93e8c44b1bfc3e5fd216d59b8ec69774}
+
+
+Returns if permission iterator is at end. 
+
+\begin{DoxyReturn}{Returns}
+True if permission iterator is at end, false otherwise. 
+\end{DoxyReturn}
+\hypertarget{class_r_c_f_1_1_server_1_1_command_ac8907eca3fca9c0fad927f3a04296b6f}{}\index{R\+C\+F\+::\+Server\+::\+Command@{R\+C\+F\+::\+Server\+::\+Command}!valid@{valid}}
+\index{valid@{valid}!R\+C\+F\+::\+Server\+::\+Command@{R\+C\+F\+::\+Server\+::\+Command}}
+\subsubsection[{valid}]{\setlength{\rightskip}{0pt plus 5cm}bool R\+C\+F\+::\+Server\+::\+Command\+::valid (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{class_r_c_f_1_1_server_1_1_command_ac8907eca3fca9c0fad927f3a04296b6f}
+
+
+If command is valid. 
+
+\begin{DoxyReturn}{Returns}
+Boolean. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/\hyperlink{_command_8h}{Command.\+h}\end{DoxyCompactItemize}

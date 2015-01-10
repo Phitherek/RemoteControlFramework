@@ -12,7 +12,7 @@
 /// \namespace RCF
 /// \brief A global namespace for RemoteControlFramework
 namespace RCF {
-    /// \namespace Client
+    /// \namespace RCF::Client
     /// \brief A namespace for RCF client
     namespace Client {
         /// \class ServerDefinition
@@ -27,8 +27,9 @@ namespace RCF {
         public:
             ServerDefinition(); ///< A plain constructor.
             ServerDefinition(std::string name, std::string hostname, std::string certfilepath); ///< \brief A constructor from name, hostname and certificate file path.
+            ///< \param name Server definition name.
             ///< \param hostname Server hostname or IP address.
-            ///< \param certfile A path to server' s SSL certificate.
+            ///< \param certfilepath A path to server' s SSL certificate.
             std::string getName(); ///< \brief Returns server definition name.
             ///< \return Server definition name.
             std::string getHostname(); ///< \brief Returns server hostname.
