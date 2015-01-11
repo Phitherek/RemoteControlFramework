@@ -12,9 +12,6 @@ if build.name() == 'windows'
     linkargs = ['-L/local/lib', '-Wl,--subsystem,windows', '-mwindows', '-lwx_mswu_xrc-3.0', '-lwx_mswu_webview-3.0', '-lwx_mswu_html-3.0', '-lwx_mswu_qa-3.0', '-lwx_mswu_adv-3.0', '-lwx_mswu_core-3.0', '-lwx_baseu_xml-3.0', '-lwx_baseu_net-3.0', '-lwx_baseu-3.0', '-lsrcfclient', '-lsrcfcommon', '-lboost_filesystem', '-lboost_system', '-lboost_thread', '-lmhash', '-lssleay32', '-leay32', '-lws2_32']
 else
     inc = include_directories('include', '/usr/include/wx-3.0', '/usr/lib/wx/include/gtk2-unicode-3.0')
-    add_global_arguments('-D_FILE_OFFSET_BITS=64', language: 'cpp')
-    add_global_arguments('-DWXUSINGDLL', language: 'cpp')
-    add_global_arguments('-D__WXGTK__', language: 'cpp')
     rcfcdep = dependency('librcfclient')
     rcfcmdep = dependency('librcfcommon')
     boostdep = dependency('boost', modules: ['filesystem', 'system', 'predef', 'asio', 'thread'])
