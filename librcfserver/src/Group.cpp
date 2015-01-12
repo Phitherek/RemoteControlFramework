@@ -154,13 +154,11 @@ void Group::save() {
         std::string filepathstr = filepath.string();
         std::ofstream out(filepathstr.c_str());
         out << "[name]" << std::endl << _name << std::endl;
-        if(_usersSize > 0) {
-            out << "[users]" << std::endl;
-            for(int i = 0; i < _usersSize; i++) {
-                out << _users[i]->getName() << std::endl;
-            }
-            out << "[usersend]" << std::endl;
+        out << "[users]" << std::endl;
+        for(int i = 0; i < _usersSize; i++) {
+            out << _users[i]->getName() << std::endl;
         }
+        out << "[usersend]" << std::endl;
         out.close();
     } else {
         throw RCF::Common::InvalidObjectException("Group is invalid and cannot be saved!");
