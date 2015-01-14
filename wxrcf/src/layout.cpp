@@ -152,6 +152,10 @@ void wxRCF::execute(int threadId, std::string query, ServerData* sd, mainWindow*
         msg += "EXEC ";
         msg += query;
         sd->cli->write(msg);
+        std::stringstream outss;
+        outss.str("");
+        std::stringstream errss;
+        errss.str("");
         do {
             resp = sd->cli->read();
             if(ps == "toplevel") {
@@ -207,16 +211,18 @@ void wxRCF::execute(int threadId, std::string query, ServerData* sd, mainWindow*
                 if(resp == "OUTEND") {
                     ps = "toplevel";
                 } else {
-                    sd->lastout += resp;
+                    outss << resp << std::endl;
                 }
             } else if(ps == "err") {
                 if(resp == "ERREND") {
                     ps = "toplevel";
                 } else {
-                    sd->lasterr += resp;
+                    errss << resp << std::endl;
                 }
             }
         } while(resp != "ERREND");
+        sd->lastout = outss.str();
+        sd->lasterr = errss.str();
         sd->lastcode = code;
         sd->status = "Idle";
     } catch(std::exception& e) {
